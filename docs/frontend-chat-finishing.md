@@ -1,0 +1,17 @@
+# Shared-chat frontend finishing
+
+Implemented 2026-10-14, following the user's final sidebar/team/info/typing requests. BeautifulUI's supplied SidebarNav, GlideMenu, ChatComposer, PromptBar and message rendering remain the component foundation. The source foundation CSS is unchanged. New application-owned history/team/status controls use its existing colour, spacing and control vocabulary; the colour-only file adds an unresolved red token.
+
+The sidebar lists up to fifty recent owned chats, titled from a bounded first-message excerpt. Unresolved titles/status labels are red; resolved ones are green. Labels and status dots accompany colour. Only the user can mark a chat resolved or reopen it. Confirmation, comparison and agent replies do not resolve a chat. Resolution is a separate versioned Mongo record, leaving incident assertions, confirmation, revision and paid-detail receipts intact. Old chats default to unresolved. Mutations require an owned session and the exact application origin.
+
+Selecting a chat restores its own report and agent history. New chat starts a separate report on the first sent message. Unsent drafts remain with their chat in memory while navigating in the current tab; reloading still clears unsent drafts. Explicit selection returns focus to the composer after loading. Voice is stopped before changing chats. Old foreground polling and presentation unmount; a pending background reply is not acknowledged as delivered in a hidden chat.
+
+You and all three agents share one transcript. The redundant participant panel above the chat has been removed; selecting an agent in the composer chooses the next speaker within this conversation. Actual validated handoff metadata is now retained in delivered history and shown as Saathi → Drishti or Drishti → Disha with its disclosed purpose. Messages without a handoff are addressed to everyone. Old replies without metadata are not given invented handoffs. Only one agent speaks at a time under the existing coordinator; this is not a new autonomous agent debate or simultaneous voice session.
+
+The composer selector has an info control explaining the agent's nature in English, Hindi or Hinglish: Saathi the patient listener, Drishti the pattern analyst, and Disha the practical guide. Info appears in a nonmodal portal so the chat frame does not clip it. Escape/Close restores trigger focus; clicking outside dismisses it.
+
+The typing row identifies the actual pending agent. Queued turns say they are waiting; running text turns say the agent is typing. Three subtle dots animate while a reply is pending. Ready, canceled, stale, errored and voice-bound turns do not display a text typing cue. Reduced motion leaves static dots and readable status. Validated reply text remains immediately readable, with delivery acknowledgement following its DOM commit.
+
+Verification covers owned status/list endpoints, stale versions, human-controlled resolution, new-report selection, independent drafts, info focus/dismissal, true handoff metadata, pending/stale indicators, and the existing chat/voice/keyboard/source workflows. Browser review uses clearly labelled fictional English/Hindi demo chats. No real model, voice, billing, email or web provider request is enabled by this increment. Animal animation, private maps and reviewed exports remain deferred.
+
+Full checks, runtime status and screenshot paths are recorded in [frontend-chat-verification.json](frontend-chat-verification.json).

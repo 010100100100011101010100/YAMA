@@ -1,0 +1,41 @@
+{
+  "checked_at": "2026-10-07",
+  "scope": "Synthetic UX preview; no application backend",
+  "script_syntax": "Node syntax check passed",
+  "responsive_checks": [
+    {"viewport_width": 320, "fragment_width": 288, "screens": 11, "horizontal_overflow": false},
+    {"viewport_width": 1024, "fragment_width": 992, "screens": 11, "horizontal_overflow": false}
+  ],
+  "browser_console": "No warnings or errors in captured final-preview logs",
+  "interactions": {
+    "hindi_intake": "Rendered and inspected; headings and utterances have explicit hi language metadata",
+    "text_keyboard": "Shift+Enter retained a newline; Enter added a local message",
+    "correction": "Amount changed to 4,300; original retained; focus returned to Edit",
+    "assertion_removal": "Item excluded; Restore received focus; restoration passed",
+    "confirmation": "Local confirmation led to the explicitly synthetic processing/results preview",
+    "evidence": "Local synthetic sample attachment disclosed no upload; extraction shown separately",
+    "graph": "Disclosure opened a pattern-only path, with no supported identity link",
+    "checkout": "Pending verification shown; no purchase or entitlement created"
+  },
+  "contrast_ratios": {
+    "light_ink_on_fog": 11.32,
+    "light_secondary_on_paper": 5.87,
+    "light_primary_button": 7.49,
+    "light_uncertainty_notice": 6.4,
+    "dark_ink_on_paper": 13.32,
+    "dark_secondary_on_paper": 7.55,
+    "dark_primary_button": 9.53,
+    "dark_uncertainty_notice": 8.5,
+    "light_control_boundary_on_paper": 3.43,
+    "dark_control_boundary_on_paper": 5.39
+  },
+  "accessibility_scope": "Semantic accessibility-tree inspection and selected focus/keyboard checks; no claim of a completed screen-reader audit",
+  "motion_scope": "Static artwork and loader; reduced-motion CSS inspected; animated exports remain unverified",
+  "board": "Twelve editable desktop frames, a mobile companion, interrupted-voice example, and journey map loaded in Excalidraw editor",
+  "limitations": [
+    "Drishti and Disha artwork uses temporary letter marks",
+    "Freeform preview replies do not drive the fixed synthetic findings",
+    "No authentication, microphone capture, upload, OCR, database, graph query or payment integration",
+    "Detailed failure-state frames and actual application tests remain future work"
+  ]
+}

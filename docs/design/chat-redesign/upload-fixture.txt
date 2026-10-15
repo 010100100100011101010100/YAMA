@@ -1,0 +1,1 @@
+Synthetic file for Yama frontend attachment testing.

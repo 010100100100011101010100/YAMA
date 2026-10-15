@@ -1,0 +1,70 @@
+[
+  {
+    "name": "small-phone",
+    "collapseControl": "grid",
+    "composer": {
+      "bottom": 446,
+      "height": 148,
+      "left": 18,
+      "right": 302,
+      "top": 298,
+      "width": 284,
+      "x": 18,
+      "y": 298
+    },
+    "overflowingContent": 0,
+    "pageWidth": 320,
+    "width": 320
+  },
+  {
+    "name": "mobile",
+    "collapseControl": "grid",
+    "composer": {
+      "bottom": 742,
+      "height": 148,
+      "left": 18,
+      "right": 357,
+      "top": 594,
+      "width": 339,
+      "x": 18,
+      "y": 594
+    },
+    "overflowingContent": 0,
+    "pageWidth": 375,
+    "width": 375
+  },
+  {
+    "name": "tablet",
+    "collapseControl": "grid",
+    "composer": {
+      "bottom": 1024,
+      "height": 148,
+      "left": 36,
+      "right": 798,
+      "top": 876,
+      "width": 762,
+      "x": 36,
+      "y": 876
+    },
+    "overflowingContent": 0,
+    "pageWidth": 834,
+    "width": 834
+  },
+  {
+    "name": "desktop",
+    "collapseControl": "grid",
+    "composer": {
+      "bottom": 812,
+      "height": 148,
+      "left": 360,
+      "right": 1144,
+      "top": 664,
+      "width": 784,
+      "x": 360,
+      "y": 664
+    },
+    "overflowingContent": 0,
+    "pageWidth": 1280,
+    "width": 1280
+  }
+]

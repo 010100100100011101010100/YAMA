@@ -1,0 +1,7 @@
+# Official provider SDKs; full tested transitive versions in requirements-agents.lock.
+openai==3.28.0
+langfuse==4.17.0
+# Explicit transports and private tracing provider used by the adapters.
+httpx2==2.13.1
+httpx==0.28.1
+opentelemetry-sdk==1.45.1

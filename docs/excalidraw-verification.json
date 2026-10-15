@@ -1,0 +1,29 @@
+{
+  "checked_at": "2026-10-07",
+  "endpoint": "https://mcp.excalidraw.com/mcp",
+  "server": {
+    "name": "Excalidraw",
+    "version": "1.0.0"
+  },
+  "tools": [
+    "read_me",
+    "create_view",
+    "export_to_excalidraw",
+    "save_checkpoint",
+    "read_checkpoint"
+  ],
+  "created_checkpoint": "ee8cf977d56b40ccac",
+  "edited_checkpoint": "2d4b05eaccc74aa3b4",
+  "creation": "passed",
+  "edited_scene_readback": "passed",
+  "native_chat_tools": "read_me and create_view verified on 2026-10-07; see tool-map-verification.json for the newer native create/edit/read-back check",
+  "content": "12 desktop wireframes and a mobile companion; synthetic design examples only",
+  "share_result": {
+    "content": [
+      {
+        "type": "text",
+        "text": "https://excalidraw.com/#json=P3wlM2tzSDCHSxWdh02tR,MutCLeCV1WVNzeWimd0WlA"
+      }
+    ]
+  }
+}

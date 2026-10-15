@@ -1,0 +1,679 @@
+{
+  "verifiedAt": "2026-10-06T18:11:05.796553+00:00",
+  "endpoint": "https://mcp.beui.dev/mcp",
+  "serverInfo": {
+    "name": "beUI",
+    "version": "0.1.0"
+  },
+  "tools": [
+    "list_components",
+    "search_components",
+    "get_component",
+    "get_install_command"
+  ],
+  "components": [
+    {
+      "slug": "message",
+      "name": "Message",
+      "dependencies": [
+        "clsx",
+        "lucide-react",
+        "motion",
+        "react",
+        "react-dom",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "components/agents/message.tsx",
+          "sha256": "d0515c5065e8d0db0cb871e8321a7b48d3f7cfe893bd10d9848acdd07488d490",
+          "characters": 6948
+        },
+        {
+          "path": "components/agents/message-bubble.tsx",
+          "sha256": "0e21cd5a02b5bd98d39b1e4c5415a570f6e0e2b26db82444d691dc97492fc78a",
+          "characters": 10089
+        },
+        {
+          "path": "components/agents/message-context.tsx",
+          "sha256": "ae4f2fd5459abcc15535f78b56f2d156cb6e066d4ecc2db3f09e2f9d1f734933",
+          "characters": 189
+        },
+        {
+          "path": "components/agents/message-scroller.tsx",
+          "sha256": "bf6105eecd904be5022d75e9c66be9d3bdb4d439b9097db3b422d9ed5edab0e0",
+          "characters": 15902
+        },
+        {
+          "path": "lib/ease.ts",
+          "sha256": "bdfa2814cffaa4d974a5fc8614868ddb89e0310a0ead9e7105f2e8132b219ff3",
+          "characters": 1660
+        },
+        {
+          "path": "lib/utils.ts",
+          "sha256": "7c8c3dfc0cdd370d44932828eb067ef771c8fe7996693221d5d4b90af6d54f2d",
+          "characters": 166
+        },
+        {
+          "path": "components/motion/preview-rail.tsx",
+          "sha256": "1f95783020d5f0e8401acbd73985fe11223f6e4164d3486ec364f0bb75d290b4",
+          "characters": 13442
+        },
+        {
+          "path": "lib/hooks/use-dismiss.ts",
+          "sha256": "b3243c39f363c9f9b33b528a2e720d5d48370e964b8c6c80747da423a4269a2a",
+          "characters": 4725
+        },
+        {
+          "path": "lib/hooks/use-hover-gesture.ts",
+          "sha256": "d381531c81668faf22cada58671451f4e7b53cf8d8718d6768e485139810755d",
+          "characters": 2205
+        },
+        {
+          "path": "lib/hooks/use-tap-gesture.ts",
+          "sha256": "b91954bf9f1cdc1771b2a6eac815d2f4e2493cb2cde5f508b2d96509dd71aeee",
+          "characters": 2440
+        },
+        {
+          "path": "lib/touch.ts",
+          "sha256": "f2a15c243c86c8bd1abb6e2e65a423b3a4c45cc1d797ebd83997f21cd1beadb9",
+          "characters": 5706
+        },
+        {
+          "path": "components/previews/agents/message.preview.tsx",
+          "sha256": "3b7c9848f4b04a3348b4891a7672f57eef364da3254bf238857605fd1ea89454",
+          "characters": 271
+        },
+        {
+          "path": "components/previews/agents/chat-preview.tsx",
+          "sha256": "2486325f1dfed670b33a161fc01aea468896d91a97f30e290363c5bcddfbf639",
+          "characters": 8523
+        },
+        {
+          "path": "components/agents/prompt-input.tsx",
+          "sha256": "48c73c0901d8a360c6e97d607df4e13b4e2b70fdf72a425a27b6d6c3b405f23b",
+          "characters": 10692
+        },
+        {
+          "path": "components/agents/streaming-response.tsx",
+          "sha256": "c026f908d4f1a48e9684918da012c89036cbbcff1a4d841a4912e9022ab15ab0",
+          "characters": 9062
+        },
+        {
+          "path": "components/motion/button/index.tsx",
+          "sha256": "df1d7b59bcef7549c02c5d231114d62d4ddba9773a9ea05ca6c842210fcf6b46",
+          "characters": 454
+        },
+        {
+          "path": "components/motion/popover-morph.tsx",
+          "sha256": "8dfe893b917874acc6803ff949b8945dcff4093eb0620c4689eaf7fdaf5211cf",
+          "characters": 13239
+        },
+        {
+          "path": "components/motion/select.tsx",
+          "sha256": "2752510f98d60caea18794d93f868916dbf27f099746828ca9e5bde8c4a201ab",
+          "characters": 13823
+        },
+        {
+          "path": "components/agents/agent-disclosure.tsx",
+          "sha256": "5113ab48b4ff542edda92ace14d0c4de89e3e3f06fca9e354b133fec93ce4265",
+          "characters": 1353
+        },
+        {
+          "path": "components/agents/citations.tsx",
+          "sha256": "40a2ef16b21cbd4049a26760fbb51538c378462486f5a32db07fb0245751bf92",
+          "characters": 7789
+        },
+        {
+          "path": "components/motion/button/base.tsx",
+          "sha256": "5948d878f3446b4cdfa6e076aa2c6ccdb05f5a102bbba074b022de6f3e924144",
+          "characters": 5272
+        },
+        {
+          "path": "components/motion/button/magnetic.tsx",
+          "sha256": "864dc7db0cda2d8ee9bff7127706c546632d00f554595c9ce1816e283acb2a1f",
+          "characters": 700
+        },
+        {
+          "path": "components/motion/button/metallic.tsx",
+          "sha256": "e95693277c7dfd71f55c096fca8a3aee2cc92fde1826f46ceab07d56d20b9f0e",
+          "characters": 3102
+        },
+        {
+          "path": "components/motion/button/stateful.tsx",
+          "sha256": "4e5805735deba5583a2005c6bb1445ed31f9a6055725bbaf29a6693284540379",
+          "characters": 6983
+        },
+        {
+          "path": "components/motion/popover-position.ts",
+          "sha256": "a31a9dc602243c3966aa1043cfd41dec5c13df1a52c847e745c88cbf00cb1f2e",
+          "characters": 2223
+        },
+        {
+          "path": "lib/hooks/use-favicon.ts",
+          "sha256": "9bebff4e7a510e0936d02c60a2c0590f370e3aeb4c6b10d8a385eb85054ec7fb",
+          "characters": 1298
+        },
+        {
+          "path": "lib/hooks/use-hover-capable.ts",
+          "sha256": "b5b9397bfa03859e04673c8f1817cf13ff55d2a9688955d6e0459ae70db90d06",
+          "characters": 745
+        },
+        {
+          "path": "components/motion/magnetic.tsx",
+          "sha256": "f7802af9bbe57998575f6d9846ecfccc842f3c682e8fb0958957581dfd9873a3",
+          "characters": 1446
+        },
+        {
+          "path": "lib/favicon.ts",
+          "sha256": "ffdf23b912e14c58113ca7b4749230ffe2f15594fa21811efa338f05683bce27",
+          "characters": 216
+        }
+      ]
+    },
+    {
+      "slug": "message-scroller",
+      "name": "Message Scroller",
+      "dependencies": [
+        "clsx",
+        "lucide-react",
+        "motion",
+        "react",
+        "react-dom",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "components/agents/message-scroller.tsx",
+          "sha256": "178039dfd4bac27e3e272709d9ec34b8d056ecaf0f2de947c9b09451293d5f79",
+          "characters": 15949
+        },
+        {
+          "path": "components/motion/preview-rail.tsx",
+          "sha256": "1f95783020d5f0e8401acbd73985fe11223f6e4164d3486ec364f0bb75d290b4",
+          "characters": 13442
+        },
+        {
+          "path": "lib/utils.ts",
+          "sha256": "7c8c3dfc0cdd370d44932828eb067ef771c8fe7996693221d5d4b90af6d54f2d",
+          "characters": 166
+        },
+        {
+          "path": "lib/ease.ts",
+          "sha256": "bdfa2814cffaa4d974a5fc8614868ddb89e0310a0ead9e7105f2e8132b219ff3",
+          "characters": 1660
+        },
+        {
+          "path": "lib/hooks/use-dismiss.ts",
+          "sha256": "b3243c39f363c9f9b33b528a2e720d5d48370e964b8c6c80747da423a4269a2a",
+          "characters": 4725
+        },
+        {
+          "path": "lib/hooks/use-hover-gesture.ts",
+          "sha256": "d381531c81668faf22cada58671451f4e7b53cf8d8718d6768e485139810755d",
+          "characters": 2205
+        },
+        {
+          "path": "lib/hooks/use-tap-gesture.ts",
+          "sha256": "b91954bf9f1cdc1771b2a6eac815d2f4e2493cb2cde5f508b2d96509dd71aeee",
+          "characters": 2440
+        },
+        {
+          "path": "lib/touch.ts",
+          "sha256": "f2a15c243c86c8bd1abb6e2e65a423b3a4c45cc1d797ebd83997f21cd1beadb9",
+          "characters": 5706
+        },
+        {
+          "path": "components/previews/agents/message-scroller.preview.tsx",
+          "sha256": "b3d1a85d852c227f1516aa75ce11128c285cb75a21e9f8044f297e05c6dc411b",
+          "characters": 1717
+        },
+        {
+          "path": "components/previews/agents/chat-preview.tsx",
+          "sha256": "2486325f1dfed670b33a161fc01aea468896d91a97f30e290363c5bcddfbf639",
+          "characters": 8523
+        },
+        {
+          "path": "components/agents/message.tsx",
+          "sha256": "39f616501ef4e7f3d928ee4f0d4730a96b7ec83a65ad4d1eff4db6d5aec2b7b9",
+          "characters": 6910
+        },
+        {
+          "path": "components/agents/message-bubble.tsx",
+          "sha256": "0e21cd5a02b5bd98d39b1e4c5415a570f6e0e2b26db82444d691dc97492fc78a",
+          "characters": 10089
+        },
+        {
+          "path": "components/agents/prompt-input.tsx",
+          "sha256": "48c73c0901d8a360c6e97d607df4e13b4e2b70fdf72a425a27b6d6c3b405f23b",
+          "characters": 10692
+        },
+        {
+          "path": "components/agents/streaming-response.tsx",
+          "sha256": "c026f908d4f1a48e9684918da012c89036cbbcff1a4d841a4912e9022ab15ab0",
+          "characters": 9062
+        },
+        {
+          "path": "components/agents/message-context.tsx",
+          "sha256": "ae4f2fd5459abcc15535f78b56f2d156cb6e066d4ecc2db3f09e2f9d1f734933",
+          "characters": 189
+        },
+        {
+          "path": "components/motion/button/index.tsx",
+          "sha256": "df1d7b59bcef7549c02c5d231114d62d4ddba9773a9ea05ca6c842210fcf6b46",
+          "characters": 454
+        },
+        {
+          "path": "components/motion/popover-morph.tsx",
+          "sha256": "8dfe893b917874acc6803ff949b8945dcff4093eb0620c4689eaf7fdaf5211cf",
+          "characters": 13239
+        },
+        {
+          "path": "components/motion/select.tsx",
+          "sha256": "2752510f98d60caea18794d93f868916dbf27f099746828ca9e5bde8c4a201ab",
+          "characters": 13823
+        },
+        {
+          "path": "components/agents/agent-disclosure.tsx",
+          "sha256": "5113ab48b4ff542edda92ace14d0c4de89e3e3f06fca9e354b133fec93ce4265",
+          "characters": 1353
+        },
+        {
+          "path": "components/agents/citations.tsx",
+          "sha256": "40a2ef16b21cbd4049a26760fbb51538c378462486f5a32db07fb0245751bf92",
+          "characters": 7789
+        },
+        {
+          "path": "components/motion/button/base.tsx",
+          "sha256": "5948d878f3446b4cdfa6e076aa2c6ccdb05f5a102bbba074b022de6f3e924144",
+          "characters": 5272
+        },
+        {
+          "path": "components/motion/button/magnetic.tsx",
+          "sha256": "864dc7db0cda2d8ee9bff7127706c546632d00f554595c9ce1816e283acb2a1f",
+          "characters": 700
+        },
+        {
+          "path": "components/motion/button/metallic.tsx",
+          "sha256": "e95693277c7dfd71f55c096fca8a3aee2cc92fde1826f46ceab07d56d20b9f0e",
+          "characters": 3102
+        },
+        {
+          "path": "components/motion/button/stateful.tsx",
+          "sha256": "4e5805735deba5583a2005c6bb1445ed31f9a6055725bbaf29a6693284540379",
+          "characters": 6983
+        },
+        {
+          "path": "components/motion/popover-position.ts",
+          "sha256": "a31a9dc602243c3966aa1043cfd41dec5c13df1a52c847e745c88cbf00cb1f2e",
+          "characters": 2223
+        },
+        {
+          "path": "lib/hooks/use-favicon.ts",
+          "sha256": "9bebff4e7a510e0936d02c60a2c0590f370e3aeb4c6b10d8a385eb85054ec7fb",
+          "characters": 1298
+        },
+        {
+          "path": "lib/hooks/use-hover-capable.ts",
+          "sha256": "b5b9397bfa03859e04673c8f1817cf13ff55d2a9688955d6e0459ae70db90d06",
+          "characters": 745
+        },
+        {
+          "path": "components/motion/magnetic.tsx",
+          "sha256": "f7802af9bbe57998575f6d9846ecfccc842f3c682e8fb0958957581dfd9873a3",
+          "characters": 1446
+        },
+        {
+          "path": "lib/favicon.ts",
+          "sha256": "ffdf23b912e14c58113ca7b4749230ffe2f15594fa21811efa338f05683bce27",
+          "characters": 216
+        }
+      ]
+    },
+    {
+      "slug": "prompt-input",
+      "name": "Prompt Input",
+      "dependencies": [
+        "clsx",
+        "lucide-react",
+        "motion",
+        "react",
+        "react-dom",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "components/agents/prompt-input.tsx",
+          "sha256": "48b4a23b00b33e6d52c89ed8f36a479364c020fc64c2c9ad4b0d02175ab6a21f",
+          "characters": 10735
+        },
+        {
+          "path": "components/motion/button/index.tsx",
+          "sha256": "df1d7b59bcef7549c02c5d231114d62d4ddba9773a9ea05ca6c842210fcf6b46",
+          "characters": 454
+        },
+        {
+          "path": "components/motion/popover-morph.tsx",
+          "sha256": "8dfe893b917874acc6803ff949b8945dcff4093eb0620c4689eaf7fdaf5211cf",
+          "characters": 13239
+        },
+        {
+          "path": "components/motion/select.tsx",
+          "sha256": "2752510f98d60caea18794d93f868916dbf27f099746828ca9e5bde8c4a201ab",
+          "characters": 13823
+        },
+        {
+          "path": "lib/ease.ts",
+          "sha256": "bdfa2814cffaa4d974a5fc8614868ddb89e0310a0ead9e7105f2e8132b219ff3",
+          "characters": 1660
+        },
+        {
+          "path": "lib/utils.ts",
+          "sha256": "7c8c3dfc0cdd370d44932828eb067ef771c8fe7996693221d5d4b90af6d54f2d",
+          "characters": 166
+        },
+        {
+          "path": "components/motion/button/base.tsx",
+          "sha256": "5948d878f3446b4cdfa6e076aa2c6ccdb05f5a102bbba074b022de6f3e924144",
+          "characters": 5272
+        },
+        {
+          "path": "components/motion/button/magnetic.tsx",
+          "sha256": "864dc7db0cda2d8ee9bff7127706c546632d00f554595c9ce1816e283acb2a1f",
+          "characters": 700
+        },
+        {
+          "path": "components/motion/button/metallic.tsx",
+          "sha256": "e95693277c7dfd71f55c096fca8a3aee2cc92fde1826f46ceab07d56d20b9f0e",
+          "characters": 3102
+        },
+        {
+          "path": "components/motion/button/stateful.tsx",
+          "sha256": "4e5805735deba5583a2005c6bb1445ed31f9a6055725bbaf29a6693284540379",
+          "characters": 6983
+        },
+        {
+          "path": "components/motion/popover-position.ts",
+          "sha256": "a31a9dc602243c3966aa1043cfd41dec5c13df1a52c847e745c88cbf00cb1f2e",
+          "characters": 2223
+        },
+        {
+          "path": "lib/hooks/use-hover-capable.ts",
+          "sha256": "b5b9397bfa03859e04673c8f1817cf13ff55d2a9688955d6e0459ae70db90d06",
+          "characters": 745
+        },
+        {
+          "path": "components/motion/magnetic.tsx",
+          "sha256": "f7802af9bbe57998575f6d9846ecfccc842f3c682e8fb0958957581dfd9873a3",
+          "characters": 1446
+        },
+        {
+          "path": "components/previews/agents/prompt-input.preview.tsx",
+          "sha256": "989da50e3baceb36171be5912d235c069109b2f3e61390bb25980ed7035ab8d6",
+          "characters": 3834
+        },
+        {
+          "path": "lib/hooks/use-favicon.ts",
+          "sha256": "9bebff4e7a510e0936d02c60a2c0590f370e3aeb4c6b10d8a385eb85054ec7fb",
+          "characters": 1298
+        },
+        {
+          "path": "lib/favicon.ts",
+          "sha256": "ffdf23b912e14c58113ca7b4749230ffe2f15594fa21811efa338f05683bce27",
+          "characters": 216
+        }
+      ]
+    },
+    {
+      "slug": "file-upload",
+      "name": "File Upload",
+      "dependencies": [
+        "@floating-ui/dom",
+        "clsx",
+        "lucide-react",
+        "motion",
+        "react",
+        "react-dom",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "components/motion/file-upload.tsx",
+          "sha256": "ff93012a9639a11d411f7eddf7287cf9ab62c3787bd1180ea9a1508b4ddcab62",
+          "characters": 17187
+        },
+        {
+          "path": "components/motion/attachment-upload.tsx",
+          "sha256": "2a9a33fa3952885a913e2cade68e32e880951f6d4f8c0738bee58e1b7b62075b",
+          "characters": 33482
+        },
+        {
+          "path": "lib/ease.ts",
+          "sha256": "bdfa2814cffaa4d974a5fc8614868ddb89e0310a0ead9e7105f2e8132b219ff3",
+          "characters": 1660
+        },
+        {
+          "path": "lib/utils.ts",
+          "sha256": "7c8c3dfc0cdd370d44932828eb067ef771c8fe7996693221d5d4b90af6d54f2d",
+          "characters": 166
+        },
+        {
+          "path": "components/motion/tooltip.tsx",
+          "sha256": "215d22a74b7647b6e2e7b2626b2bcce5fa57dca6f5ce66fbcba49b7052c9dd01",
+          "characters": 8666
+        },
+        {
+          "path": "lib/presence-gate.tsx",
+          "sha256": "f3c3911933dda28679c108281da9acc37e8f98bc28d7bb79ff63bc0e3aaa9c74",
+          "characters": 1864
+        },
+        {
+          "path": "components/motion/tooltip/positioner.tsx",
+          "sha256": "74f1bb523526f1c8575925f2805ee7f3b21d0855de5a21de12b32b7074be28fc",
+          "characters": 1034
+        },
+        {
+          "path": "components/motion/tooltip/use-position.ts",
+          "sha256": "7e879a55956168f9f89bf8dbee57598a2840d75ea969f2936b32e197b8e90d3e",
+          "characters": 7138
+        },
+        {
+          "path": "components/motion/tooltip-surface.tsx",
+          "sha256": "d082ccbc58b0ad10a4372245a6254f9a70095a55d869595d6bba778b23aba3f8",
+          "characters": 1405
+        },
+        {
+          "path": "lib/hooks/use-dismiss.ts",
+          "sha256": "b3243c39f363c9f9b33b528a2e720d5d48370e964b8c6c80747da423a4269a2a",
+          "characters": 4725
+        },
+        {
+          "path": "lib/hooks/use-hover-gesture.ts",
+          "sha256": "d381531c81668faf22cada58671451f4e7b53cf8d8718d6768e485139810755d",
+          "characters": 2205
+        },
+        {
+          "path": "lib/hooks/use-tap-gesture.ts",
+          "sha256": "b91954bf9f1cdc1771b2a6eac815d2f4e2493cb2cde5f508b2d96509dd71aeee",
+          "characters": 2440
+        },
+        {
+          "path": "lib/touch.ts",
+          "sha256": "f2a15c243c86c8bd1abb6e2e65a423b3a4c45cc1d797ebd83997f21cd1beadb9",
+          "characters": 5706
+        },
+        {
+          "path": "components/previews/blocks/file-upload.preview.tsx",
+          "sha256": "421a7baef29fecbb352002b3f559a0fd7ecb5601315f0086d9581763b1b69448",
+          "characters": 5174
+        }
+      ]
+    },
+    {
+      "slug": "image-viewer",
+      "name": "Image Viewer",
+      "dependencies": [
+        "clsx",
+        "lucide-react",
+        "motion",
+        "react",
+        "react-dom",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "components/motion/morphing-lightbox.tsx",
+          "sha256": "0ad7bdd6876ab4391e5948d2ef96318d531831acb395e3c18a64d6deaabc69ba",
+          "characters": 24232
+        },
+        {
+          "path": "lib/ease.ts",
+          "sha256": "bdfa2814cffaa4d974a5fc8614868ddb89e0310a0ead9e7105f2e8132b219ff3",
+          "characters": 1660
+        },
+        {
+          "path": "lib/hooks/use-modal-scope.ts",
+          "sha256": "87f1d964f44dd965dc81bda0f41f0ba362e86b9836521766b54b28c472208df7",
+          "characters": 3483
+        },
+        {
+          "path": "lib/presence-gate.tsx",
+          "sha256": "f3c3911933dda28679c108281da9acc37e8f98bc28d7bb79ff63bc0e3aaa9c74",
+          "characters": 1864
+        },
+        {
+          "path": "lib/utils.ts",
+          "sha256": "7c8c3dfc0cdd370d44932828eb067ef771c8fe7996693221d5d4b90af6d54f2d",
+          "characters": 166
+        }
+      ]
+    },
+    {
+      "slug": "input",
+      "name": "Input",
+      "dependencies": [
+        "clsx",
+        "lucide-react",
+        "motion",
+        "react",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "components/motion/input.tsx",
+          "sha256": "1467f467c24cf6c89fa88ce00acdc6e6cbd40f225bdb0c3a026b0773445e1475",
+          "characters": 6618
+        },
+        {
+          "path": "lib/utils.ts",
+          "sha256": "7c8c3dfc0cdd370d44932828eb067ef771c8fe7996693221d5d4b90af6d54f2d",
+          "characters": 166
+        },
+        {
+          "path": "components/previews/motion/input.preview.tsx",
+          "sha256": "fb03cd5ca5e3db29397880cb1b344b064eb83b8554da4b46d52bbb4534e03106",
+          "characters": 1455
+        }
+      ]
+    },
+    {
+      "slug": "collapsible",
+      "name": "Animated Collapsible",
+      "dependencies": [
+        "clsx",
+        "lucide-react",
+        "motion",
+        "react",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "components/motion/collapsible.tsx",
+          "sha256": "4fdc3d92ee6698e4284fd34025d25e848c9a5fbb5828ee53b5508ced8bb19b19",
+          "characters": 9668
+        },
+        {
+          "path": "lib/ease.ts",
+          "sha256": "bdfa2814cffaa4d974a5fc8614868ddb89e0310a0ead9e7105f2e8132b219ff3",
+          "characters": 1660
+        },
+        {
+          "path": "lib/utils.ts",
+          "sha256": "7c8c3dfc0cdd370d44932828eb067ef771c8fe7996693221d5d4b90af6d54f2d",
+          "characters": 166
+        },
+        {
+          "path": "components/previews/motion/collapsible.preview.tsx",
+          "sha256": "9d09f7b3738fa10d1984c9c75b76a4982452931ed875eb7392a26d30a8a59bff",
+          "characters": 622
+        }
+      ]
+    },
+    {
+      "slug": "tabs",
+      "name": "Tabs",
+      "dependencies": [
+        "clsx",
+        "lucide-react",
+        "motion",
+        "react",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "components/motion/tabs.tsx",
+          "sha256": "7912c13d13d5e067e24a875d82a24c6203605e23a3ef8c93e16bf8bdd89baa73",
+          "characters": 14497
+        },
+        {
+          "path": "lib/ease.ts",
+          "sha256": "bdfa2814cffaa4d974a5fc8614868ddb89e0310a0ead9e7105f2e8132b219ff3",
+          "characters": 1660
+        },
+        {
+          "path": "lib/utils.ts",
+          "sha256": "7c8c3dfc0cdd370d44932828eb067ef771c8fe7996693221d5d4b90af6d54f2d",
+          "characters": 166
+        },
+        {
+          "path": "components/previews/motion/tabs.preview.tsx",
+          "sha256": "f1a39bcc6bdebe9b9269a4c56bebe918cceec4ab8a3214cd28755704afce43dc",
+          "characters": 2234
+        }
+      ]
+    },
+    {
+      "slug": "loader",
+      "name": "Loader",
+      "dependencies": [
+        "clsx",
+        "motion",
+        "react",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "components/motion/loader.tsx",
+          "sha256": "bf4d4dc7245e6d75910203c34611ebfc08718a1fdfdb1d48ec1e051aebc8cbae",
+          "characters": 18213
+        },
+        {
+          "path": "lib/ease.ts",
+          "sha256": "bdfa2814cffaa4d974a5fc8614868ddb89e0310a0ead9e7105f2e8132b219ff3",
+          "characters": 1660
+        },
+        {
+          "path": "lib/utils.ts",
+          "sha256": "7c8c3dfc0cdd370d44932828eb067ef771c8fe7996693221d5d4b90af6d54f2d",
+          "characters": 166
+        },
+        {
+          "path": "components/previews/motion/loader.preview.tsx",
+          "sha256": "6c14a63fa9d4fc02f569f3c1639cb9e3756d8fcd7b5d18974fdefce1c2c1b062",
+          "characters": 1327
+        }
+      ]
+    }
+  ],
+  "scope": "MCP source retrieval only; components not installed or UI-tested"
+}

@@ -1,0 +1,63 @@
+{
+  "created": "2026-10-07",
+  "source_tool": "Native image generation; three original isolated transparent illustrations",
+  "shared_prompt": "Use case: stylized-concept. Asset type: transparent companion artwork for Yama's dark expressive incident-intelligence application. One bird only, entire body visible including feet and tail, sitting on a tiny neutral twig. Art-directed fine engraved natural-history bird illustration with clean, nuanced feather shading, very high contrast ivory/silver highlights and dark graphite detail, sparse pale blue feather accents, suitable for conversion into coarse dithered pixel art. Elegant, expressive, patient; realistic bird anatomy rather than a cartoon mascot. Composition: square transparent canvas, full isolated bird centered with generous transparent padding, silhouette clearly readable at 64px. No scenery, ground, shadow, frame, glow, circle, UI, lettering, labels, accessories, uniform or watermark. Actual transparent background; no painted black or white background. This is a production image asset, not a UI mockup.",
+  "subject_briefs": {
+    "saathi": "A gentle Indian house sparrow, patient and attentive, facing right.",
+    "drishti": "An alert Indian kingfisher, observant and precise, facing right.",
+    "disha": "A graceful swallow, calmly poised to guide onward, facing right."
+  },
+  "render_tool": "ASCII Magic MCP, free Dither",
+  "settings": {
+    "enhance": false,
+    "algo": "bayer4",
+    "palette": "original",
+    "font_size": 3,
+    "scale": 1,
+    "contrast": 120,
+    "post_fx": "none"
+  },
+  "recipe": "recipe:v1:eyJ2IjoxLCJyZW5kZXJNb2RlIjoiZGl0aGVyIiwiZm9udFNpemUiOjMsImNvbnRyYXN0IjoxMjAsImRpdGhlckFsZ28iOiJiYXllcjQiLCJkaXRoZXJQYWxldHRlIjoib3JpZ2luYWwifQ",
+  "assets": [
+    {
+      "agent": "saathi",
+      "files": [
+        {
+          "path": "assets/agents/saathi-source.png",
+          "sha256": "967f49e7ad30e7316e40e81952463cf1eafb86460a1641a1849109cb0401f5fa"
+        },
+        {
+          "path": "public/agents/saathi.png",
+          "sha256": "6e2e9c8c5538b7e85e35366167d0bdec925e0ff24290f0f14b9e43e724666e8e"
+        }
+      ]
+    },
+    {
+      "agent": "drishti",
+      "files": [
+        {
+          "path": "assets/agents/drishti-source.png",
+          "sha256": "c60e1db0d017222500128babfc3d9d22baa359d89ff11e4c9f26a650189efcb6"
+        },
+        {
+          "path": "public/agents/drishti.png",
+          "sha256": "a87395ce96f81b210cda23ff895ae43171bb9e3faa8770135217e17edb894b52"
+        }
+      ]
+    },
+    {
+      "agent": "disha",
+      "files": [
+        {
+          "path": "assets/agents/disha-source.png",
+          "sha256": "d4e4e59e0d4561dee563bcfa6b7aa5802a6ae30f17b6c4cb0bda04796ee145fa"
+        },
+        {
+          "path": "public/agents/disha.png",
+          "sha256": "1ad030b8863234ec72cab75454791c66e8dbbc6fda4b955a0f0341d5cf33d426"
+        }
+      ]
+    }
+  ],
+  "ui_treatment": "CSS grayscale; bounded Motion rotation only during caption preview; static under reduced motion."
+}

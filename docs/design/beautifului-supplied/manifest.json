@@ -1,0 +1,121 @@
+{
+  "date": "2026-10-08",
+  "source": "Files supplied directly by the user",
+  "license": "licenses/BeautifulUI-MIT.txt",
+  "components": [
+    {
+      "number": 1,
+      "name": "LoadingState",
+      "source": "/Users/shera/.codex/attachments/78f6b956-34c6-4a69-b6cc-26063db66e23/Pasted text.txt",
+      "snapshot": "docs/design/beautifului-supplied/LoadingState.tsx.txt",
+      "sha256": "eb1bdcddcd2dbdfe1232b3bf3d7dfd0912ef9b6e0fb1a9b095cb423778e8a8d1",
+      "status": "Application adaptation",
+      "application": "src/components/primitives/LoadingState.tsx"
+    },
+    {
+      "number": 2,
+      "name": "ThinkingState",
+      "source": "/Users/shera/.codex/attachments/e305c977-70e4-4bb6-a742-ba27e6be796d/Pasted text.txt",
+      "snapshot": "docs/design/beautifului-supplied/ThinkingState.tsx.txt",
+      "sha256": "3d73617406120fad93fd15c67054a59debb9e43ccd385a21e2f48a7fb4036e24",
+      "status": "Application adaptation",
+      "application": "src/components/primitives/ThinkingState.tsx"
+    },
+    {
+      "number": 3,
+      "name": "StreamingText",
+      "source": "/Users/shera/.codex/attachments/09aa0edf-dbd6-4b38-97b2-ecbe2576f64f/Pasted text.txt",
+      "snapshot": "docs/design/beautifului-supplied/StreamingText.tsx.txt",
+      "sha256": "8b17569fbc9c75aef1f82a5310f2402209cc8ab1b13f65fdd71251cb1e1f14d3",
+      "status": "Application adaptation",
+      "application": "src/components/primitives/StreamingText.tsx"
+    },
+    {
+      "number": 4,
+      "name": "ApprovalCard",
+      "source": "/Users/shera/.codex/attachments/f6be99a9-867d-4e28-a863-fc77fdb17df5/Pasted text.txt",
+      "snapshot": "docs/design/beautifului-supplied/ApprovalCard.tsx.txt",
+      "sha256": "5e90ba19b79f4d385a34e9cf703b15e819c72df93d70a72c8c01aa85d500ca95",
+      "status": "Application adaptation",
+      "application": "src/components/primitives/ApprovalCard.tsx"
+    },
+    {
+      "number": 5,
+      "name": "ToolChips",
+      "source": "/Users/shera/.codex/attachments/a60865a2-ccaa-435e-9a62-815106147275/Pasted text.txt",
+      "snapshot": "docs/design/beautifului-supplied/ToolChips.tsx.txt",
+      "sha256": "dc06a0ec805825622bf622f0f56cc8305f79751fe7fcb55727a59869b443c9c8",
+      "status": "Application adaptation",
+      "application": "src/components/primitives/ToolChips.tsx"
+    },
+    {
+      "number": 6,
+      "name": "ChatComposer",
+      "source": "/Users/shera/.codex/attachments/6a344d56-8e82-40a6-a77f-be28cdb7ccad/Pasted text.txt",
+      "snapshot": "docs/design/beautifului-supplied/ChatComposer.tsx.txt",
+      "sha256": "1b8ac6cd342a5ccab92c0e0265d7431a35703e23496bd85c4cf64d883e6cc7f5",
+      "status": "Application adaptation",
+      "application": "src/components/primitives/ChatComposer.tsx"
+    },
+    {
+      "number": 7,
+      "name": "PromptBar",
+      "source": "/Users/shera/.codex/attachments/0687117e-d49c-4899-9c02-239b0bd24c31/Pasted text.txt",
+      "snapshot": "docs/design/beautifului-supplied/PromptBar.tsx.txt",
+      "sha256": "1f2ff02adae3f1fe80b00fd0ef1c54c3558e8638502c1b7d71b1d0000dfceb5a",
+      "status": "Application adaptation",
+      "application": "src/components/primitives/PromptBar.tsx"
+    },
+    {
+      "number": 8,
+      "name": "RecommendationCard",
+      "source": "/Users/shera/.codex/attachments/f968642c-a5b1-4309-9e51-0cb02f9a04d8/Pasted text.txt",
+      "snapshot": "docs/design/beautifului-supplied/RecommendationCard.tsx.txt",
+      "sha256": "fe4c56f271f147bb84cdef3f2c7238bdc9eb9a5643a0e4a949e62adb9e25abba",
+      "status": "Application adaptation",
+      "application": "src/components/primitives/RecommendationCard.tsx"
+    },
+    {
+      "number": 9,
+      "name": "FilterTable",
+      "source": "/Users/shera/.codex/attachments/5487aa19-097c-496a-a83c-4957e423248c/Pasted text.txt",
+      "snapshot": "docs/design/beautifului-supplied/FilterTable.tsx.txt",
+      "sha256": "7075a6ff652f2a539f835a4ed77e4357404906aff4ba5fb786255965d7aefa74",
+      "status": "Application adaptation",
+      "application": "src/components/primitives/FilterTable.tsx"
+    },
+    {
+      "number": 10,
+      "name": "SidebarNav",
+      "source": "/Users/shera/.codex/attachments/186f989c-9caa-40f2-b9fa-c30b91f3b002/Pasted text.txt",
+      "snapshot": "docs/design/beautifului-supplied/SidebarNav.tsx.txt",
+      "sha256": "06a0685ab35c16789231ee1947b4efd7f49adc50ae1f0ce4e0f7a2f2e35a6a59",
+      "status": "Application adaptation",
+      "application": "src/components/primitives/SidebarNav.tsx"
+    },
+    {
+      "number": 11,
+      "name": "InsightCards",
+      "source": "/Users/shera/.codex/attachments/0d778a43-47d6-4da0-8c70-dda37f662dd9/Pasted text.txt",
+      "snapshot": "docs/design/beautifului-supplied/InsightCards.tsx.txt",
+      "sha256": "7d6def83506070a8316759f82e531dc56b2d2d1b9e76bf6c95e2ef0c3fb69ff2",
+      "status": "Application adaptation",
+      "application": "src/components/primitives/InsightCards.tsx"
+    },
+    {
+      "number": 12,
+      "name": "AgentScreen",
+      "source": "/Users/shera/.codex/attachments/15081c8a-0f05-4587-bc20-1423ad712dd1/Pasted text.txt",
+      "snapshot": "docs/design/beautifului-supplied/AgentScreen.tsx.txt",
+      "sha256": "d1697b2d93f8c4ad5d065c58c6b1f2331acba125f496fac35000439d988f6c75",
+      "status": "Retained for future integration"
+    }
+  ],
+  "verification": {
+    "command": "npm run check",
+    "tests": 45,
+    "typecheck": "passed",
+    "lint": "passed",
+    "build": "passed"
+  }
+}

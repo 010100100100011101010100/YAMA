@@ -1,0 +1,62 @@
+{
+  "date": "2026-10-09",
+  "mode": "synthetic_localhost",
+  "increment": "plain_text_evidence",
+  "commands": {
+    "npm run db:init": "passed; additive evidence schema/indexes",
+    "npm run typecheck": "passed",
+    "npm run lint": "passed",
+    "npm run test:frontend -- --maxWorkers=1": "passed; one worker is now the default",
+    "npm run test:frontend -- tests/frontend/demo-state.test.ts": "passed after adding file-provenance export assertions",
+    "npm run test:backend": "passed after cancellation regression fix",
+    "npm run test:integration": "passed; long-running graph worker stopped during suite",
+    "npm run test:integration -- tests/integration/api.test.ts": "passed after upload cancellation fix",
+    "python3 -m unittest discover -s tests -v": "passed",
+    "npm run build": "passed; all evidence routes included"
+  },
+  "tests": {
+    "frontend": 88,
+    "backend_unit": 19,
+    "database_http_and_native_runtime_integration": 34,
+    "offline_agent_coordinator": 29,
+    "total_unique": 170
+  },
+  "browser": {
+    "native_file_selection": "unverified; documented in-app file-chooser API timed out on the folder and file input",
+    "fixture_setup": "fictional-record.txt uploaded and extracted through the real EvidenceService into the known synthetic browser report; no manual report/metadata mutation",
+    "restored_file_list": "passed; one owned ready file, report revision 3 unchanged by upload/extraction",
+    "explicit_source_review": "passed; source text visible, Add as draft note disabled until acknowledged",
+    "review_revision": "passed; revision 4 created, draft unconfirmed, original source preserved",
+    "confirm_and_compare": "passed; explicit current-revision confirmation followed by real catalogue result",
+    "refresh_recovery": "passed; revision 4, reviewed file state and exact source text restored",
+    "hindi_source_320px": { "status": "passed", "viewport_width": 320, "page_width": 320, "source_width": 245 },
+    "screenshots": ["design/evidence-service/source-review.jpg", "design/evidence-service/hindi-source-320.jpg"],
+    "final_state": "default viewport and English restored; localhost tab retained; graph worker restarted"
+  },
+  "verified_boundaries": [
+    "Raw and chunked byte limits, deadline and cancellation; partial prefixes rejected",
+    "Unsafe filenames, MIME/signature mismatches, binary/control content and invalid UTF-8",
+    "Exact original Hindi, whitespace, BOM and line endings; no truncation",
+    "Private file permissions, no-follow reads, source hash integrity and symlink rejection",
+    "Ownership for every HTTP file operation and service report/file reference",
+    "Concurrent duplicate uploads, reused-key conflict precedence and transactional quota races",
+    "Explicit source hash/current revision acknowledgement and idempotent import",
+    "Atomic review rollback, confirmation invalidation and archived source preservation",
+    "Actual private FalkorDB file/source provenance without shared catalogue publication",
+    "Client scoped-response validation, retry key reuse and expired-session handling",
+    "Escaped source preview, failed review retention, focus return, semantic accessibility and export provenance"
+  ],
+  "resolved_verification_issues": [
+    "Initial concurrent test load timed out UI tests and OOM-killed MongoDB (exit 137). Frontend workers reduced to one; suites run separately. Mongo limit raised from 640 to 768 MB with health-check headroom; volumes and the 2 GB VM preserved.",
+    "Cancellation regression initially reproduced accepting a valid prefix when the final read completed after abort. UploadBody now rechecks the signal after every awaited read."
+  ],
+  "limits": [
+    "Only UTF-8 .txt, maximum 64 KiB and 6000 UTF-16 code units, 20 slots per report including archived files.",
+    "Archival removal retains bytes and historical text; permanent erasure, orphan cleanup and recovery jobs are not implemented.",
+    "Filesystem and Mongo commits are not atomic; crashes or unknown commit outcomes can leave orphan blobs.",
+    "PDF/images, OCR, long-running parser isolation, antivirus and encryption at rest are later increments.",
+    "Native picker, manual screen-reader and emulated reduced-motion browser verification remain outstanding.",
+    "Anonymous sessions are demo ownership, not recoverable or verified production identities.",
+    "No model, voice, artwork, email, external lookup or payment provider was called."
+  ]
+}

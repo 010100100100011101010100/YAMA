@@ -1,0 +1,16 @@
+.DS_Store
+.env
+.env.*
+!.env.example
+node_modules/
+.next/
+.vercel/
+*.tsbuildinfo
+coverage/
+playwright-report/
+test-results/
+.venv/
+.venv-voice/
+__pycache__/
+.local/
+*.log

@@ -1,0 +1,827 @@
+PROJECT Yama — MASTER PRODUCT CONTEXT
+You are helping conceptualize, design, reason about, and later build a
+platform called Project Yama.
+At this stage, DO NOT begin implementing the application unless explicitly
+asked.
+Your immediate responsibility is to deeply understand the product,
+its purpose, UX philosophy, graph architecture, safety constraints,
+agent roles, matching system, business model, and intended user journey.
+Whenever future features are proposed, preserve this context unless the user
+explicitly changes it.
+
+1. PRODUCT MISSION
+Project Yama is an AI-assisted incident intelligence platform.
+Its purpose is to help people who have experienced or witnessed crimes,
+fraud, abuse, harassment, or other harmful incidents:
+Explain what happened naturally.
+Organize their story into structured incident information.
+Preserve relevant evidence and identifiers.
+Connect their incident with potentially related incidents.
+Discover patterns across otherwise fragmented reports.
+Explain why two incidents may be connected.
+Help the user understand appropriate next steps.
+Help prepare information needed for official reporting.
+The core technological differentiator is:
+AI agents acting on connected graph data using FalkorDB.
+Project Yama is NOT:
+a vigilante platform,
+a doxxing platform,
+a public accusation database,
+an AI judge,
+an AI police officer,
+or a system that declares someone guilty.
+The system deals with:
+reports, allegations, evidence, entities, relationships, and patterns.
+It must always distinguish those concepts from established guilt.
+
+2. CORE PRODUCT PRINCIPLE
+The fundamental user journey is:
+Narrate → Confirm → Connect → Understand → Act
+The victim should never need to understand:
+graph databases,
+Cypher,
+legal taxonomies,
+investigation terminology,
+entity resolution,
+embeddings,
+graph traversal,
+or agent architecture.
+The intelligence remains underneath the UX.
+
+3. SUPPORTED INCIDENT TYPES
+Project Yama should use an extensible crime and incident taxonomy.
+It must eventually support categories including, but not limited to:
+Financial fraud
+Investment fraud
+Real-estate fraud
+Identity fraud
+Impersonation
+Cybercrime
+Account compromise
+Phishing
+Malware-related incidents
+Sextortion
+Blackmail
+Extortion
+Online harassment
+Cyberbullying
+Offline bullying
+Stalking
+Threats
+Hate crime
+Assault
+Sexual harassment
+Molestation
+Sexual assault
+Robbery
+Theft
+Burglary
+Property crime
+Organized crime
+Trafficking
+Terrorism-related incidents
+Recruitment or radicalization-related incidents
+Violent crime
+Other harmful or suspicious incidents
+Do not design the database around a fixed list.
+Use:
+IncidentCategory
+and
+IncidentSubcategory
+so new categories can be introduced without redesigning the graph.
+
+4. FIRST-RUN UX
+The first experience should be extremely simple.
+Do NOT confront the user with a complicated form.
+The opening screen should reassure the user without making unrealistic
+promises.
+Never say:
+"Criminals never win."
+Instead communicate ideas such as:
+"You do not need to figure everything out right now."
+"You can start by telling us what happened."
+"We'll help organize the information step by step."
+"Preserving evidence and connecting related reports can make action easier."
+The interface may show a small number of verified statistics concerning
+reporting, crime resolution, recovery, investigation, or justice.
+However:
+statistics must come from authoritative sources;
+their jurisdiction and date must be visible;
+outdated statistics must not be presented as current;
+statistics must never guarantee an outcome;
+statistics should encourage action rather than create fear.
+Never fabricate a statistic for emotional reassurance.
+
+5. THREE Yama AGENTS
+The main interface presents three visually distinctive,
+dithered-style AI avatars.
+Each agent has a specific responsibility.
+Agent 1 — Saathi
+ROLE:
+Incident Intake Agent
+PERSONALITY:
+Warm, patient, conversational, non-judgmental.
+MISSION:
+Help the user explain what happened without making them feel interrogated.
+Saathi:
+accepts voice or text;
+supports natural conversation;
+supports English and Hindi;
+should eventually support Hinglish/code-switching;
+extracts facts silently while the user talks;
+asks only contextually useful follow-up questions;
+identifies missing important information;
+helps organize timelines;
+helps identify available evidence;
+never pressures the user;
+never determines guilt.
+Example introduction:
+"I'm Saathi. Tell me what happened in your own words.
+You don't need to organize everything — I'll help with that."
+
+Agent 2 — Drishti
+ROLE:
+Graph Intelligence Agent
+PERSONALITY:
+Calm, analytical, precise and evidence-driven.
+MISSION:
+Analyze FalkorDB and discover connections between the current incident
+and other reports.
+Drishti:
+performs graph traversal;
+performs entity resolution;
+detects shared identifiers;
+detects modus-operandi similarity;
+discovers multi-hop connections;
+calculates match scores;
+distinguishes strong evidence from weak similarity;
+explains every meaningful graph connection;
+identifies contradictory evidence;
+never claims that a match proves guilt.
+Example introduction:
+"I'm Drishti. I look for connections between incidents and explain
+exactly why two reports may be related."
+
+Agent 3 — Disha
+ROLE:
+Action and Resolution Agent
+PERSONALITY:
+Direct, procedural, reassuring and practical.
+MISSION:
+Turn the organized incident into useful next actions.
+Disha may help with:
+evidence preservation;
+complaint preparation;
+jurisdiction guidance;
+official reporting channels;
+cybercrime reporting;
+police reporting guidance;
+emergency resources;
+generating an incident summary;
+generating an evidence manifest;
+creating a chronological timeline;
+explaining what information authorities may require.
+Disha does NOT pretend to file an FIR or complaint unless a legitimate
+official integration actually exists.
+Example introduction:
+"I'm Disha. Once your report is organized, I'll help you understand
+what you can do next."
+
+6. USER SESSION MODEL
+Users may initially begin describing an incident with minimal friction.
+Authentication should occur when persistence or sensitive actions become
+necessary.
+Authentication DOES NOT mean:
+"This is a verified victim."
+It means only that the platform has verified control of an account,
+phone number, email, or another authentication method.
+Once authenticated, the dashboard may show previous incident sessions as
+simple cards.
+Example:
+
+Investment Fraud
+Last updated:
+12 September 2026
+Status:
+Report organized
+Potential connections:
+4
+[Continue]
+
+Users should be able to maintain multiple independent incident sessions.
+
+7. INCIDENT INTAKE UX
+Avoid giant forms.
+Start with:
+"What happened?"
+Allow:
+[Speak]
+or
+[Type]
+The AI extracts information dynamically.
+Example:
+User:
+"A guy named Arman contacted me on LinkedIn about an import business.
+Later we moved to WhatsApp and I sent him ₹70,000."
+The system may extract:
+{
+"incident_type": "suspected_financial_fraud",
+"reported_alias": "Arman",
+"initial_platform": "LinkedIn",
+"secondary_platform": "WhatsApp",
+"amount": 70000,
+"currency": "INR"
+}
+The user should NOT initially see JSON.
+Saathi instead asks useful missing questions such as:
+"Do you still have the WhatsApp number?"
+or:
+"How was the ₹70,000 transferred?"
+Questions should depend on previous answers.
+Avoid:
+"Question 7 of 34."
+Prefer lightweight progress:
+✓ What happened
+✓ People / identifiers
+● Evidence
+○ Review
+○ Connections
+
+8. CONFIRMATION BEFORE GRAPH COMMIT
+AI extraction must not silently become trusted graph information.
+Before the report becomes durable graph data, show:
+"Here's what I understood."
+Present extracted facts in human-readable form.
+The user can:
+confirm,
+correct,
+remove,
+or add information.
+Every stored assertion must retain provenance.
+
+9. GRAPH MODEL
+FalkorDB is a core dependency of Project Yama.
+The application should lose important functionality if FalkorDB is removed.
+Possible major node types include:
+Incident
+Report
+User
+ReportedSubject
+Person
+Alias
+Organization
+Group
+Phone
+Email
+SocialAccount
+PaymentAccount
+BankAccount
+CryptoWallet
+Device
+IPAddress
+Domain
+Website
+Location
+Vehicle
+Asset
+Weapon
+CommunicationPlatform
+Evidence
+Document
+Image
+Video
+Message
+Transaction
+ModusOperandi
+Technique
+Threat
+Demand
+Event
+Complaint
+Authority
+Case
+IncidentCategory
+The ontology must remain extensible.
+
+10. GRAPH RELATIONSHIPS
+Potential relationships include:
+REPORTS
+MENTIONS
+INVOLVES
+TARGETED
+WITNESSED
+OCCURRED_AT
+OCCURRED_DURING
+CONTACTED_VIA
+COMMUNICATED_WITH
+USES_ALIAS
+USES_PHONE
+USES_EMAIL
+USES_HANDLE
+USES_DEVICE
+USES_DOMAIN
+USES_WEBSITE
+USES_ACCOUNT
+USES_PAYMENT_ACCOUNT
+USES_CRYPTO_WALLET
+USES_VEHICLE
+USES_WEAPON
+USES_PLATFORM
+USES_TECHNIQUE
+USES_MODUS_OPERANDI
+CLAIMED_IDENTITY
+IMPERSONATED
+REPRESENTED_ORGANIZATION
+ASSOCIATED_WITH
+MEMBER_OF
+CONTACTED
+THREATENED
+DEMANDED
+TRANSFERRED_TO
+PAID_TO
+RECEIVED_FROM
+STOLE
+ATTEMPTED_TO_STEAL
+ACCESSED
+COMPROMISED
+EXFILTRATED
+HARASSED
+STALKED
+ATTACKED
+RECRUITED
+FUNDED
+PROMOTED
+COORDINATED_WITH
+REFERRED_TO
+HAS_EVIDENCE
+SUPPORTED_BY
+CONTRADICTED_BY
+CORROBORATED_BY
+RELATED_TO
+REPORTED_TO
+HAS_COMPLAINT
+All sensitive relationships must be treated as assertions rather than
+automatically established facts.
+Example:
+ReportedSubject
+──USES_PHONE──>
+Phone
+should internally contain metadata such as:
+{
+"source": "report_123",
+"assertion_status": "reported",
+"confidence": 0.82,
+"user_confirmed": true,
+"evidence_attached": true,
+"created_at": "...",
+"verification_level": "unverified"
+}
+
+11. PROVENANCE IS MANDATORY
+Every important node relationship should answer:
+"Why does Yama believe this?"
+Track:
+source report;
+evidence source;
+timestamp;
+reporter;
+extraction method;
+user confirmation;
+verification state;
+confidence;
+public-record source where applicable.
+Possible assertion states:
+REPORTED
+USER_CONFIRMED
+EVIDENCE_SUPPORTED
+CORROBORATED
+PUBLIC_RECORD
+OFFICIALLY_VERIFIED
+DISPUTED
+CONTRADICTED
+The platform must distinguish these clearly.
+
+12. MATCHING ENGINE
+Project Yama uses a weighted graph-based matching model.
+Do NOT calculate:
+"Probability that this person committed the crime."
+Instead calculate at least two independent concepts:
+ENTITY LINKAGE SCORE
+How strongly do identifiers suggest that two reports reference the
+same underlying entity?
+INCIDENT PATTERN SIMILARITY
+How similar are the behaviors, sequence, technique, context,
+communication path and modus operandi?
+These must never be represented as guilt probabilities.
+Initial example weights:
+Same phone number:
++40
+Same UPI / bank / payment account:
++40
+Same crypto wallet:
++40
+Same exact social account:
++35
+Same email:
++35
+Same domain:
++25
+Same uploaded image or strongly matching image reference:
++25
+Same alias:
++15
+Same unusual request:
++15
+Same modus-operandi sequence:
++15
+Same communication transition:
++10
+Geographic overlap:
++8
+Temporal similarity:
++5
+Narrative semantic similarity:
++5
+These are STARTING weights.
+They are configurable and may later be empirically calibrated.
+High-value direct identifiers should generally outweigh generic text
+similarity.
+The system should also support NEGATIVE evidence.
+Examples:
+conflicting verified identifiers;
+incompatible timelines;
+contradictory locations;
+clearly different entities;
+evidence indicating that an identifier was spoofed;
+copied or brigaded reports.
+Negative evidence should reduce confidence.
+
+13. EXPLAINABLE MATCHES
+Never simply show:
+"87% Match"
+The user must be able to understand WHY.
+Example:
+STRONG ENTITY CONNECTION
+Your report and Report #183 share:
+✓ Same WhatsApp number
+✓ Same UPI account
+✓ Same LinkedIn account
+PATTERN SIMILARITY
+Both incidents followed:
+LinkedIn contact
+→ business proposal
+→ WhatsApp migration
+→ urgent payment request
+Graph path:
+Current Incident
+→ WhatsApp X
+→ Report #183
+→ UPI Y
+→ Report #091
+This explainability is a major product feature.
+
+14. SIMILAR CASE DISCOVERY
+After a report is processed, Project Yama can show potentially related
+cases.
+Initially, approximately 30% of the available advanced case intelligence
+is available in the free result.
+This should be enough for the user to understand:
+that relevant connections exist;
+broadly why a connection was found;
+the strength category;
+and what actions remain available.
+The remaining advanced intelligence is monetized.
+Price:
+$10 USD to unlock the next 10 advanced case details.
+A "detail" may include things such as:
+another relevant incident connection;
+another graph path;
+an additional shared identifier category;
+a deeper modus-operandi comparison;
+another timeline correlation;
+an additional evidence relationship;
+a non-sensitive agent analysis insight.
+Payment NEVER unlocks personal victim information.
+Payment NEVER converts hidden private information into public information.
+Payment NEVER unlocks addresses, private phone numbers, private victim
+identities, intimate evidence, or other prohibited sensitive information.
+
+15. SAFETY INFORMATION MUST NEVER BE PAYWALLED
+Regardless of payment status, users must always receive access to:
+emergency guidance;
+immediate safety guidance;
+evidence-preservation instructions;
+relevant helpline information;
+official reporting options;
+complaint-preparation basics;
+information already supplied by that user;
+critical warnings concerning imminent danger.
+Monetization applies to deeper analytical intelligence,
+not essential safety assistance.
+Avoid manipulative monetization such as:
+"We know who attacked you. Pay $10 to see."
+Instead:
+"We found additional potentially related incident intelligence.
+Unlock 10 additional connection insights."
+
+16. PRIVACY BETWEEN VICTIMS
+Finding another related report must NEVER automatically expose another
+victim's identity.
+Example result:
+POTENTIALLY RELATED REPORT
+Location:
+Bengaluru
+Approximate time:
+May 2026
+Connections:
+✓ Same payment account
+✓ Same phone number
+✓ Similar approach
+Do NOT expose:
+victim name;
+phone;
+email;
+address;
+exact private location;
+private social accounts;
+sensitive uploaded media;
+complete testimony.
+If victim-to-victim communication is introduced later,
+use a consent-based blind relay.
+Victim A requests contact.
+Victim B receives the request.
+Victim B chooses:
+Accept
+or
+Decline.
+
+17. PUBLIC CASE EXPLORER
+Project Yama also contains a separate case-exploration mode.
+Users may browse or search criminal cases and incident patterns
+without submitting a personal case.
+The purpose is education and understanding.
+Users may search things such as:
+incident type;
+modus operandi;
+platform used;
+scam technique;
+broad location;
+timeline;
+graph patterns;
+public cases;
+sanitized internal patterns.
+The AI may provide:
+case summaries;
+timelines;
+entity relationships;
+graph explanations;
+behavioral patterns;
+similarities to other public cases;
+agent analysis.
+Private internal victim reports must NOT become a public-search database.
+Public explorer content should consist of:
+genuinely public records;
+appropriately licensed/open information;
+synthetic demonstration data;
+strongly anonymized aggregate information.
+Sensitive personal information must not leak through graph traversal.
+
+18. FALSE ACCUSATION DEFENSE
+Project Yama must use neutral terminology.
+Prefer:
+"reported subject"
+"reported alias"
+"person referenced in the report"
+"potentially related entity"
+"possible entity linkage"
+"related incident"
+"reported behavior"
+Avoid automatically calling someone:
+"criminal"
+"rapist"
+"terrorist"
+"scammer"
+"thief"
+unless describing an established public legal finding where that terminology
+is supported by an authoritative source.
+Multiple reports are NOT automatically proof.
+Five users making the same allegation means:
+"Five reports contain similar allegations."
+It does not automatically mean:
+"The accused committed five crimes."
+
+19. TRUST MODEL
+Do not label someone simply:
+"Verified victim."
+Instead maintain trust/evidence levels.
+Example:
+LEVEL 0
+Unverified submission
+LEVEL 1
+Account / phone / email verified
+LEVEL 2
+Supporting evidence supplied
+LEVEL 3
+Independent graph corroboration
+LEVEL 4
+Official complaint reference supplied
+LEVEL 5
+Official/public-record verification
+These levels affect graph reasoning but do not determine guilt.
+
+20. DATA-POISONING AND ABUSE DEFENSE
+Project Yama must anticipate malicious submissions.
+Controls may include:
+OTP verification;
+CAPTCHA;
+rate limits;
+device/session abuse detection;
+duplicate-report detection;
+copied-text detection;
+evidence provenance;
+upload limits;
+moderation;
+brigading detection;
+graph anomaly detection;
+reputation/trust levels;
+manual escalation for serious cases.
+Authentication alone does not prove truthfulness.
+
+21. HIGH-RISK INCIDENTS
+Certain categories require additional caution, particularly:
+terrorism;
+sexual violence;
+stalking;
+child safety;
+trafficking;
+hate crimes;
+threats of imminent violence.
+For these categories:
+prioritize immediate safety;
+avoid speculative identification;
+avoid suggestive image matching;
+avoid exposing another complainant;
+distinguish allegations from verification;
+encourage appropriate official reporting;
+preserve evidence carefully.
+Graph analysis should assist investigation,
+not replace competent authorities.
+
+22. SEARCH AND IMAGE MATCHING
+Images may become graph evidence, but image similarity must be handled
+carefully.
+The system should distinguish:
+"Same uploaded image"
+from:
+"AI believes these faces represent the same person."
+The latter carries considerably greater uncertainty.
+Do not tell a user:
+"We found your attacker."
+Prefer:
+"Another report contains potentially related identifying evidence."
+Especially for violent or sexual crimes, avoid interactions that could
+unintentionally influence witness memory.
+
+23. MAIN RESULTS UX
+After processing a case, prioritize three major cards.
+CARD 1 — YOUR REPORT
+Shows:
+organized incident;
+extracted facts;
+evidence;
+timeline;
+identifiers;
+missing useful information.
+CTA:
+Review report
+
+CARD 2 — CONNECTIONS
+Shows:
+number of potentially related reports;
+strongest graph connection;
+entity linkage strength;
+pattern similarity;
+explainable graph paths.
+CTA:
+Explore connections
+
+CARD 3 — NEXT ACTIONS
+Shows:
+preserve evidence;
+relevant reporting options;
+generate complaint summary;
+create evidence manifest;
+safety resources where relevant.
+CTA:
+Continue
+The victim-facing interface should remain calm and simple.
+Advanced graph visualization belongs primarily inside:
+"Explain this connection."
+
+24. IMPORTANT PRODUCT LANGUAGE
+Project Yama should sound confident without pretending to know more
+than the evidence establishes.
+GOOD:
+"We found three potentially related incidents."
+GOOD:
+"These reports reference the same payment account."
+GOOD:
+"The pattern is unusually similar."
+GOOD:
+"This connection is based on two shared identifiers."
+BAD:
+"This is definitely the same criminal."
+BAD:
+"We have identified your attacker."
+BAD:
+"This person is guilty."
+BAD:
+"Criminals never win."
+
+25. CORE BUSINESS MODEL
+The initial model is:
+FREE:
+incident narration;
+AI intake;
+structured report;
+basic graph processing;
+approximately 30% of advanced match intelligence;
+essential safety guidance;
+reporting guidance.
+PAID:
+$10 USD
+Unlock:
+the next 10 advanced connection details.
+The product may later explore alternative plans,
+but preserve this model unless specifically changed.
+
+26. HACKATHON CONTEXT
+Project Yama is being conceived for:
+GraphHacks by WeMakeDevs
+Track:
+Agents that Act on Connected Data
+Core graph technology:
+FalkorDB
+Therefore FalkorDB must provide meaningful application functionality.
+The graph should power:
+entity resolution;
+connection discovery;
+multi-hop reasoning;
+incident clustering;
+pattern discovery;
+evidence paths;
+relationship explanation;
+agent decisions.
+FalkorDB must NOT merely power a decorative graph visualization.
+
+27. DESIGN PHILOSOPHY
+Whenever making a product decision, optimize for:
+Lowest possible cognitive burden.
+Trauma-aware interaction.
+Evidence preservation.
+Explainable AI reasoning.
+Privacy by default.
+Strong provenance.
+Graph-native intelligence.
+Resistance to false accusations.
+Resistance to malicious reports.
+Useful next actions.
+Clear uncertainty.
+Minimal unnecessary navigation.
+The user should feel:
+"I told Yama what happened.
+Yama organized it.
+Yama found meaningful connections.
+Yama showed me why.
+Yama helped me decide what to do next."
+
+28. YOUR ROLE GOING FORWARD
+When discussing Project Yama:
+reason from this product context;
+identify weaknesses instead of blindly agreeing;
+suggest better alternatives where appropriate;
+preserve graph-native architecture;
+preserve privacy and evidence provenance;
+distinguish allegation from fact;
+think about adversarial abuse;
+think about UX for distressed users;
+think about scalability;
+think about multi-language India-first UX;
+think about explainability;
+think about data quality;
+think about monetization without compromising basic safety.
+Do NOT start writing application code merely because this context exists.
+Wait until explicitly asked for:
+architecture,
+database schema,
+workflows,
+wireframes,
+APIs,
+agents,
+prompts,
+code,
+UI,
+FalkorDB implementation,
+or other specific deliverables.
+This document defines what Project Yama is.
+

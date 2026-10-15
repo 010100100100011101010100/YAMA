@@ -1,0 +1,63 @@
+{
+  "date": "2026-10-11",
+  "increment": "5 — dated assistance and reviewed private actions",
+  "mode": "synthetic localhost; fixtures; no outbound submissions or paid provider calls",
+  "checks": {
+    "typecheck": "passed",
+    "eslint": "passed",
+    "productionBuild": "passed",
+    "frontend": {"passed": 128, "files": 21},
+    "backend": {"passed": 43, "files": 8},
+    "databaseHttpRuntime": {"passed": 119, "files": 12},
+    "pythonCoordinatorDispatcherProvider": {"passed": 102, "skipped": 0},
+    "total": 392,
+    "finalDisplayChanges": "Six affected frontend tests, typecheck, lint and production build passed after translated pattern labels and readable timestamps were added.",
+    "bootstrap": "Additive db:init passed; existing configuration and report history preserved."
+  },
+  "newCoverage": [
+    "Dated India assistance in English, Hindi and Hinglish without authentication, report confirmation or purchase",
+    "Contacts withheld before verification date or after review deadline",
+    "Canonical exact Hindi sources, corrections, uncertain/contradicted statements and omission IDs",
+    "Receipts bind report revision, confirmation and active file metadata",
+    "Concurrent duplicate reviews return one immutable record and original timestamp",
+    "Cross-account denial, forged acknowledgement/receipt/submission flag and wrong Origin",
+    "Stale revision/file inventory, transaction rollback and file changes during an approval snapshot",
+    "Role-restricted read-only assistance/action tools and stale cached-delivery rejection",
+    "Actual server acknowledgement before success, keyboard disclosures, focus retained when acknowledgement resets",
+    "Client rejects false filing claims, wrong report/receipt and unreviewed success responses"
+  ],
+  "browser": {
+    "environment": "Disposable production preview on localhost:4100, separate cookie host and Mongo/FalkorDB namespace",
+    "verified": [
+      "Official options visible before an incident was saved",
+      "Fictional phone draft corrected from proposed ₹18,000 to ₹8,000; replies marked uncertain",
+      "Unconfirmed draft shows corrections, exact original phrases and translated pattern labels",
+      "Keyboard Enter opens original-source disclosure and retains focus",
+      "Explicit acknowledgement saves privately; refresh restores review and timestamp without confirming incident",
+      "A subsequent statement edit requires fresh review and clears acknowledgement",
+      "Hindi 320×740 viewport: document scrollWidth/clientWidth both 320; viewport reset",
+      "Fixed official source links use noopener noreferrer and no-referrer with no report parameters",
+      "Original user report remained revision 8 and its tab stayed open"
+    ],
+    "screenshots": ["design/assistance-actions-browser.jpg", "design/assistance-actions-hindi-mobile.jpg"],
+    "cleanup": "Temporary tabs closed; zero preview databases and graph namespaces remain."
+  },
+  "sources": {
+    "checkedAt": "2026-10-11",
+    "reviewBy": "2027-01-09",
+    "urls": [
+      "https://www.mha.gov.in/en/commoncontent/emergency-response-support-system-erss",
+      "https://www.pib.gov.in/PressReleasePage.aspx?PRID=2298336&lang=1&reg=3",
+      "https://consumerhelpline.gov.in/public/about"
+    ],
+    "availabilityLimit": "112 and cybercrime homepages did not load reliably; ministry/PIB/NCH sources support the contact and scope claims. Actual calling and filing were not tested."
+  },
+  "notVerified": [
+    "Actual official-service availability, filing, eligibility or outcome",
+    "Physical screen-reader operation and full colour-contrast audit",
+    "Live OpenAI/Langfuse/Sarvam accounts or voice sessions",
+    "External lookup, export, email, payments and police partnership integration",
+    "Production retention/purge/recovery, safeguarding and India-only processing assurance"
+  ],
+  "next": "Increment 6 — Sarvam/LiveKit voice with real playout, interruption/reconnection and text fallback"
+}

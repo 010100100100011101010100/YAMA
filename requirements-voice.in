@@ -1,0 +1,3 @@
+# Isolated from .venv: LiveKit currently requires OpenAI <3 and OTel <1.45.
+livekit-agents[sarvam]==1.8.6
+livekit-api==1.2.1

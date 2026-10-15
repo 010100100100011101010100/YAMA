@@ -1,0 +1,73 @@
+{
+  "date": "2026-10-08",
+  "revision": "BeautifulUI conversation workspace",
+  "visualApproval": "Awaiting user review",
+  "sources": "../beautifului-2026-10-08/manifest.json",
+  "automated": {
+    "typecheck": "passed",
+    "lint": "passed",
+    "tests": 34,
+    "productionBuild": "passed",
+    "contrastTokenPairs": "19/19 passed",
+    "semanticAxe": "critical screens passed; contrast measured separately"
+  },
+  "browser": {
+    "engine": "Codex in-app browser",
+    "desktopViewport": [
+      1280,
+      720
+    ],
+    "phoneViewports": [
+      [
+        390,
+        844
+      ],
+      [
+        320,
+        640
+      ]
+    ],
+    "horizontalOverflow": false,
+    "visibleControlTargets": "At least 44 px in measured desktop and 390 px controls",
+    "hindiBody": "18 px IBM Plex Sans Devanagari",
+    "desktopBody": "18 px Inter Variable",
+    "draftPreservation": "Passed across agent selection, mode switching, panel open/close and handoff",
+    "correction": "Amount changed from ₹18,000 to ₹8,000; notice disappeared; focus restored to Edit Amount",
+    "sources": "Immediate source button opens original wording",
+    "handoff": "Saathi → Disha while Drishti works; completion retains Disha; explicit comparison selects Drishti",
+    "readingPosition": "Home put scrollTop at 0; a new message/reply left it at 0 and offered See new messages (2)",
+    "sendFocus": "Returns to #message after Send",
+    "stopPreviewFocus": "Returns to Start preview",
+    "phoneVoiceNotice": {
+      "bottom": 342.5,
+      "composerTop": 420,
+      "viewport": [
+        320,
+        640
+      ],
+      "playingControlsHeight": 44
+    },
+    "phoneModal": "Native :modal; heading focus, forward Tab to close, Escape restores Your notes",
+    "browserErrors": [],
+    "viewportOverride": "reset",
+    "finalTab": "http://127.0.0.1:3000/"
+  },
+  "limitations": [
+    "Caption preview only; no microphone or audio",
+    "No databases, backend, auth, provider or payment integration",
+    "Manual screen-reader and physical keyboard/device review outstanding",
+    "Backward modal focus wrapping and reduced-motion emulation remain separate checks",
+    "Native report download observation remains outstanding; client action and report contents covered by tests"
+  ],
+  "screenshots": [
+    "chat.png",
+    "comparison.png",
+    "handoff.png",
+    "mobile-hindi-chat-short.png",
+    "mobile-hindi-chat.png",
+    "mobile-hindi-start.png",
+    "mobile-hindi-voice.png",
+    "sources.png",
+    "voice.png"
+  ]
+}

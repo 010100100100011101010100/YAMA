@@ -1,0 +1,45 @@
+{
+  "date": "2026-10-15",
+  "frontend_suite": {
+    "passed": 152,
+    "files": 28
+  },
+  "frontend_targeted_after_new_cases": {
+    "passed": 20,
+    "files": 3
+  },
+  "read_recovery_and_chat_targeted": {
+    "passed": 20,
+    "files": 4
+  },
+  "delivered_reply_read_recovery_final": {
+    "passed": 4,
+    "files": 1
+  },
+  "backend_suite": {
+    "passed": 91,
+    "files": 16
+  },
+  "dialogue_and_voice_integration": {
+    "passed": 36,
+    "files": 3
+  },
+  "python_suite": {
+    "passed": 116
+  },
+  "typecheck": "passed",
+  "lint": "passed",
+  "production_build": "passed",
+  "browser": "See browser-proof.json and screenshots in this directory.",
+  "runtime": {
+    "health": "ready",
+    "workers_running": 7,
+    "database_volume_preserved": true,
+    "adapter": "fixture"
+  },
+  "limitations": [
+    "No live provider calls; existing API configuration is still required.",
+    "Physical mobile keyboards and manual screen-reader testing remain outside this verification."
+  ],
+  "note": "Targeted test runs overlap the full suite; counts must not be added together."
+}

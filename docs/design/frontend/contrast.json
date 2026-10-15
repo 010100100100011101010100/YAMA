@@ -1,0 +1,135 @@
+[
+  {
+    "foreground": "ink",
+    "background": "bg",
+    "ratio": 16.185,
+    "minimum": 4.5,
+    "passed": true
+  },
+  {
+    "foreground": "ink",
+    "background": "surface",
+    "ratio": 14.456,
+    "minimum": 4.5,
+    "passed": true
+  },
+  {
+    "foreground": "ink",
+    "background": "raised",
+    "ratio": 11.889,
+    "minimum": 4.5,
+    "passed": true
+  },
+  {
+    "foreground": "muted",
+    "background": "bg",
+    "ratio": 9.267,
+    "minimum": 4.5,
+    "passed": true
+  },
+  {
+    "foreground": "muted",
+    "background": "surface",
+    "ratio": 8.277,
+    "minimum": 4.5,
+    "passed": true
+  },
+  {
+    "foreground": "muted",
+    "background": "raised",
+    "ratio": 6.807,
+    "minimum": 4.5,
+    "passed": true
+  },
+  {
+    "foreground": "primary",
+    "background": "bg",
+    "ratio": 13.308,
+    "minimum": 4.5,
+    "passed": true
+  },
+  {
+    "foreground": "primary",
+    "background": "surface",
+    "ratio": 11.886,
+    "minimum": 4.5,
+    "passed": true
+  },
+  {
+    "foreground": "primary",
+    "background": "raised",
+    "ratio": 9.775,
+    "minimum": 4.5,
+    "passed": true
+  },
+  {
+    "foreground": "accent",
+    "background": "bg",
+    "ratio": 10.711,
+    "minimum": 4.5,
+    "passed": true
+  },
+  {
+    "foreground": "accent",
+    "background": "surface",
+    "ratio": 9.567,
+    "minimum": 4.5,
+    "passed": true
+  },
+  {
+    "foreground": "accent",
+    "background": "raised",
+    "ratio": 7.868,
+    "minimum": 4.5,
+    "passed": true
+  },
+  {
+    "foreground": "error",
+    "background": "bg",
+    "ratio": 11.387,
+    "minimum": 4.5,
+    "passed": true
+  },
+  {
+    "foreground": "error",
+    "background": "surface",
+    "ratio": 10.17,
+    "minimum": 4.5,
+    "passed": true
+  },
+  {
+    "foreground": "error",
+    "background": "raised",
+    "ratio": 8.364,
+    "minimum": 4.5,
+    "passed": true
+  },
+  {
+    "foreground": "primary-ink",
+    "background": "primary",
+    "ratio": 12.851,
+    "minimum": 4.5,
+    "passed": true
+  },
+  {
+    "foreground": "control",
+    "background": "bg",
+    "ratio": 4.727,
+    "minimum": 3,
+    "passed": true
+  },
+  {
+    "foreground": "control",
+    "background": "surface",
+    "ratio": 4.222,
+    "minimum": 3,
+    "passed": true
+  },
+  {
+    "foreground": "control",
+    "background": "raised",
+    "ratio": 3.472,
+    "minimum": 3,
+    "passed": true
+  }
+]

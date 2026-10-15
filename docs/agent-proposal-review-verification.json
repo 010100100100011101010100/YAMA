@@ -1,0 +1,62 @@
+{
+  "stage": "3b",
+  "date": "2026-10-10",
+  "mode": "synthetic_localhost",
+  "automated": {
+    "frontend": { "passed": 107, "files": 15 },
+    "backendUnit": { "passed": 28, "files": 5 },
+    "databaseHttpRuntime": { "passed": 78, "files": 9 },
+    "pythonCoordinatorDispatcher": { "passed": 69 },
+    "totalPassed": 282,
+    "typecheck": "passed",
+    "lint": "passed",
+    "productionBuild": "passed",
+    "commands": ["npm run check", "npm run test:integration", "npm run test:agents"],
+    "authSetup": "Tests honor Better Auth's bounded Retry-After/X-Retry-After window; application rate limits remain enabled.",
+    "cleanup": "Only isolated test namespaces and newly created test-account records were removed."
+  },
+  "browser": {
+    "origin": "http://127.0.0.1:3000",
+    "existingTabUsed": true,
+    "freshDemoSessionUsed": true,
+    "olderSyntheticReportPreserved": true,
+    "readyProposals": 6,
+    "selectedProposalsAccepted": 5,
+    "omittedField": "item",
+    "acceptanceRevision": 2,
+    "confirmationImmediatelyAfterAcceptance": null,
+    "correctedAmount": "₹12,000",
+    "originalAmountPreserved": "₹18,000",
+    "correctedRevision": 3,
+    "separateConfirmationRevision": 3,
+    "actualFalkorDBCandidates": 2,
+    "receiptAndCorrectionRestoredAfterRefresh": true,
+    "focusAfterAcceptance": "Extract proposals",
+    "focusAfterCorrection": "Edit Amount",
+    "keyboardTabFromExtraction": "Add extraction example",
+    "hindiViewport": { "width": 320, "height": 760, "documentWidth": 320, "panelWidth": 319, "panelScrollWidth": 319 },
+    "viewportAndEnglishPreferenceRestored": true,
+    "screenshots": [
+      "docs/design/agent-proposals/source-preview.png",
+      "docs/design/agent-proposals/accepted-draft.png",
+      "docs/design/agent-proposals/restored-review.png",
+      "docs/design/agent-proposals/hindi-320.png"
+    ]
+  },
+  "runtime": {
+    "health": "ready",
+    "workersStarted": ["graph", "evidence", "agents"],
+    "agentExecution": "Existing Python coordinator and fixture dispatcher through private snapshot stdin",
+    "providerCalls": 0,
+    "microphoneCapture": false,
+    "outboundMail": false,
+    "paymentTransactions": false
+  },
+  "limits": [
+    "Only three exact authored English/Hindi/Hinglish narratives produce extraction proposals.",
+    "Agent task quota is 20 per report over its lifetime; retention/purge is a separate service.",
+    "Browser dialogue remains authored; live OpenAI, Langfuse and Sarvam/LiveKit are not connected.",
+    "Browser/DOM/accessibility-tree and unit accessibility checks do not replace a native screen-reader audit.",
+    "Public launch and real-report handling remain separate."
+  ]
+}

@@ -1,0 +1,99 @@
+{
+  "date": "2026-10-14",
+  "scope": "Increment 10: synthetic localhost Dodo test checkout, signed durable webhook inbox and account detail-credit ledger",
+  "checks": {
+    "typecheck": "passed",
+    "lint": "passed",
+    "productionBuild": "passed; ten new billing/intelligence route handlers compiled",
+    "frontend": {
+      "tests": 135,
+      "files": 23,
+      "status": "passed"
+    },
+    "backend": {
+      "tests": 78,
+      "files": 15,
+      "status": "passed"
+    },
+    "integration": {
+      "tests": 196,
+      "files": 21,
+      "status": "passed"
+    },
+    "agentPython": {
+      "tests": 113,
+      "skipped": 0,
+      "status": "passed"
+    },
+    "voicePython": {
+      "tests": 7,
+      "status": "passed"
+    },
+    "totalTests": 529,
+    "pythonDependencyChecks": "Both isolated environments passed pip check",
+    "npmAudit": {
+      "vulnerabilities": 0
+    },
+    "installedSDKs": {
+      "dodopayments": "2.54.2"
+    },
+    "sdkVerification": "Actual installed SDK with fake HTTP transport: test API paths, fixed cart/metadata/return, no customer/report data, rejected price/native entitlements, stripped payment PII and no automatic retries",
+    "paymentVerification": "Actual SDK raw-body signature/timestamp checks; durable event deduplication; authenticated payment snapshot matched against business, purchase/session, exact SKU/quantity, USD total and non-subscription state",
+    "credits": "Ten credits granted once; account-wide ledger isolated by fixture/test scope; refund tombstones, dispute revocation, interrupted read-only verification, global worker concurrency and retained API budgets",
+    "detailAccess": "Six of twenty authored fixtures free; locked bodies/sources hidden; owned UUID references, revision/receipt/source freshness, one-credit unlock, free repeat reads, last-credit race and reversal access checks",
+    "httpFlow": "Real anonymous sessions and actual FalkorDB projection; owned fixture checkout, durable completion event, worker grant, preview/unlock/read/replay; untrusted origins, foreign accounts and return-parameter forgery rejected; existing Connections/assistance still free",
+    "runtime": {
+      "applicationHealth": "ready / synthetic_localhost",
+      "livekitHttpStatus": 200,
+      "billingProvider": "fixture",
+      "dodoTestEnabled": false,
+      "voiceLiveEnabled": false,
+      "publicWebLiveEnabled": false,
+      "mailLiveEnabled": false,
+      "secretFileMode": "0600",
+      "existingConfiguration": "preserved; missing billing settings appended",
+      "workersRunning": [
+        "graph",
+        "evidence",
+        "agents",
+        "voice",
+        "web",
+        "mail",
+        "billing"
+      ]
+    },
+    "infrastructureRecovery": {
+      "firstIntegrationRun": "Interrupted after MongoDB aborted with TooManyFilesOpen during eventfd creation; this run was not counted as passing",
+      "fix": "Explicit Mongo nofile soft/hard limit 65536; recreated container with original volume, memory limit and cache unchanged",
+      "containerLimitVerified": 65536,
+      "integrationRerun": "196 tests passed across 21 files"
+    },
+    "cleanup": {
+      "remainingTestDatabases": 0,
+      "interruptedRunFixtureDatabasesRemoved": 2,
+      "interruptedRunFixtureGraphsRemoved": 0,
+      "rootBillingPurchases": 0,
+      "rootBillingEvents": 0,
+      "rootBillingGrants": 0,
+      "rootBillingConsumptions": 0,
+      "rootIntelligenceBatches": 0,
+      "rootIntelligenceAccesses": 0,
+      "workerLockHeldBeforeStartup": false,
+      "httpTestAccountsAndReports": "cleaned using test-owned account IDs",
+      "existingUserReportsOrBrowserEdited": false
+    },
+    "externalDodoApiRequests": 0,
+    "chargesMade": 0
+  },
+  "limitations": [
+    "Dodo account keys, merchant/product eligibility, webhook registration and deliberate external sandbox checks remain pending",
+    "Only fixture and Dodo test modes are available; no live charge or saved-card confirmation endpoint",
+    "Advanced detail bodies are explicitly authored entitlement fixtures, not generated intelligence or sellable analysis",
+    "Browser checkout/detail controls and agent purchase/unlock capabilities were not added",
+    "Uncertain checkout creation never reposts automatically; missing provider session references require future operator reconciliation",
+    "Any refund state or dispute history conservatively suspends the full grant; resolved disputes do not automatically restore access",
+    "Anonymous demo sessions have no durable account recovery; production identity, audit, retention and reconciliation need separate increments",
+    "India-only processing, production Dodo suitability and public-launch requirements remain unresolved",
+    "Private visual maps and reviewed PDF/DOCX exports remain deferred"
+  ]
+}

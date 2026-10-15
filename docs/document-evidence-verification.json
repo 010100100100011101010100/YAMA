@@ -1,0 +1,65 @@
+{
+  "date": "2026-10-09",
+  "mode": "synthetic_localhost",
+  "increment": "pdf_image_extraction_and_local_ocr",
+  "commands": {
+    "npm run evidence:setup": "passed; parser-only Docker context, English/Hindi OCR, immutable local image receipt",
+    "npm run db:init": "passed; additive schema/index/worker-lock initialization",
+    "npm run check": "passed before focus refinements; subsequent checks recorded below",
+    "npm run test:frontend": "passed; 91 tests in a quiet serial run after focus refinements",
+    "npm run test:backend": "passed; 22 tests",
+    "npm run test:integration": "passed; 51 real database/HTTP/runtime tests, long-running workers stopped",
+    "python3 -m unittest discover -s tests -v": "passed; 29 offline coordinator tests",
+    "final_typecheck_lint_parser_smoke_and_build": "passed after focus refinements and Docker CLI fallback; real Hindi parser smoke passed and production build includes cancellation route"
+  },
+  "tests": {
+    "frontend": 91,
+    "backend_unit": 22,
+    "database_http_and_runtime_integration": 51,
+    "offline_agent_coordinator": 29,
+    "total_unique": 193
+  },
+  "runtime_isolation": "document-evidence-runtime.json; inspected an actual running OCR container",
+  "browser": {
+    "fixture_setup": "Fictional shaped Hindi PNG uploaded and queued through the real EvidenceService into the known synthetic browser report; no direct report/metadata mutation",
+    "pending_refresh": "passed; queued file restored at revision 4",
+    "background_completion": "passed; ready text appeared without a reload; focus stayed on Files heading; report revision unchanged",
+    "exact_hindi_source": "passed; काल्पनिक रिकॉर्ड and सामान नहीं आया। displayed in read-only source",
+    "explicit_review": "passed; acknowledgement required; review created revision 5, invalidated confirmation and returned focus to the file button",
+    "confirm_and_compare": "passed; explicit revision-5 confirmation, real graph comparison returned two synthetic catalogue candidates",
+    "refresh_recovery": "passed; revision 5, reviewed file, original text and graph comparison restored",
+    "source_focus": "passed after regression fix; explicit opening focuses the source field",
+    "hindi_source_320px": { "status": "passed", "viewport_width": 320, "page_width": 320, "source_width": 245, "source_focused": true },
+    "screenshots": ["design/document-evidence/source-review.png", "design/document-evidence/hindi-source-320.png", "design/document-evidence/source-approved.png"],
+    "native_file_selection": "unverified; the in-app chooser API previously timed out; HTTP uploads and component selection are tested",
+    "final_state": "default viewport and English restored; reviewed source tab retained; graph and evidence workers restarted and reported ready after final checks"
+  },
+  "verified_boundaries": [
+    "Matching PDF/PNG/JPEG extensions, MIME types and signatures; text and binary byte limits",
+    "Real PDF text pages, scanned PDF OCR, PNG/JPEG OCR and shaped Hindi OCR",
+    "Real encrypted/malformed/blank/page-limit/pixel-limit failures without a partial approved source",
+    "Parent cancellation and cleanup with bounded isolated parsing",
+    "Mongo durable queued/processing states, global parser lease, expired/replaced claims and retry exhaustion",
+    "Cross-account cancellation/source access and token-guarded rejection of canceled/stale worker output",
+    "Raw-byte rehashing, frozen text receipt/hash, exact UTF-16 page ranges and versioned runtime image",
+    "Text-hash-bound current-revision acknowledgement; correction preserves immutable source receipt",
+    "Actual private FalkorDB text/page provenance; existing catalogue isolation checks retained",
+    "Client polling, OCR review warning, cancellation/retry and no focus loss on background completion",
+    "Source-opening and cancellation focus regressions reproduced first, then fixed and tested"
+  ],
+  "resolved_verification_issues": [
+    "The first runtime test run lacked its Hindi fixture. Generated it with proper Devanagari shaping; real Hindi OCR then passed.",
+    "Browser review exposed focus loss after opening text. The source now receives focus after the request completes; canceled jobs focus their next control.",
+    "A focused Cancel control disappeared on background completion. One persistent action button now becomes Read text without remounting.",
+    "Two broader UI tests timed out during concurrent browser verification. Their focused rerun and all 91 tests passed with browser activity stopped and workers paused; assertions/timeouts were not weakened."
+  ],
+  "limits": [
+    "PDF/images: 5 MiB, 1–3 PDF pages, 8 million decoded pixels, 8000 pixels per side, 6000 UTF-16 source units; three started parser attempts.",
+    "PDF pages with some text plus embedded image text are treated as text pages; image-region merging is not implemented.",
+    "OCR accuracy is not guaranteed. Users compare with their original and correct draft assertions; no original PDF/image preview exists yet.",
+    "Archival removal retains raw bytes and historical text. Permanent erasure, orphan cleanup, encryption at rest and backups remain separate work.",
+    "These resource/isolation checks are not a comprehensive parser security audit or public-launch approval.",
+    "Native picker and manual screen-reader verification remain outstanding. Existing reduced-motion styling is unchanged.",
+    "No OpenAI/Sarvam, voice, artwork, mail, web-search/scraping or payment provider was called."
+  ]
+}

@@ -1,0 +1,129 @@
+{
+  "viewportChecks": [
+    {
+      "viewport": 1024,
+      "overflow": [],
+      "screen": "story",
+      "scrollWidth": 992,
+      "width": 992
+    },
+    {
+      "viewport": 1024,
+      "overflow": [],
+      "screen": "review",
+      "scrollWidth": 992,
+      "width": 992
+    },
+    {
+      "viewport": 1024,
+      "overflow": [],
+      "screen": "connect",
+      "scrollWidth": 992,
+      "width": 992
+    },
+    {
+      "viewport": 1024,
+      "overflow": [],
+      "screen": "act",
+      "scrollWidth": 992,
+      "width": 992
+    },
+    {
+      "viewport": 320,
+      "overflow": [],
+      "screen": "story",
+      "scrollWidth": 288,
+      "width": 288
+    },
+    {
+      "viewport": 320,
+      "overflow": [],
+      "screen": "review",
+      "scrollWidth": 288,
+      "width": 288
+    },
+    {
+      "viewport": 320,
+      "overflow": [],
+      "screen": "connect",
+      "scrollWidth": 288,
+      "width": 288
+    },
+    {
+      "viewport": 320,
+      "overflow": [],
+      "screen": "act",
+      "scrollWidth": 288,
+      "width": 288
+    },
+    {
+      "viewport": 320,
+      "language": "hi",
+      "overflow": [],
+      "screen": "story",
+      "scrollWidth": 288,
+      "width": 288
+    },
+    {
+      "viewport": 320,
+      "language": "hi",
+      "overflow": [],
+      "screen": "review",
+      "scrollWidth": 288,
+      "width": 288
+    },
+    {
+      "viewport": 320,
+      "language": "hi",
+      "overflow": [],
+      "screen": "connect",
+      "scrollWidth": 288,
+      "width": 288
+    },
+    {
+      "viewport": 320,
+      "language": "hi",
+      "overflow": [],
+      "screen": "act",
+      "scrollWidth": 288,
+      "width": 288
+    }
+  ],
+  "interactions": {
+    "confirmationRequiresCheckedDetails": true,
+    "amountCorrectionPreservesOriginal": true,
+    "correctionReturnsFocusToCheckbox": true,
+    "confirmedComparisonSeparatesPatternAndEntity": true,
+    "editingInvalidatesConfirmation": true,
+    "leaveOutPreservesSourceAndReturnsFocus": true,
+    "shiftEnterCreatesNewline": true,
+    "addNoteButtonWorks": true,
+    "voicePreviewStatesMicrophoneOff": true,
+    "companionAnimationBounded": true,
+    "companionAnimationPauses": true,
+    "unsavedEditClearlyLabelled": true,
+    "checkoutDoesNotCreateEntitlement": true,
+    "keyboardFocusVisible": true
+  },
+  "reducedMotion": {
+    "cssInspected": true,
+    "browserPreference": false,
+    "emulationTested": false
+  },
+  "limitations": [
+    "Prototype with local synthetic fixtures; not installed React components.",
+    "Hindi copy is partial.",
+    "No full screen-reader audit or reduced-motion browser emulation.",
+    "No live voice, upload, graph, persistence, or payment integration."
+  ],
+  "keyboardFocusEvidence": {
+    "control": "Save correction",
+    "outlineStyle": "auto",
+    "outlineWidth": "1px"
+  },
+  "screenshots": [
+    "storyroom-intake-v3.png",
+    "storyroom-review-v3.png",
+    "storyroom-mobile-hi-v3.png"
+  ]
+}

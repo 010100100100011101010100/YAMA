@@ -1,0 +1,16 @@
+{
+  "checked_at": "2026-10-07",
+  "native_tools": [
+    "read_me",
+    "create_view"
+  ],
+  "initial_checkpoint": "4ede74fbad3742bfae",
+  "edited_checkpoint": "ee063bc3490747e4a8",
+  "native_creation": "passed",
+  "native_checkpoint_edit": "passed",
+  "server_checkpoint_readback": "passed",
+  "content": "Synthetic provider architecture only; no incident or account data",
+  "element_count": 43,
+  "local_scene": "docs/design/yama-tool-map.excalidraw",
+  "runtime_service_adapters": "not implemented"
+}

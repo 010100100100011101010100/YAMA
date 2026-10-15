@@ -1,0 +1,73 @@
+{
+  "date": "2026-10-10",
+  "increment": "3c2: three-agent text dialogue and durable handoffs",
+  "mode": "synthetic_localhost",
+  "liveProviderRequests": 0,
+  "credentialsChanged": false,
+  "checks": {
+    "typecheck": "passed",
+    "lint": "passed",
+    "productionBuild": "passed",
+    "additiveDatabaseInitialization": "passed",
+    "frontend": {
+      "files": 18,
+      "passed": 118
+    },
+    "backendUnit": {
+      "files": 6,
+      "passed": 35
+    },
+    "databaseHttpRuntime": {
+      "files": 11,
+      "passed": 102
+    },
+    "pythonCoordinatorDispatcherProviderSdk": {
+      "passed": 96,
+      "skipped": 0
+    },
+    "totalTests": 351
+  },
+  "commands": [
+    "npm run check",
+    "npm run test:integration",
+    ".venv/bin/python -m unittest discover -s tests -q",
+    "npm run db:init"
+  ],
+  "verified": [
+    "Concurrent duplicate starts and delivery acknowledgements create one generation/handoff",
+    "Three role-specific English/Hindi/Hinglish fixtures through actual private Python IPC",
+    "Frozen role/provider configuration and actual official Responses SDK serialization with in-memory transport",
+    "One foreground conversation per report; handoff only after current-revision delivery acknowledgement",
+    "Manual selection, language preference, automatic-off, stop and narration changes revoke pending generation",
+    "Late and stale results cannot deliver or mutate incident assertions",
+    "Shared extraction/dialogue provider budget and no automatic replay of uncertain live calls",
+    "Oversized context rejected before reserving a provider call",
+    "Unknown role paths, forged report writes, unowned messages, foreign accounts/origins and signed-out sessions rejected",
+    "Existing corrected values, negative and excluded evidence retained in minimal owned context",
+    "Real Langfuse SDK exports fixed role/operation metadata without incident content or identity",
+    "Keyboard focus, accessibility, earlier-revision labels and idempotent client retries",
+    "Changed notes or preferences invalidate old pending client retry intents"
+  ],
+  "browser": {
+    "threeAgentSequence": "passed",
+    "refreshPreservesReplyIdsAndActiveDisha": "passed",
+    "hindiPreferenceRestores": "passed",
+    "automaticHandoffPreferenceRestores": "passed",
+    "preferencesRestoredAfterProbe": true,
+    "reportRevisionBeforeAndAfter": 8,
+    "reportNotesChangedByProbe": false,
+    "screenshot": "docs/design/text-dialogue-browser.jpg"
+  },
+  "runtime": {
+    "apiHealth": "ready",
+    "graphWorker": "running",
+    "evidenceWorker": "running",
+    "agentWorker": "running"
+  },
+  "notVerified": [
+    "Live OpenAI access, model quality, billing, retention/regional eligibility and a real Langfuse endpoint",
+    "Model-grounded graph findings and sourced action guidance (next separate increments)",
+    "Actual Sarvam voice and audio-playout handoffs",
+    "Public-launch safeguarding, regional handling and production security"
+  ]
+}

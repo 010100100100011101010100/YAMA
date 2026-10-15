@@ -1,0 +1,94 @@
+{
+  "chat-composer": {
+    "url": "https://www.beautifului.dev/r/chat-composer.json",
+    "sha256": "79c9f3f70215d1b36b7f68d5f2956ec3ffad5c61a16e79c1314536a9625c5dce",
+    "dependencies": null,
+    "registryDependencies": [
+      "https://www.beautifului.dev/r/foundation.json"
+    ],
+    "files": [
+      {
+        "path": "components/primitives/ChatComposer.tsx",
+        "lines": 242,
+        "snapshot": "chat-composer-ChatComposer.tsx.txt"
+      }
+    ]
+  },
+  "prompt-bar": {
+    "url": "https://www.beautifului.dev/r/prompt-bar.json",
+    "sha256": "68968526b7464d291a3a395bf6b336e7c1916420171fe543f81624f368b27dd7",
+    "dependencies": [
+      "glimm"
+    ],
+    "registryDependencies": [
+      "https://www.beautifului.dev/r/foundation.json"
+    ],
+    "files": [
+      {
+        "path": "components/primitives/PromptBar.tsx",
+        "lines": 712,
+        "snapshot": "prompt-bar-PromptBar.tsx.txt"
+      }
+    ]
+  },
+  "task-rows": {
+    "url": "https://www.beautifului.dev/r/task-rows.json",
+    "sha256": "a195e9caa440f795fb42d11001e00d29066b78a353850b054069fd32236742ef",
+    "dependencies": null,
+    "registryDependencies": [
+      "https://www.beautifului.dev/r/foundation.json"
+    ],
+    "files": [
+      {
+        "path": "components/primitives/TaskRows.tsx",
+        "lines": 274,
+        "snapshot": "task-rows-TaskRows.tsx.txt"
+      }
+    ]
+  },
+  "button": {
+    "url": "https://www.beautifului.dev/r/button.json",
+    "sha256": "cdc7affc58ab3353dc159d33bd87e826c581856ea39fa6bbab7cb11f67ac3352",
+    "dependencies": [
+      "class-variance-authority"
+    ],
+    "registryDependencies": [
+      "https://www.beautifului.dev/r/foundation.json"
+    ],
+    "files": [
+      {
+        "path": "components/atoms/Button.tsx",
+        "lines": 47,
+        "snapshot": "button-Button.tsx.txt"
+      }
+    ]
+  },
+  "context-cards": {
+    "url": "https://www.beautifului.dev/r/context-cards.json",
+    "sha256": "086d3e60ef3381498a74dde8e9019e9936310c39e71044cae28df8c668c2c38d",
+    "dependencies": null,
+    "registryDependencies": [
+      "https://www.beautifului.dev/r/foundation.json"
+    ],
+    "files": [
+      {
+        "path": "components/primitives/ContextCards.tsx",
+        "lines": 120,
+        "snapshot": "context-cards-ContextCards.tsx.txt"
+      }
+    ]
+  },
+  "foundation": {
+    "url": "https://www.beautifului.dev/r/foundation.json",
+    "sha256": "c3b97e7d7cac0c53b78823611b8fd793f136bfde72b8e4635147fb83f6fc162c",
+    "dependencies": null,
+    "registryDependencies": null,
+    "files": [
+      {
+        "path": "app/beautifui/foundation.css",
+        "lines": 643,
+        "snapshot": "foundation-foundation.css"
+      }
+    ]
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "reviewed": "2026-10-08",
+  "items": [
+    {
+      "registry": "rare-ui",
+      "item": "folder-component",
+      "sourcePath": "components/ui/folder-component.tsx",
+      "snapshot": "rare-ui-folder-component.tsx.txt",
+      "sha256": "b4a76341e592d5048a39de5d56ace38a526da21bb3065ffb9f5b1ff0aced30dd"
+    },
+    {
+      "registry": "rare-ui",
+      "item": "matrix-orb",
+      "sourcePath": "components/ui/matrix-orb.tsx",
+      "snapshot": "rare-ui-matrix-orb.tsx.txt",
+      "sha256": "83dae4ac5052091800c37a4fc1abb5d4248d3663a23f9096bc1f5d7b99e27cdb"
+    },
+    {
+      "registry": "aceternity",
+      "item": "magnetic-button-demo",
+      "sourcePath": "components/magnetic-button-demo.tsx",
+      "snapshot": "aceternity-magnetic-button-demo.tsx.txt",
+      "sha256": "76a75252ae3c3f72d69838389e1c48de8ca930945b77ee36fbff44449b336d20"
+    },
+    {
+      "registry": "aceternity",
+      "item": "magnetic-button-demo",
+      "sourcePath": "components/ui/magnetic-button.tsx",
+      "snapshot": "aceternity-magnetic-button.tsx.txt",
+      "sha256": "92960c6a3390d4a74da91de2eeb506da2930a532783aa4c99c78fcee01758181"
+    }
+  ]
+}

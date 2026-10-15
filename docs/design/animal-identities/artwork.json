@@ -1,0 +1,69 @@
+{
+  "created": "2026-10-08",
+  "generation": "Built-in imagegen tool, followed by an imagegen edit for coarser pixel clusters.",
+  "rendering": "ASCII Magic MCP, free Dither style.",
+  "canvas": {
+    "width": 1254,
+    "height": 1254,
+    "alpha": true
+  },
+  "settings": {
+    "style": "dither",
+    "style_requested_by_user": true,
+    "algo": "bayer4",
+    "palette": "grey4",
+    "font_size": 20,
+    "scale": 1,
+    "settings": {
+      "contrast": 110
+    },
+    "enhance": false
+  },
+  "notes": [
+    "Logical grid dimensions were prompt targets, not an exact enforced pixel grid.",
+    "Permanent downloaded assets are used; renderer URLs expire.",
+    "Source portraits and edited intermediates remain under assets/agents/2026-10-08.",
+    "Previous bird identities remain historical artifacts."
+  ],
+  "assets": [
+    {
+      "agent": "saathi",
+      "name": "Saathi",
+      "animal": "eagle",
+      "subject": "An eagle head and upper breast, three-quarter profile facing right. Distinct hooked beak, powerful brow and layered neck feathers, beak closed. Natural proportions, dignified and watchful, not angry. This is Saathi's eagle identity.",
+      "bytes": 265082,
+      "sha256": "feb69747f0676d508d6ab3604d510458a4e2bd414d67c25e86473c72fab5aeb5",
+      "file": "public/agents/saathi-eagle-dither.png",
+      "source": "assets/agents/2026-10-08/saathi-eagle-source.png",
+      "editedSource": "assets/agents/2026-10-08/saathi-eagle-medium.png",
+      "url": "https://www.ascii-magic.com/am-renders/2809a3560e474ca43cf6bf876dff6f3b.png",
+      "recipe": "recipe:v1:eyJ2IjoxLCJyZW5kZXJNb2RlIjoiZGl0aGVyIiwiZm9udFNpemUiOjIwLCJjb250cmFzdCI6MTEwLCJkaXRoZXJBbGdvIjoiYmF5ZXI0IiwiZGl0aGVyUGFsZXR0ZSI6ImdyZXk0In0"
+    },
+    {
+      "agent": "drishti",
+      "name": "Drishti",
+      "animal": "wolf",
+      "subject": "A grey wolf's head and upper chest, nearly frontal three-quarter pose slightly facing right. Pointed upright ears, elongated natural muzzle, closed mouth, layered angular fur. Alert and composed, no snarl, no cartoon grin, not a dog or fox. This is Drishti's wolf identity.",
+      "bytes": 261161,
+      "sha256": "aa80e66df814ccdd69a2ed81ba7fd244be3486874b85579f9e0496af2b2636f2",
+      "file": "public/agents/drishti-wolf-dither.png",
+      "source": "assets/agents/2026-10-08/drishti-wolf-source.png",
+      "editedSource": "assets/agents/2026-10-08/drishti-wolf-medium.png",
+      "url": "https://www.ascii-magic.com/am-renders/46a94dc485cb5362db0b0fb6437b6fe6.png",
+      "recipe": "recipe:v1:eyJ2IjoxLCJyZW5kZXJNb2RlIjoiZGl0aGVyIiwiZm9udFNpemUiOjIwLCJjb250cmFzdCI6MTEwLCJkaXRoZXJBbGdvIjoiYmF5ZXI0IiwiZGl0aGVyUGFsZXR0ZSI6ImdyZXk0In0"
+    },
+    {
+      "agent": "disha",
+      "name": "Disha",
+      "animal": "elephant",
+      "subject": "An Asian elephant's head and upper shoulders, three-quarter view slightly facing right. Broad recognisable ears, natural small eyes, a clearly visible gently descending trunk and subtle short tusks. Wise and composed, true elephant anatomy, not a cute baby. Keep the complete trunk visible within the square. This is Disha's elephant identity.",
+      "bytes": 310470,
+      "sha256": "423d3272b0e86cba4716447d047acab6e170fefd958623687c7e27149e07cf7f",
+      "file": "public/agents/disha-elephant-dither.png",
+      "source": "assets/agents/2026-10-08/disha-elephant-source.png",
+      "editedSource": "assets/agents/2026-10-08/disha-elephant-medium.png",
+      "url": "https://www.ascii-magic.com/am-renders/23d5e1c92de1773acf8ef4e6a7411c8b.png",
+      "recipe": "recipe:v1:eyJ2IjoxLCJyZW5kZXJNb2RlIjoiZGl0aGVyIiwiZm9udFNpemUiOjIwLCJjb250cmFzdCI6MTEwLCJkaXRoZXJBbGdvIjoiYmF5ZXI0IiwiZGl0aGVyUGFsZXR0ZSI6ImdyZXk0In0"
+    }
+  ]
+}

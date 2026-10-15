@@ -1,0 +1,57 @@
+{
+  "date": "2026-10-12",
+  "scope": "Synthetic localhost Sarvam/LiveKit voice increment",
+  "checks": {
+    "typecheck": "passed",
+    "lint": "passed",
+    "productionBuild": "passed",
+    "frontend": { "tests": 135, "files": 23, "status": "passed" },
+    "backend": { "tests": 46, "files": 9, "status": "passed" },
+    "integration": { "tests": 128, "files": 14, "status": "passed" },
+    "agentPython": { "tests": 102, "skipped": 0, "status": "passed" },
+    "voicePython": { "tests": 7, "status": "passed", "transport": "in-memory Sarvam SDK responses" },
+    "totalTests": 418,
+    "finalAffectedFrontendRerun": { "tests": 21, "files": 4, "status": "passed" },
+    "pythonDependencyChecks": "Both isolated environments passed pip check",
+    "localRTC": "Actual native LiveKit room received synthetic microphone audio using the application's restricted tokens; no provider key",
+    "browser": {
+      "desktopVoiceDisabled": "passed at 1280x720",
+      "hindiMobileVoiceDisabled": "passed at 390x844",
+      "hindiTranscriptReview": "passed using a proposed fixture in a disposable Mongo namespace, without microphone/provider access",
+      "originalAndCorrectedWording": "Both preserved after editing, explicit saving and refresh",
+      "reportConfirmation": "Remained null; fixture revision advanced from 2 to 3",
+      "chatFallbackAndHandoffs": "Passed; saved notes, Hindi preference and three delivered fixture replies survived refresh",
+      "microphonePermissionGranted": false,
+      "viewportOverride": "reset",
+      "temporaryTab": "closed"
+    },
+    "runtime": {
+      "applicationHealth": "ready / synthetic_localhost",
+      "voiceProviderEnabled": false,
+      "nativeLiveKitBindings": ["TCP 127.0.0.1:7880", "UDP 127.0.0.1:7882"],
+      "secretFileModes": "0600",
+      "workersRestored": ["graph", "evidence", "agents", "voice"]
+    },
+    "cleanup": {
+      "remainingPreviewOrVoiceTestDatabases": 0,
+      "remainingPreviewGraphs": 0,
+      "remainingTransportTestRooms": 0,
+      "temporaryFixtureScripts": "removed"
+    }
+  },
+  "speakers": { "saathi": "priya", "drishti": "shubh", "disha": "suhani" },
+  "screenshots": [
+    "docs/design/voice-disabled-desktop.png",
+    "docs/design/voice-disabled-hindi-mobile.png",
+    "docs/design/voice-transcript-hindi-mobile.png",
+    "docs/design/voice-reviewed-chat-hindi-mobile.png"
+  ],
+  "limitations": [
+    "No live Sarvam STT/TTS or paid model call was made",
+    "Provider keys, credit balances, training/retention dashboard controls and real speech auditions await user setup",
+    "First TTS increment buffers short WAV responses; streaming TTS and duplex latency tuning remain future work",
+    "Real device echo, microphone permissions, barge-in thresholds and mixed-script pronunciation remain unverified",
+    "LiveKit media failed through this macOS/Colima forwarding setup; the pinned native loopback server passed",
+    "Public-launch residency, safeguarding, account recovery and retention/purge requirements remain separate work"
+  ]
+}

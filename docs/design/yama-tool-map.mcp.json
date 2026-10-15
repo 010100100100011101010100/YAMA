@@ -1,0 +1,565 @@
+{
+  "elements": [
+    {
+      "type": "rectangle",
+      "id": "bg",
+      "x": -4000,
+      "y": -3000,
+      "width": 10000,
+      "height": 7500,
+      "backgroundColor": "#15141b",
+      "fillStyle": "solid",
+      "strokeColor": "transparent",
+      "strokeWidth": 0
+    },
+    {
+      "type": "cameraUpdate",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 960
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "x": 50,
+      "y": 30,
+      "text": "YAMA / agents and useful tools",
+      "fontSize": 32,
+      "strokeColor": "#e5e5e5"
+    },
+    {
+      "type": "text",
+      "id": "caption",
+      "x": 50,
+      "y": 80,
+      "text": "Proposed runtime map / synthetic design / services are not connected yet",
+      "fontSize": 18,
+      "strokeColor": "#a0a0a0"
+    },
+    {
+      "type": "rectangle",
+      "id": "saathi",
+      "x": 50,
+      "y": 135,
+      "width": 360,
+      "height": 110,
+      "backgroundColor": "#1e3a5f",
+      "fillStyle": "solid",
+      "strokeColor": "#4a9eed",
+      "strokeWidth": 1.5,
+      "roundness": {
+        "type": 3
+      }
+    },
+    {
+      "type": "text",
+      "id": "saathi-title",
+      "x": 70,
+      "y": 153,
+      "text": "Saathi",
+      "fontSize": 24,
+      "strokeColor": "#e5e5e5"
+    },
+    {
+      "type": "rectangle",
+      "id": "drishti",
+      "x": 450,
+      "y": 135,
+      "width": 360,
+      "height": 110,
+      "backgroundColor": "#2d1b69",
+      "fillStyle": "solid",
+      "strokeColor": "#8b5cf6",
+      "strokeWidth": 1.5,
+      "roundness": {
+        "type": 3
+      }
+    },
+    {
+      "type": "text",
+      "id": "drishti-title",
+      "x": 470,
+      "y": 153,
+      "text": "Drishti",
+      "fontSize": 24,
+      "strokeColor": "#e5e5e5"
+    },
+    {
+      "type": "text",
+      "id": "drishti-body",
+      "x": 470,
+      "y": 190,
+      "text": "Find links / explain their limits",
+      "fontSize": 18,
+      "strokeColor": "#e5e5e5"
+    },
+    {
+      "type": "rectangle",
+      "id": "disha",
+      "x": 850,
+      "y": 135,
+      "width": 360,
+      "height": 110,
+      "backgroundColor": "#1a4d2e",
+      "fillStyle": "solid",
+      "strokeColor": "#22c55e",
+      "strokeWidth": 1.5,
+      "roundness": {
+        "type": 3
+      }
+    },
+    {
+      "type": "text",
+      "id": "disha-title",
+      "x": 870,
+      "y": 153,
+      "text": "Disha",
+      "fontSize": 24,
+      "strokeColor": "#e5e5e5"
+    },
+    {
+      "type": "text",
+      "id": "disha-body",
+      "x": 870,
+      "y": 190,
+      "text": "Offer options / prepare reports",
+      "fontSize": 18,
+      "strokeColor": "#e5e5e5"
+    },
+    {
+      "type": "arrow",
+      "id": "saathi-route",
+      "x": 230,
+      "y": 245,
+      "width": 215,
+      "height": 65,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          35
+        ],
+        [
+          215,
+          35
+        ],
+        [
+          215,
+          65
+        ]
+      ],
+      "strokeColor": "#a0a0a0",
+      "strokeWidth": 1.5,
+      "endArrowhead": "arrow"
+    },
+    {
+      "type": "arrow",
+      "id": "drishti-route",
+      "x": 630,
+      "y": 245,
+      "width": 0,
+      "height": 65,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          65
+        ]
+      ],
+      "strokeColor": "#a0a0a0",
+      "strokeWidth": 1.5,
+      "endArrowhead": "arrow"
+    },
+    {
+      "type": "arrow",
+      "id": "disha-route",
+      "x": 1030,
+      "y": 245,
+      "width": -215,
+      "height": 65,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          35
+        ],
+        [
+          -215,
+          35
+        ],
+        [
+          -215,
+          65
+        ]
+      ],
+      "strokeColor": "#a0a0a0",
+      "strokeWidth": 1.5,
+      "endArrowhead": "arrow"
+    },
+    {
+      "type": "rectangle",
+      "id": "dispatch",
+      "x": 395,
+      "y": 310,
+      "width": 470,
+      "height": 110,
+      "backgroundColor": "#5c3d1a",
+      "fillStyle": "solid",
+      "strokeColor": "#f59e0b",
+      "strokeWidth": 1.5,
+      "roundness": {
+        "type": 3
+      }
+    },
+    {
+      "type": "text",
+      "id": "dispatch-title",
+      "x": 415,
+      "y": 328,
+      "text": "Coordinator + tool dispatcher",
+      "fontSize": 24,
+      "strokeColor": "#e5e5e5"
+    },
+    {
+      "type": "text",
+      "id": "dispatch-body",
+      "x": 415,
+      "y": 365,
+      "text": "One speaker / permissions / revision / budget",
+      "fontSize": 18,
+      "strokeColor": "#e5e5e5"
+    },
+    {
+      "type": "text",
+      "id": "guard-note",
+      "x": 75,
+      "y": 352,
+      "text": "OpenAI text\nSarvam speech",
+      "fontSize": 20,
+      "strokeColor": "#a0a0a0"
+    },
+    {
+      "type": "text",
+      "id": "trace-note",
+      "x": 920,
+      "y": 347,
+      "text": "Langfuse traces\nRedacted before export",
+      "fontSize": 18,
+      "strokeColor": "#a0a0a0"
+    },
+    {
+      "type": "arrow",
+      "id": "database-route",
+      "x": 445,
+      "y": 420,
+      "width": -215,
+      "height": 75,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          35
+        ],
+        [
+          -215,
+          35
+        ],
+        [
+          -215,
+          75
+        ]
+      ],
+      "strokeColor": "#a0a0a0",
+      "strokeWidth": 1.5,
+      "endArrowhead": "arrow"
+    },
+    {
+      "type": "arrow",
+      "id": "web-route",
+      "x": 630,
+      "y": 420,
+      "width": 0,
+      "height": 75,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          75
+        ]
+      ],
+      "strokeColor": "#a0a0a0",
+      "strokeWidth": 1.5,
+      "endArrowhead": "arrow"
+    },
+    {
+      "type": "arrow",
+      "id": "evidence-route",
+      "x": 815,
+      "y": 420,
+      "width": 215,
+      "height": 75,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          35
+        ],
+        [
+          215,
+          35
+        ],
+        [
+          215,
+          75
+        ]
+      ],
+      "strokeColor": "#a0a0a0",
+      "strokeWidth": 1.5,
+      "endArrowhead": "arrow"
+    },
+    {
+      "type": "rectangle",
+      "id": "database",
+      "x": 50,
+      "y": 495,
+      "width": 360,
+      "height": 130,
+      "backgroundColor": "#1a4d4d",
+      "fillStyle": "solid",
+      "strokeColor": "#14b8a6",
+      "strokeWidth": 1.5,
+      "roundness": {
+        "type": 3
+      }
+    },
+    {
+      "type": "text",
+      "id": "database-title",
+      "x": 70,
+      "y": 513,
+      "text": "Own data first",
+      "fontSize": 24,
+      "strokeColor": "#e5e5e5"
+    },
+    {
+      "type": "rectangle",
+      "id": "public",
+      "x": 450,
+      "y": 495,
+      "width": 360,
+      "height": 130,
+      "backgroundColor": "#2d1b69",
+      "fillStyle": "solid",
+      "strokeColor": "#8b5cf6",
+      "strokeWidth": 1.5,
+      "roundness": {
+        "type": 3
+      }
+    },
+    {
+      "type": "text",
+      "id": "public-title",
+      "x": 470,
+      "y": 513,
+      "text": "Public sources when needed",
+      "fontSize": 24,
+      "strokeColor": "#e5e5e5"
+    },
+    {
+      "type": "text",
+      "id": "public-body",
+      "x": 470,
+      "y": 550,
+      "text": "Exa: discover / Firecrawl: read\nSources + dates + request limits",
+      "fontSize": 18,
+      "strokeColor": "#e5e5e5"
+    },
+    {
+      "type": "rectangle",
+      "id": "evidence",
+      "x": 850,
+      "y": 495,
+      "width": 360,
+      "height": 130,
+      "backgroundColor": "#1a4d4d",
+      "fillStyle": "solid",
+      "strokeColor": "#14b8a6",
+      "strokeWidth": 1.5,
+      "roundness": {
+        "type": 3
+      }
+    },
+    {
+      "type": "text",
+      "id": "evidence-title",
+      "x": 870,
+      "y": 513,
+      "text": "Evidence processing",
+      "fontSize": 24,
+      "strokeColor": "#e5e5e5"
+    },
+    {
+      "type": "text",
+      "id": "evidence-body",
+      "x": 870,
+      "y": 550,
+      "text": "Local OCR + hash + provenance\nDigiLocker: optional consent flow",
+      "fontSize": 18,
+      "strokeColor": "#e5e5e5"
+    },
+    {
+      "type": "text",
+      "id": "output-label",
+      "x": 50,
+      "y": 665,
+      "text": "Tool outputs stay attached to the current reviewed report",
+      "fontSize": 20,
+      "strokeColor": "#a0a0a0"
+    },
+    {
+      "type": "rectangle",
+      "id": "maps",
+      "x": 50,
+      "y": 720,
+      "width": 360,
+      "height": 125,
+      "backgroundColor": "#1e3a5f",
+      "fillStyle": "solid",
+      "strokeColor": "#4a9eed",
+      "strokeWidth": 1.5,
+      "roundness": {
+        "type": 3
+      }
+    },
+    {
+      "type": "text",
+      "id": "maps-title",
+      "x": 70,
+      "y": 738,
+      "text": "Explain visually",
+      "fontSize": 24,
+      "strokeColor": "#e5e5e5"
+    },
+    {
+      "type": "text",
+      "id": "maps-body",
+      "x": 70,
+      "y": 775,
+      "text": "Excalidraw: editable sketches\nCytoscape.js: interactive graph",
+      "fontSize": 18,
+      "strokeColor": "#e5e5e5"
+    },
+    {
+      "type": "rectangle",
+      "id": "reports",
+      "x": 450,
+      "y": 720,
+      "width": 360,
+      "height": 125,
+      "backgroundColor": "#1a4d2e",
+      "fillStyle": "solid",
+      "strokeColor": "#22c55e",
+      "strokeWidth": 1.5,
+      "roundness": {
+        "type": 3
+      }
+    },
+    {
+      "type": "text",
+      "id": "reports-title",
+      "x": 470,
+      "y": 738,
+      "text": "Prepare reviewed exports",
+      "fontSize": 24,
+      "strokeColor": "#e5e5e5"
+    },
+    {
+      "type": "text",
+      "id": "reports-body",
+      "x": 470,
+      "y": 775,
+      "text": "PDF / DOCX / timeline / manifest\nSources, uncertainty, version",
+      "fontSize": 18,
+      "strokeColor": "#e5e5e5"
+    },
+    {
+      "type": "rectangle",
+      "id": "mail",
+      "x": 850,
+      "y": 720,
+      "width": 360,
+      "height": 125,
+      "backgroundColor": "#5c3d1a",
+      "fillStyle": "solid",
+      "strokeColor": "#f59e0b",
+      "strokeWidth": 1.5,
+      "roundness": {
+        "type": 3
+      }
+    },
+    {
+      "type": "text",
+      "id": "mail-title",
+      "x": 870,
+      "y": 738,
+      "text": "Notify after user approval",
+      "fontSize": 24,
+      "strokeColor": "#e5e5e5"
+    },
+    {
+      "type": "text",
+      "id": "mail-body",
+      "x": 870,
+      "y": 775,
+      "text": "Resend primary / Gmail fallback\nVerified recipients + durable outbox",
+      "fontSize": 18,
+      "strokeColor": "#e5e5e5"
+    },
+    {
+      "type": "text",
+      "id": "footer",
+      "x": 50,
+      "y": 885,
+      "text": "Sketching MCP helps us design. Embedded SDKs run the private Yama experience.",
+      "fontSize": 18,
+      "strokeColor": "#a0a0a0"
+    },
+    {
+      "type": "text",
+      "id": "saathi-body-v2",
+      "x": 70,
+      "y": 190,
+      "text": "Listen / correct / collect evidence",
+      "fontSize": 17,
+      "strokeColor": "#e5e5e5"
+    },
+    {
+      "type": "text",
+      "id": "database-body-v2",
+      "x": 70,
+      "y": 550,
+      "text": "FalkorDB: incidents + connections\nPostgreSQL: accounts + billing",
+      "fontSize": 18,
+      "strokeColor": "#e5e5e5"
+    }
+  ]
+}

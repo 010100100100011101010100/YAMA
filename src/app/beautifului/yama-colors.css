@@ -1,0 +1,26 @@
+/* BeautifulUI colour overrides only. Geometry, type, shadows and keyframes
+   come from foundation.css and the supplied component classes. */
+:root, .dark {
+  color-scheme: dark;
+  --page: oklch(0.205 0.004 260);
+  --canvas: oklch(0.205 0.004 260);
+  --surface: oklch(0.25 0.005 260);
+  --inset: oklch(0.243 0.004 260);
+  --field: oklch(0.285 0.006 260);
+  --hover: oklch(0.29 0.006 260);
+  --hover-2: oklch(0.32 0.007 260);
+  --ink: oklch(0.965 0.005 260);
+  --ink-2: oklch(0.79 0.012 260);
+  --ink-3: oklch(0.70 0.012 260);
+  --line: oklch(0.31 0.008 260);
+  --line-strong: oklch(0.40 0.015 260);
+  --line-soft: oklch(0.278 0.006 260);
+  --accent: oklch(0.84 0.07 35);
+  --accent-ink: oklch(0.75 0.07 35);
+  --accent-tint: oklch(0.84 0.07 35 / .14);
+  --chat-unresolved: oklch(0.76 0.13 25);
+  --green: oklch(0.76 0.17 150);
+  --green-tint: oklch(0.76 0.17 150 / .14);
+  --stripe: transparent;
+  --stripe-bg: var(--canvas);
+}

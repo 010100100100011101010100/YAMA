@@ -1,0 +1,54 @@
+{
+  "date": "2026-10-08",
+  "revision": "Chat/conference redesign",
+  "userApproval": "Pending visual review",
+  "automated": {
+    "typecheck": "passed",
+    "lint": "passed",
+    "frontendTests": 30,
+    "productionBuild": "passed",
+    "contrastTokenPairs": "19/19 passed",
+    "semanticAxeAudit": "passed; rendered contrast checked separately"
+  },
+  "browser": {
+    "engine": "Codex in-app browser",
+    "desktopViewport": [
+      1280,
+      720
+    ],
+    "mobileViewports": [
+      [
+        390,
+        844
+      ],
+      [
+        320,
+        640
+      ]
+    ],
+    "noHorizontalPageOverflow": true,
+    "composerAndActionsVisible": true,
+    "reviewCorrectionAndHandoff": "passed",
+    "fileChooserOpensFilesPanel": "passed with synthetic text file",
+    "readingPosition": "scrollTop remained 0 after a reply; See new messages (2) shown",
+    "modalEscapeAndOpenerReturn": "passed",
+    "modalForwardTab": "passed",
+    "modalBackwardTab": "not verified: document focus returned to BODY in the in-app browser",
+    "viewportOverride": "reset"
+  },
+  "limitations": [
+    "Caption preview only; no audio or microphone",
+    "No backend, database, auth, provider or payment integration",
+    "Manual screen-reader testing outstanding",
+    "Backward modal focus wrapping needs regular-browser/device review",
+    "Physical mobile keyboard and reduced-motion emulation outstanding",
+    "Native report download observation outstanding; client export contents/action covered by tests"
+  ],
+  "screenshots": [
+    "chat.png",
+    "voice.png",
+    "notes.png",
+    "mobile-hindi-chat.png",
+    "mobile-hindi-voice.png"
+  ]
+}

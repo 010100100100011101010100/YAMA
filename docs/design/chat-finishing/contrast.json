@@ -1,0 +1,50 @@
+[
+  {
+    "foreground": "chat-unresolved",
+    "background": "canvas",
+    "ratio": 7.907,
+    "passed": true
+  },
+  {
+    "foreground": "chat-unresolved",
+    "background": "surface",
+    "ratio": 7.062,
+    "passed": true
+  },
+  {
+    "foreground": "chat-unresolved",
+    "background": "field",
+    "ratio": 6.335,
+    "passed": true
+  },
+  {
+    "foreground": "chat-unresolved",
+    "background": "hover",
+    "ratio": 6.23,
+    "passed": true
+  },
+  {
+    "foreground": "green",
+    "background": "canvas",
+    "ratio": 8.904,
+    "passed": true
+  },
+  {
+    "foreground": "green",
+    "background": "surface",
+    "ratio": 7.953,
+    "passed": true
+  },
+  {
+    "foreground": "green",
+    "background": "field",
+    "ratio": 7.135,
+    "passed": true
+  },
+  {
+    "foreground": "green",
+    "background": "hover",
+    "ratio": 7.016,
+    "passed": true
+  }
+]

@@ -1,0 +1,44 @@
+{
+  "date": "2026-10-10",
+  "increment": "3c1: OpenAI extraction and metadata-only Langfuse",
+  "mode": "synthetic_localhost",
+  "liveProviderRequests": 0,
+  "credentialsChanged": false,
+  "sdkVersions": { "openaiPython": "3.28.0", "langfusePython": "4.17.0" },
+  "checks": {
+    "typecheck": "passed",
+    "lint": "passed",
+    "productionBuild": "passed",
+    "pinnedSdkSetup": "passed",
+    "pipDependencyCheck": "passed",
+    "additiveDatabaseInitialization": "passed",
+    "frontend": { "files": 15, "passed": 108 },
+    "backendUnit": { "files": 6, "passed": 35 },
+    "databaseHttpRuntime": { "files": 9, "passed": 85 },
+    "pythonCoordinatorDispatcherProviderSdk": { "passed": 87, "skipped": 0 },
+    "totalTests": 315
+  },
+  "verified": [
+    "Official Responses SDK request serialization and decoding against in-memory HTTP transport",
+    "Strict proposal schema and independent exact UTF-16 source validation",
+    "English, Hindi and Hinglish request language; fixed Saathi role; minimal message context",
+    "Refusal, incomplete response, malformed JSON, alias drift, cancellation and sanitized upstream failure",
+    "No automatic SDK retry on rate limiting; proxies and redirects disabled in the production client factory",
+    "Server-selected frozen adapter/configuration; provider identity bound to hash and accepted provenance",
+    "Atomic shared lifetime call reservations across reports and concurrent attempts",
+    "No provider replay for expired live claims; conservative reservations remain consumed after failure",
+    "Actual Langfuse in-memory exporter emits operational attributes without prompt/response content",
+    "Unknown attributes removed; foreign spans and spans with events/links rejected",
+    "Disabled monitoring has no SDK side effects; invalid monitoring destinations rejected",
+    "Monitoring outage and bounded daemon-thread flush cannot hold extraction open indefinitely",
+    "Fixture subprocess credential allowlist and explicit automated live-call guard",
+    "Existing fixture browser receipt and corrected amount still render at confirmed revision 3"
+  ],
+  "runtime": { "apiHealth": "ready", "graphWorker": "running", "evidenceWorker": "running", "agentWorker": "running" },
+  "notVerified": [
+    "Live OpenAI credentials, model access, model quality, billing and regional retention eligibility",
+    "A real Langfuse account or self-hosted endpoint",
+    "Generated foreground dialogue or durable three-agent handoffs (next increment 3c2)",
+    "India-only public-launch inference and data handling"
+  ]
+}

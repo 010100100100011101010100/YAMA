@@ -1,0 +1,61 @@
+{
+  "date": "2026-10-11",
+  "scope": "increment 4: synthetic localhost connection explanations",
+  "checks": {
+    "typecheck": "passed",
+    "lint": "passed",
+    "productionBuild": "passed",
+    "frontend": { "files": 19, "tests": 122, "passed": 122 },
+    "backend": { "files": 7, "tests": 38, "passed": 38 },
+    "integration": { "files": 11, "tests": 111, "passed": 111 },
+    "pythonWithPinnedSDKs": { "tests": 100, "passed": 100, "skipped": 0 },
+    "totalTests": 371,
+    "catalogueFingerprintInitialization": "passed"
+  },
+  "covered": [
+    "Actual Mongo/FalkorDB provenance paths checked against the canonical owned revision",
+    "Original Hindi wording, correction history, proposal origins and evidence hashes",
+    "Negative/uncertain/excluded statements withheld from match support and preserved for review",
+    "Missing snapshots, missing pattern edges and corrupted source ranges fail closed",
+    "Stale catalogue content rejected and withdrawn fictional examples filtered",
+    "Graph results scoped to the current account; private reports never enter the catalogue",
+    "Drishti receives actual comparisons without report/message/owner IDs in provider context",
+    "Unconfirmed, pending, ready-empty and ready-match states remain distinct",
+    "Revision or cited catalogue changes invalidate generated/ready text and pending handoffs",
+    "Cached dispatcher explanation results rechecked before delivery",
+    "Actual OpenAI SDK serializes comparison context with strict output and untrusted-input instructions using mock transport",
+    "Actual Langfuse SDK export privacy checks remain passing",
+    "Keyboard disclosures, accessible source rendering and focus-preserving source-panel refresh"
+  ],
+  "browser": {
+    "environment": "isolated localhost:4100 with a disposable Mongo/graph namespace",
+    "provider": "fixture",
+    "realGraphComparison": "passed",
+    "deliberateAmountMismatchCorrected": "passed",
+    "uncertainTagWithheldWithExactSourceVisible": "passed",
+    "groundedDrishtiToDishaHandoff": "passed",
+    "sourceButtonPanelRemainsOpenDuringRefresh": "passed",
+    "keyboardDisclosure": "passed",
+    "reloadPreservesReplyIdsAndSourceButton": "passed",
+    "testRevision": 4,
+    "originalConversationRevisionBeforeAndAfter": 8,
+    "originalConversationNotesChangedByProbe": false,
+    "screenshot": "docs/design/connection-sources-browser.jpg",
+    "temporaryPreviewCleanedUp": true
+  },
+  "runtime": {
+    "health": "ready",
+    "graphWorker": "running",
+    "evidenceWorker": "running",
+    "agentWorker": "running",
+    "newCredentialsRequired": false,
+    "environmentFileMode": "600"
+  },
+  "notVerified": [
+    "Live OpenAI/Langfuse account access and generated prose quality",
+    "Historical catalogue body recovery and concurrent staff publication/revocation transactions",
+    "Identity/entity linkage, private cross-account discovery or real-report publication",
+    "Sarvam voice, sourced action guidance, external lookup, outbound mail and payments",
+    "Public-launch safeguarding, regional handling and production security"
+  ]
+}

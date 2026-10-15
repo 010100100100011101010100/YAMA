@@ -1,0 +1,43 @@
+{
+  "date": "2026-10-08",
+  "foundation": {
+    "registry": "https://www.beautifului.dev/r/foundation.json",
+    "snapshot": "docs/design/beautifului-2026-10-08/foundation-foundation.css",
+    "snapshotSha256": "32c68b62b5bfa18fc33cb291f6966d02dc2585a87e75e925c86225b2cf058e1d",
+    "application": "src/app/beautifului/foundation.css",
+    "applicationSha256": "55bbd8be9140d78885b330e9f7b2e1742cc781fc58f0b36afb664b5418342ee4",
+    "repair": "Removed malformed orphan records-footer-hint fragment and unmatched brace; raw snapshot preserved."
+  },
+  "colourOverrides": "src/app/beautifului/yama-colors.css",
+  "portraits": [
+    {
+      "original": "assets/agents/2026-10-08/saathi-eagle-source.png",
+      "served": "public/agents/saathi-eagle-fine.png",
+      "sha256": "bef627aabd8d468e0f7285e176f28a1a43a6a9b21aad3762013910146e3732bf"
+    },
+    {
+      "original": "assets/agents/2026-10-08/drishti-wolf-source.png",
+      "served": "public/agents/drishti-wolf-fine.png",
+      "sha256": "b89d262822ece8ec22c1875486314bf57e728a46ee5c9b54639aa025cd272b86"
+    },
+    {
+      "original": "assets/agents/2026-10-08/disha-elephant-source.png",
+      "served": "public/agents/disha-elephant-fine.png",
+      "sha256": "d98307c5ecd6d3e44d0ad0895c0059e9c65b313ac27f330a91f634d7e24f7665"
+    }
+  ],
+  "dependency": {
+    "name": "shadow-plugin",
+    "version": "2.1.1",
+    "license": "licenses/Shadow-Plugin-MIT.txt"
+  },
+  "verification": {
+    "command": "npm run check",
+    "tests": 48,
+    "typecheck": "passed",
+    "lint": "passed",
+    "build": "passed",
+    "suppliedSnapshots": "12 unchanged",
+    "portraitCopies": "3 unchanged"
+  }
+}

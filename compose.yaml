@@ -1,0 +1,42 @@
+name: yama-db
+services:
+  mongo:
+    image: mongo:8.0@sha256:d0d926f94df099bff534b7ee5b5986458131a22489dfff8664509af0c1e2ca9c
+    entrypoint: ["bash", "/opt/yama/mongo-entrypoint.sh"]
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: yama_root
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_ROOT_PASSWORD:?Run npm run db:setup}
+    ports: ["127.0.0.1:27018:27018"]
+    volumes:
+      - mongo-data:/data/db
+      - ./infra/mongo-entrypoint.sh:/opt/yama/mongo-entrypoint.sh:ro
+      - ./.local/secrets/mongo-key:/run/yama/mongo-key:ro
+    # mongosh health checks need headroom beyond the 256 MB WiredTiger cache.
+    mem_limit: 768m
+    # Test namespaces and indexes can exceed Docker's default descriptor allowance.
+    ulimits:
+      nofile:
+        soft: 65536
+        hard: 65536
+    cpus: 1
+    healthcheck:
+      test: ["CMD-SHELL", "mongosh --quiet --port 27018 -u yama_root -p \"$$MONGO_INITDB_ROOT_PASSWORD\" --authenticationDatabase admin --eval 'quit(db.adminCommand({ping:1}).ok ? 0 : 1)' >/dev/null"]
+      interval: 15s
+      timeout: 5s
+      retries: 20
+  falkordb:
+    image: falkordb/falkordb:6.0.1@sha256:e2765e207e5ba4ee90e47ed31eb7491ad6dd3d42241c326e429375c02ad9882f
+    environment:
+      REDIS_ARGS: --requirepass ${FALKORDB_PASSWORD:?Run npm run db:setup} --appendonly yes --maxmemory 384mb --maxmemory-policy noeviction
+    ports: ["127.0.0.1:6380:6379"]
+    volumes: ["falkor-data:/data"]
+    mem_limit: 640m
+    cpus: 1
+    healthcheck:
+      test: ["CMD-SHELL", "REDISCLI_AUTH=\"${FALKORDB_PASSWORD:?Run npm run db:setup}\" redis-cli ping | grep -q PONG"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+volumes:
+  mongo-data:
+  falkor-data:

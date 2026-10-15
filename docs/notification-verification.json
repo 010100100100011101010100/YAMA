@@ -1,0 +1,52 @@
+{
+  "date": "2026-10-14",
+  "scope": "Increment 9: synthetic localhost notification outbox, SDK adapters and Disha preview tool; maps/exports deferred",
+  "checks": {
+    "typecheck": "passed",
+    "lint": "passed",
+    "productionBuild": "passed; five notification route handlers compiled",
+    "frontend": { "tests": 135, "files": 23, "status": "passed" },
+    "backend": { "tests": 69, "files": 13, "status": "passed" },
+    "integration": { "tests": 169, "files": 18, "status": "passed" },
+    "agentPython": { "tests": 113, "skipped": 0, "status": "passed" },
+    "voicePython": { "tests": 7, "status": "passed" },
+    "totalTests": 493,
+    "pythonDependencyChecks": "Both isolated environments passed pip check",
+    "npmAudit": { "vulnerabilities": 0 },
+    "installedSDKs": { "resend": "6.32.1", "nodemailer": "10.1.0" },
+    "sdkVerification": "Actual Resend SDK with fake fetch and actual Nodemailer MIME generation in memory; one attempt, fixed endpoint/SMTP options, idempotency/header checks, no attachments or live network",
+    "authAndDispatcher": "Real anonymous sessions, owned HTTP previews/approval, Origin/auth/ownership rejection, capture receipt, and real Python Disha preview-only tool",
+    "lifecycle": "Canonical concurrent previews, exact approval and key replay, fallback consent, stale recipients/configuration, expiry, lifetime reservations, global claim, cancellation during dispatch, uncertain/crashed claims and no blind replay",
+    "privacy": "Generic three-language templates contain no report narrative/evidence/account token; provider child environments omit database, cookie, model and monitoring secrets",
+    "runtime": {
+      "applicationHealth": "ready / synthetic_localhost",
+      "mailProvider": "fixture",
+      "mailLiveEnabled": false,
+      "mailFallbackEnabled": false,
+      "voiceLiveEnabled": false,
+      "publicWebLiveEnabled": false,
+      "secretFileMode": "0600",
+      "existingConfiguration": "preserved; missing entries appended only",
+      "workersRunning": ["graph", "evidence", "agents", "voice", "web", "mail"]
+    },
+    "cleanup": {
+      "remainingMailTestDatabases": 0,
+      "rootNotificationJobs": 0,
+      "rootNotificationRecipients": 0,
+      "rootNotificationBudgets": 0,
+      "workerLockHeldBeforeStartup": false,
+      "httpTestAccountsAndReports": "cleaned using test-owned account IDs",
+      "userReportOrBrowserEdited": false
+    },
+    "externalEmailsSent": 0
+  },
+  "limitations": [
+    "Live keys, sending-domain verification, Gmail eligibility, token/app-password setup and provider controls are pending",
+    "Recipients are operator-confirmed for synthetic tests; verified account email identities and recovery are not implemented",
+    "Only the fixed generic workspace-link template is supported; arbitrary messages, recipients, report details and attachments are rejected",
+    "Current text/voice generators do not autonomously select this tool; browser approval controls remain separate work",
+    "Provider acceptance is not confirmed inbox delivery; delivery/bounce webhooks and uncertain-send reconciliation remain future contracts",
+    "Local lifetime reservations do not replace provider-side quotas or spending controls",
+    "No private maps, PDF/DOCX exports, Dodo payments or production launch changes were made"
+  ]
+}

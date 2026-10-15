@@ -1,0 +1,7 @@
+Style: Dither (dither, free)
+Dressing: curated look 1 of 4 (pass variant 0-3 to try the others)
+Post FX: none
+Rendered 1122x1402 → https://www.ascii-magic.com/am-renders/2a2b2a3c1885fb006c26f925991385ce.png (download link, expires in 24h)
+Recipe: recipe:v1:eyJ2IjoxLCJyZW5kZXJNb2RlIjoiZGl0aGVyIiwiZm9udFNpemUiOjMsImJnQmx1ciI6MCwiZGl0aGVyQWxnbyI6ImJheWVyNCIsImRpdGhlclBhbGV0dGUiOiJvcmlnaW5hbCIsImRpdGhlckNvbnRyYXN0IjoxMDB9
+Open in the editor: https://www.ascii-magic.com/app?r=eyJ2IjoxLCJyZW5kZXJNb2RlIjoiZGl0aGVyIiwiZm9udFNpemUiOjMsImJnQmx1ciI6MCwiZGl0aGVyQWxnbyI6ImJheWVyNCIsImRpdGhlclBhbGV0dGUiOiJvcmlnaW5hbCIsImRpdGhlckNvbnRyYXN0IjoxMDB9
+(preview below is 410x512; the download link is full resolution)

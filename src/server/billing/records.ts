@@ -1,0 +1,90 @@
+import type { CheckoutView, AdvancedDetail } from "@/lib/billing";
+import type { ConnectionReceipt } from "@/lib/connections";
+import type { BillingSettings } from "./config";
+import type { BillingEvent, PaymentSnapshot } from "./domain";
+export type PurchaseRecord = {
+  _id: string;
+  ownerId: string;
+  scope: BillingSettings["scope"];
+  requestKey: string;
+  configHash: string;
+  productId: string;
+  businessId: string;
+  status: CheckoutView["status"];
+  sessionId: string | null;
+  url: string | null;
+  paymentId: string | null;
+  createdAt: Date;
+  expiresAt: Date;
+  errorCode: string | null;
+  fixturePayment?: PaymentSnapshot;
+};
+export type EventRecord = {
+  _id: string;
+  scope: BillingSettings["scope"];
+  webhookId: string;
+  rawHash: string;
+  event: BillingEvent;
+  status: "pending" | "processing" | "done" | "failed";
+  attempts: number;
+  dueAt: Date;
+  leaseUntil: Date | null;
+  claimToken: string | null;
+  errorCode: string | null;
+  createdAt: Date;
+};
+export type CreditGrant = {
+  _id: string;
+  scope: BillingSettings["scope"];
+  ownerId: string;
+  purchaseId: string;
+  paymentId: string;
+  total: 10;
+  remaining: number;
+  active: boolean;
+  createdAt: Date;
+};
+export type CreditAccount = {
+  _id: string;
+  ownerId: string;
+  scope: BillingSettings["scope"];
+  fence: number;
+};
+export type ReversalRecord = {
+  _id: string;
+  scope: BillingSettings["scope"];
+  paymentId: string;
+  reason: string;
+  createdAt: Date;
+};
+export type DetailBatch = {
+  _id: string;
+  ownerId: string;
+  reportId: string;
+  revision: number;
+  fingerprint: string;
+  receipt: string;
+  sourceReceipt: ConnectionReceipt;
+  details: AdvancedDetail[];
+  createdAt: Date;
+};
+export type DetailAccess = {
+  _id: string;
+  ownerId: string;
+  scope: BillingSettings["scope"];
+  batchId: string;
+  detailId: string;
+  grantId: string | null;
+  createdAt: Date;
+};
+export type CreditConsumption = {
+  _id: string;
+  ownerId: string;
+  scope: BillingSettings["scope"];
+  key: string;
+  batchId: string;
+  detailId: string;
+  grantId: string | null;
+  charged: number;
+  createdAt: Date;
+};

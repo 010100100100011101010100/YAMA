@@ -1,0 +1,25 @@
+{
+  "verifiedOn": "2026-10-07",
+  "style": "dither",
+  "tier": "free",
+  "recipe": "recipe:v1:eyJ2IjoxLCJyZW5kZXJNb2RlIjoiZGl0aGVyIiwiZm9udFNpemUiOjQsImJnQmx1ciI6MCwiYnJpZ2h0bmVzcyI6LTQxLCJkaXRoZXJBbGdvIjoiYXRraW5zb24iLCJkaXRoZXJQYWxldHRlIjoib3JpZ2luYWwiLCJkaXRoZXJDb250cmFzdCI6MTE4fQ",
+  "editorUrl": "https://www.ascii-magic.com/app?r=eyJ2IjoxLCJyZW5kZXJNb2RlIjoiZGl0aGVyIiwiZm9udFNpemUiOjQsImJnQmx1ciI6MCwiYnJpZ2h0bmVzcyI6LTQxLCJkaXRoZXJBbGdvIjoiYXRraW5zb24iLCJkaXRoZXJQYWxldHRlIjoib3JpZ2luYWwiLCJkaXRoZXJDb250cmFzdCI6MTE4fQ",
+  "settings": {
+    "v": 1,
+    "renderMode": "dither",
+    "fontSize": 4,
+    "bgBlur": 0,
+    "brightness": -41,
+    "ditherAlgo": "atkinson",
+    "ditherPalette": "original",
+    "ditherContrast": 118
+  },
+  "verification": {
+    "dimensions": [
+      512,
+      512
+    ],
+    "replayPixelIdentical": true,
+    "animatedExportVerified": false
+  }
+}

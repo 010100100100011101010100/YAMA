@@ -1,0 +1,46 @@
+{
+  "date": "2026-10-08",
+  "mode": "synthetic_localhost",
+  "commands": {
+    "npm run check": "passed",
+    "npm run test:integration": "passed",
+    "python3 -m unittest discover -s tests -v": "passed",
+    "npm run db:init repeated": "passed",
+    "npm run db:requeue-graph": "passed",
+    "database restart and API recovery": "passed"
+  },
+  "tests": {
+    "frontend": 53,
+    "backend_unit": 11,
+    "database_http_and_native_runtime_integration": 21,
+    "offline_agent_coordinator": 29,
+    "total": 114
+  },
+  "runtime": {
+    "colima_profile": "yama",
+    "cpus": 2,
+    "memory_gb": 2,
+    "mongodb_version": "8.0.32",
+    "falkordb_version": "6.0.1",
+    "api_health_after_restart": 200,
+    "mongo_catalogue_cases_after_restart": 2,
+    "graph_catalogue_cases_after_restart": 2,
+    "existing_redis_6379": "untouched"
+  },
+  "unconnected": [
+    "frontend persistence adapter",
+    "Python coordinator service bridge",
+    "live model and voice providers",
+    "evidence upload and processing",
+    "external web lookup",
+    "Langfuse monitoring",
+    "mail and report exports",
+    "payment and entitlement handling"
+  ],
+  "limits": [
+    "Anonymous authenticated demo sessions are not verified production identities or recoverable accounts.",
+    "Graph discovery compares confirmed pattern tags against authored synthetic catalogue entries; entity linkage and vector search are not implemented.",
+    "Historic revisions are retained; deletion, purge, backups and public-launch controls are separate increments.",
+    "No live provider calls or purchases were made."
+  ]
+}

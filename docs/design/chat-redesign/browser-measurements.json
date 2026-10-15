@@ -1,0 +1,133 @@
+{
+  "desktopChat": {
+    "actions": {
+      "bottom": 708,
+      "height": 44,
+      "left": 140,
+      "right": 1140,
+      "top": 664,
+      "width": 1000,
+      "x": 140,
+      "y": 664
+    },
+    "bodyFont": "18px / 28.8px \"Hanken Grotesk Variable\", \"IBM Plex Sans Devanagari\", sans-serif",
+    "composer": {
+      "bottom": 658,
+      "height": 177.25,
+      "left": 140,
+      "right": 1140,
+      "top": 480.75,
+      "width": 1000,
+      "x": 140,
+      "y": 480.75
+    },
+    "height": 720,
+    "scrollWidth": 1280,
+    "width": 1280
+  },
+  "desktopVoice": {
+    "actions": {
+      "bottom": 708,
+      "height": 44,
+      "left": 140,
+      "right": 1140,
+      "top": 664,
+      "width": 1000,
+      "x": 140,
+      "y": 664
+    },
+    "composer": {
+      "bottom": 658,
+      "height": 104,
+      "left": 140,
+      "right": 1140,
+      "top": 554,
+      "width": 1000,
+      "x": 140,
+      "y": 554
+    },
+    "height": 720,
+    "log": {
+      "bottom": 554,
+      "height": 114.75,
+      "left": 140,
+      "right": 1140,
+      "top": 439.25,
+      "width": 1000,
+      "x": 140,
+      "y": 439.25
+    },
+    "scrollWidth": 1280,
+    "width": 1280
+  },
+  "mobileHindiChat": {
+    "actions": {
+      "bottom": 836,
+      "height": 66.25,
+      "left": 12,
+      "right": 378,
+      "top": 769.75,
+      "width": 366,
+      "x": 12,
+      "y": 769.75
+    },
+    "bodyFont": "18px / 28.8px \"IBM Plex Sans Devanagari\", \"Hanken Grotesk Variable\", sans-serif",
+    "composer": {
+      "bottom": 765.75,
+      "height": 161.25,
+      "left": 12,
+      "right": 378,
+      "top": 604.5,
+      "width": 366,
+      "x": 12,
+      "y": 604.5
+    },
+    "height": 844,
+    "scrollWidth": 390,
+    "width": 390
+  },
+  "smallHindiVoice": {
+    "actions": {
+      "bottom": 632,
+      "height": 86.5,
+      "left": 12,
+      "right": 308,
+      "top": 545.5,
+      "width": 296,
+      "x": 12,
+      "y": 545.5
+    },
+    "composer": {
+      "bottom": 541.5,
+      "height": 104,
+      "left": 12,
+      "right": 308,
+      "top": 437.5,
+      "width": 296,
+      "x": 12,
+      "y": 437.5
+    },
+    "height": 640,
+    "scrollWidth": 320,
+    "stage": {
+      "bottom": 437.5,
+      "height": 256.5,
+      "left": 12,
+      "right": 308,
+      "top": 181,
+      "width": 296,
+      "x": 12,
+      "y": 181
+    },
+    "stageScrollHeight": 314,
+    "width": 320
+  },
+  "mobilePanel": {
+    "focus": "panel-title",
+    "modal": true,
+    "focusWrapsInside": false,
+    "openerRestored": true,
+    "forwardTabStaysInside": true,
+    "backTabObservation": "The in-app browser returned document focus to BODY when moving backward from the first control. Native modal state stayed active; backward focus wrapping is not claimed as verified."
+  }
+}

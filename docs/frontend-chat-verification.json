@@ -1,0 +1,80 @@
+{
+  "date": "2026-10-14",
+  "scope": "Saved-chat sidebar, human-controlled resolution, shared-agent chat, agent nature info and typing presentation",
+  "checks": {
+    "typecheck": "passed",
+    "lint": "passed",
+    "productionBuild": "passed; chat-status endpoint compiled",
+    "frontend": {
+      "tests": 142,
+      "files": 26,
+      "status": "passed"
+    },
+    "backend": {
+      "tests": 78,
+      "files": 15,
+      "status": "passed"
+    },
+    "integration": {
+      "tests": 202,
+      "files": 23,
+      "status": "passed"
+    },
+    "agentPython": {
+      "tests": 113,
+      "status": "passed",
+      "skipped": 0
+    },
+    "voicePython": {
+      "tests": 7,
+      "status": "passed"
+    },
+    "totalTests": 542,
+    "chatStatus": "Owned bounded titles; old chats unresolved; manual resolve/reopen; same-target replay; version conflict; status independent of notes/confirmation; foreign accounts, sessions, extra fields and mutation origins rejected",
+    "chatNavigation": "Explicit selection reads the selected report, New chat creates a separate report, unsent drafts remain with their chat during in-tab navigation, and selection focuses the composer",
+    "handoffs": "Validated target/reason retained in ready and delivered messages; actual Saathi to Drishti to Disha fixture chains observed in English and Hindi",
+    "typing": "Actual queued/running agent identity, removal for ready/stale/canceled turns, no voice-bound text cue; actual accepted queue observed while local agent worker paused",
+    "agentInfo": "English/Hindi/Hinglish profiles; nonmodal portal, outside dismissal, Escape/Close focus restoration; Hindi panel visually checked",
+    "responsive": "1280x900 desktop and 375x812 mobile reviewed; mobile document width 375 with viewport 375; Hindi wraps and all participants remain available",
+    "statusContrast": {
+      "pairs": 8,
+      "minimumRatio": 6.23,
+      "allPassed": true
+    },
+    "reducedMotion": "CSS makes typing dots static under prefers-reduced-motion; physical OS/screen-reader audition remains separate",
+    "componentFoundation": "Original BeautifulUI foundation unchanged; application-owned group/history/info styles, Aceternity Button reused, new red colour token only in colour override file",
+    "screenshots": [
+      "docs/design/chat-finishing/desktop.png",
+      "docs/design/chat-finishing/mobile.png",
+      "docs/design/chat-finishing/typing.png"
+    ],
+    "runtime": {
+      "applicationHealth": "ready / synthetic_localhost",
+      "workersRunning": [
+        "graph",
+        "evidence",
+        "agents",
+        "voice",
+        "web",
+        "mail",
+        "billing"
+      ],
+      "providerMode": "fixtures; live flags unchanged"
+    },
+    "cleanup": {
+      "remainingChatTestDatabases": 0,
+      "httpTestAccountsAndReports": "removed using owned test account IDs",
+      "browserDemoChats": "Two clearly labelled synthetic English/Hindi chats retained for review"
+    },
+    "skillUpdate": "User-approved Impeccable v4.5.2 update applied to copied user-level .agents install; optional new design hook declined",
+    "externalProviderRequests": 0
+  },
+  "limitations": [
+    "Live text/voice providers still require the existing credential and account-control setup",
+    "Chat list contains the latest fifty reports; reload restores the latest report",
+    "Unsent drafts are retained in memory within the current tab and are cleared on reload",
+    "Old dialogue entries without handoff metadata receive no invented handoff labels",
+    "The existing single-speaker coordinator controls handoffs; autonomous agent debate and simultaneous voices were not added",
+    "Animal animation, private maps and reviewed PDF/DOCX exports remain deferred"
+  ]
+}

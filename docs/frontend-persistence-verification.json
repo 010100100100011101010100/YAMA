@@ -1,0 +1,53 @@
+{
+  "date": "2026-10-09",
+  "mode": "synthetic_localhost",
+  "commands": {
+    "npm run check": "passed",
+    "npm run test:integration": "passed",
+    "python3 -m unittest discover -s tests -v": "passed"
+  },
+  "tests": {
+    "frontend": 78,
+    "backend_unit": 11,
+    "database_http_and_native_runtime_integration": 21,
+    "offline_agent_coordinator": 29,
+    "total": 139
+  },
+  "browser": {
+    "create_authored_example": "passed; persisted report revision 2",
+    "correct_amount": "passed; revision 3, source wording preserved",
+    "edit_focus_restoration": "passed; Edit Amount focused after save",
+    "server_confirmation": "passed; comparison unavailable until acknowledged",
+    "real_graph_results": "passed; two authored catalogue entries, shared tags and item difference",
+    "refresh_recovery": "passed; amount, confirmed revision and graph result restored",
+    "hindi_review_320px": "passed; document width 320, support selectors bounded within viewport",
+    "screenshots": [
+      "design/backend-connected/comparison.jpg",
+      "design/backend-connected/hindi-review-320.jpg"
+    ]
+  },
+  "automated_persistence_coverage": [
+    "Concurrent restoration shares anonymous sign-in",
+    "Exact Hindi/whitespace narration and valid source ranges",
+    "Same creation key after a lost response",
+    "Read-before-retry for committed corrections and appended messages",
+    "Revision conflicts require review",
+    "Authentication expiry does not silently create a new write session",
+    "Pending confirmation and duplicate-submission gating",
+    "Failed draft/correction retention and edit focus",
+    "Actual ready, empty, failed and canceled graph responses",
+    "No fixed fixture comparison in persisted mode",
+    "Local file selection does not alter the canonical revision",
+    "Semantic accessibility in persisted review and comparison",
+    "Save failure notice remains inside the open review panel"
+  ],
+  "limits": [
+    "Anonymous sessions are not verified or recoverable production accounts.",
+    "Only user messages, assertions and confirmation are persisted; unsent drafts, agent hints, selected file names and UI preferences remain local.",
+    "Example proposals are authored. Arbitrary narration has no model extraction yet.",
+    "Comparison uses confirmed pattern tags against synthetic catalogue entries; identity linkage and probability scores are not implemented.",
+    "Cancellation stops the UI subscription, not the durable graph projection job.",
+    "Manual screen-reader and emulated reduced-motion browser review remain outstanding; no visual redesign was made.",
+    "No live providers, external messages, uploads or purchases were invoked."
+  ]
+}

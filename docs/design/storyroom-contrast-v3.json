@@ -1,0 +1,82 @@
+{
+  "method": "OKLCH to linear sRGB, gamut clipping, WCAG relative luminance. Token pairs, not a complete rendered-page audit.",
+  "checks": [
+    {
+      "foreground": "ink",
+      "background": "background",
+      "ratio": 15.54,
+      "minimum": 4.5,
+      "passed": true
+    },
+    {
+      "foreground": "ink",
+      "background": "surface",
+      "ratio": 13.35,
+      "minimum": 4.5,
+      "passed": true
+    },
+    {
+      "foreground": "muted",
+      "background": "background",
+      "ratio": 8.67,
+      "minimum": 4.5,
+      "passed": true
+    },
+    {
+      "foreground": "muted",
+      "background": "surface",
+      "ratio": 7.45,
+      "minimum": 4.5,
+      "passed": true
+    },
+    {
+      "foreground": "muted",
+      "background": "raised",
+      "ratio": 6.37,
+      "minimum": 4.5,
+      "passed": true
+    },
+    {
+      "foreground": "primaryInk",
+      "background": "primary",
+      "ratio": 12.88,
+      "minimum": 4.5,
+      "passed": true
+    },
+    {
+      "foreground": "coral",
+      "background": "surface",
+      "ratio": 8.99,
+      "minimum": 4.5,
+      "passed": true
+    },
+    {
+      "foreground": "danger",
+      "background": "surface",
+      "ratio": 9.25,
+      "minimum": 4.5,
+      "passed": true
+    },
+    {
+      "foreground": "controlEdge",
+      "background": "surface",
+      "ratio": 3.76,
+      "minimum": 3,
+      "passed": true
+    },
+    {
+      "foreground": "controlEdge",
+      "background": "background",
+      "ratio": 4.38,
+      "minimum": 3,
+      "passed": true
+    },
+    {
+      "foreground": "controlEdge",
+      "background": "raised",
+      "ratio": 3.22,
+      "minimum": 3,
+      "passed": true
+    }
+  ]
+}

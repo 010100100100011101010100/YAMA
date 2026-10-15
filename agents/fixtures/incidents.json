@@ -1,0 +1,5 @@
+[
+  {"language":"en","narrative":"Fictional example: 📝 I paid ₹18,000 for a laptop. Delivery was promised, but it did not arrive. The seller did not reply.","phrases":{"amount":"₹18,000","item":"laptop","paid":"I paid ₹18,000","promised_delivery":"Delivery was promised","not_delivered":"it did not arrive","no_reply":"The seller did not reply"}},
+  {"language":"hi","narrative":"काल्पनिक उदाहरण: 📝 मैंने लैपटॉप के लिए ₹18,000 दिए। डिलीवरी का वादा था, लेकिन सामान नहीं आया। विक्रेता ने जवाब नहीं दिया।","phrases":{"amount":"₹18,000","item":"लैपटॉप","paid":"मैंने लैपटॉप के लिए ₹18,000 दिए","promised_delivery":"डिलीवरी का वादा था","not_delivered":"सामान नहीं आया","no_reply":"विक्रेता ने जवाब नहीं दिया"}},
+  {"language":"hinglish","narrative":"Fictional example: 📝 Maine laptop ke liye ₹18,000 diye. Delivery ka promise tha, par samaan nahi aaya. Seller ne reply nahi kiya.","phrases":{"amount":"₹18,000","item":"laptop","paid":"Maine laptop ke liye ₹18,000 diye","promised_delivery":"Delivery ka promise tha","not_delivered":"samaan nahi aaya","no_reply":"Seller ne reply nahi kiya"}}
+]

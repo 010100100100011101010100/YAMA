@@ -1,0 +1,37 @@
+{
+  "verifiedAt": "2026-10-09T11:06:11Z",
+  "stage": "3a: authenticated dispatcher and fixture adapter",
+  "environment": "synthetic localhost; no paid provider calls",
+  "checks": {
+    "python": { "passed": 69, "coordinator": 32, "dispatcher": 28, "gateway": 9 },
+    "realIntegration": { "passed": 59, "newAgentServiceTests": 8, "existingDatabaseEvidenceRuntimeTests": 51 },
+    "backendUnit": { "passed": 22 },
+    "typecheck": "passed",
+    "lint": "passed",
+    "executedTestTotal": 150
+  },
+  "verifiedFlows": [
+    "Exact authored extraction previews in English, Hindi and Hinglish; JavaScript UTF-16 ranges including emoji",
+    "Preview leaves Mongo report revision, assertions and confirmation unchanged",
+    "Separate simulated user acceptance, correction, exclusion and explicit confirmation",
+    "Actual FalkorDB projection/comparison with two published fictional catalogue cases",
+    "Disha summary and manifest through authenticated owned data",
+    "Ready-result handoff only after scripted delivery acknowledgement",
+    "Cross-account, expired and signed-out session denial",
+    "Role allowlists and unavailable tools rejected before service invocation",
+    "Late, canceled, edited, timeout and malformed model results cannot become deliverable",
+    "Manifest invalidated by file archival without requiring report revision change",
+    "Redirect/proxy refusal, fixed UUID routes, bounded JSON and sanitized errors",
+    "Existing database, evidence, OCR and runtime integration regressions"
+  ],
+  "limitations": [
+    "No live OpenAI, Sarvam, LiveKit, Langfuse or other provider calls",
+    "Fixture extraction recognizes exactly three authored narratives; arbitrary input receives no proposals",
+    "Python session receipts/results are not durable Mongo jobs",
+    "Browser still uses existing authored agent hints; no dispatcher endpoint or preview acceptance UI yet",
+    "Delivery acknowledgement is scripted, not browser or audio playout verification",
+    "No new frontend behavior; frontend tests and production build were not rerun in this backend-only increment",
+    "Existing document-increment verification covers the previous frontend/build baseline"
+  ],
+  "next": "3b: durable agent receipts, browser proposal preview and explicit acceptance"
+}

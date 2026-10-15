@@ -1,0 +1,135 @@
+{
+  "schema_version": 1,
+  "shared_tools": [
+    "read_own_account",
+    "read_authorized_evidence",
+    "ask_user_question",
+    "lookup_verified_assistance",
+    "request_handoff",
+    "delegate_task"
+  ],
+  "agents": {
+    "saathi": {
+      "name": "Saathi",
+      "purpose": "Listen, clarify, and prepare a reviewable incident account.",
+      "skill": "saathi/SKILL.md",
+      "speaker": "priya",
+      "tools": [
+        "propose_draft_assertions",
+        "propose_timeline",
+        "identify_missing_information"
+      ]
+    },
+    "drishti": {
+      "name": "Drishti",
+      "purpose": "Find permitted similar cases and explain connections and their limits.",
+      "skill": "drishti/SKILL.md",
+      "speaker": "shubh",
+      "tools": [
+        "find_similar_cases",
+        "query_connection_paths",
+        "compare_entities",
+        "explain_connection",
+        "search_public_web",
+        "fetch_public_page"
+      ]
+    },
+    "disha": {
+      "name": "Disha",
+      "purpose": "Offer practical options and prepare material for the user's next steps.",
+      "skill": "disha/SKILL.md",
+      "speaker": "suhani",
+      "tools": [
+        "find_reporting_options",
+        "prepare_incident_summary",
+        "prepare_evidence_manifest",
+        "propose_next_actions",
+        "search_public_web",
+        "fetch_public_page",
+        "prepare_email"
+      ]
+    }
+  },
+  "tools": {
+    "read_own_account": {
+      "background": false,
+      "requires_confirmation": false
+    },
+    "read_authorized_evidence": {
+      "background": false,
+      "requires_confirmation": false
+    },
+    "ask_user_question": {
+      "background": false,
+      "requires_confirmation": false
+    },
+    "lookup_verified_assistance": {
+      "background": true,
+      "requires_confirmation": false
+    },
+    "request_handoff": {
+      "background": false,
+      "requires_confirmation": false
+    },
+    "delegate_task": {
+      "background": false,
+      "requires_confirmation": false
+    },
+    "propose_draft_assertions": {
+      "background": true,
+      "requires_confirmation": false
+    },
+    "propose_timeline": {
+      "background": true,
+      "requires_confirmation": false
+    },
+    "identify_missing_information": {
+      "background": true,
+      "requires_confirmation": false
+    },
+    "find_similar_cases": {
+      "background": true,
+      "requires_confirmation": true
+    },
+    "query_connection_paths": {
+      "background": true,
+      "requires_confirmation": true
+    },
+    "compare_entities": {
+      "background": true,
+      "requires_confirmation": true
+    },
+    "explain_connection": {
+      "background": true,
+      "requires_confirmation": true
+    },
+    "find_reporting_options": {
+      "background": true,
+      "requires_confirmation": false
+    },
+    "prepare_incident_summary": {
+      "background": true,
+      "requires_confirmation": false
+    },
+    "prepare_evidence_manifest": {
+      "background": true,
+      "requires_confirmation": false
+    },
+    "propose_next_actions": {
+      "background": true,
+      "requires_confirmation": false
+    },
+    "search_public_web": {
+      "background": true,
+      "requires_confirmation": false
+    },
+    "fetch_public_page": {
+      "background": true,
+      "requires_confirmation": false
+    },
+    "prepare_email": {
+      "background": true,
+      "requires_confirmation": false
+    }
+  }
+}

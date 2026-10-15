@@ -1,0 +1,52 @@
+{
+  "date": "2026-10-12",
+  "scope": "Increment 7: synthetic localhost Exa/Firecrawl backend and specialist dispatcher",
+  "checks": {
+    "typecheck": "passed",
+    "lint": "passed",
+    "productionBuild": "passed; all three public lookup routes compiled",
+    "frontend": { "tests": 135, "files": 23, "status": "passed" },
+    "backend": { "tests": 57, "files": 11, "status": "passed" },
+    "integration": { "tests": 147, "files": 16, "status": "passed" },
+    "agentPython": { "tests": 110, "skipped": 0, "status": "passed" },
+    "voicePython": { "tests": 7, "status": "passed" },
+    "totalTests": 456,
+    "pythonDependencyChecks": "Both isolated environments passed pip check",
+    "npmAudit": { "vulnerabilities": 0 },
+    "sdkTransports": {
+      "exa-js": "2.25.0; actual SDK with fake fetch, contents disabled and one request",
+      "firecrawl": "4.46.0; actual SDK with fake Axios adapter, sanitized HTML multipart parse and one attempt",
+      "sanitize-html": "2.18.0",
+      "liveProviderCalls": 0
+    },
+    "httpAndDispatcher": "Real anonymous auth, owned Mongo jobs, fixed-origin Python POST/read gateway, authored search/page results and cancellation cascade",
+    "network": "Unsafe URLs, private/mapped/reserved IPs, mixed DNS, declared-family mismatch, redirect rebinding, byte limits and executable HTML rejected using fake DNS/page transports",
+    "lifecycle": "Ownership, roles, exact arguments, key replay, selected-page deduplication, cache age, stale revisions, global worker lock, uncertain outcomes, configuration changes, lifetime quotas and over-reservation provider cost tested",
+    "instructionIsolation": "Public text remains untrusted and cannot alter report revision or confirmation",
+    "runtime": {
+      "applicationHealth": "ready / synthetic_localhost",
+      "publicWebProvider": "fixture",
+      "publicWebLiveEnabled": false,
+      "voiceLiveEnabled": false,
+      "secretFileMode": "0600",
+      "existingConfiguration": "preserved; setup adds missing entries only",
+      "workersRestored": ["graph", "evidence", "agents", "voice", "web"]
+    },
+    "cleanup": {
+      "remainingPublicWebTestDatabases": 0,
+      "remainingRootPublicWebJobs": 0,
+      "publicWebBudgetRecords": 0,
+      "workerLockHeldBeforeRestoration": false,
+      "httpTestAccountsAndReports": "cleaned using test-owned account IDs",
+      "userBrowserOrReportEdited": false
+    }
+  },
+  "limitations": [
+    "No live provider account, credits, billing, retention policy or current public-page extraction was verified",
+    "Live synthetic checks require keys, explicit enablement, policy acknowledgement and provider-side spending controls",
+    "Initial public lookup is limited to three predefined topics, approved official domains and bounded UTF-8 HTML",
+    "The current text/voice generator does not autonomously select these dispatcher tools; UI controls and generated tool intents remain separate work",
+    "Application reservations are conservative admission limits, not a guaranteed provider invoice cap",
+    "No real reports, graph writes, complaint submission, outbound mail or payment integration was added"
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "image": "sha256:9f3cd732bf5feb4cf8c83c703393b35debb544a64d0903ad5ff80b8279c80e85",
+  "user": "65532:65532",
+  "network": "none",
+  "readonlyRoot": true,
+  "memoryBytes": 402653184,
+  "memorySwapBytes": 402653184,
+  "cpu": 0.75,
+  "pids": 64,
+  "capabilitiesDropped": [
+    "ALL"
+  ],
+  "securityOptions": [
+    "no-new-privileges"
+  ],
+  "tmpfs": {
+    "/tmp": "rw,noexec,nosuid,size=64m"
+  },
+  "mounts": [
+    {
+      "destination": "/input/document",
+      "writable": false
+    }
+  ],
+  "environmentKeys": [
+    "PATH",
+    "GPG_KEY",
+    "PYTHON_VERSION",
+    "PYTHON_SHA256",
+    "OMP_THREAD_LIMIT",
+    "OPENBLAS_NUM_THREADS"
+  ]
+}

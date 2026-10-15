@@ -1,0 +1,17 @@
+{
+  "directMentionFlow": [
+    "Disha"
+  ],
+  "draft": "",
+  "namedFlow": [
+    "Saathi",
+    "Disha"
+  ],
+  "recipient": "saathi",
+  "recovery": {
+    "alerts": 0,
+    "messages": 6,
+    "recipient": "saathi"
+  },
+  "hindiCompletion": "@Drishti "
+}

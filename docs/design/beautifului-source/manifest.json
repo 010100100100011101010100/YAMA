@@ -1,0 +1,161 @@
+{
+  "prompt-bar": {
+    "url": "https://www.beautifului.dev/r/prompt-bar.json",
+    "sha256": "68968526b7464d291a3a395bf6b336e7c1916420171fe543f81624f368b27dd7",
+    "bytes": 32797,
+    "name": "prompt-bar",
+    "dependencies": [
+      "glimm"
+    ],
+    "registryDependencies": [
+      "https://www.beautifului.dev/r/foundation.json"
+    ],
+    "files": [
+      {
+        "path": "components/primitives/PromptBar.tsx",
+        "type": "registry:component",
+        "lines": 712
+      }
+    ]
+  },
+  "approval-card": {
+    "url": "https://www.beautifului.dev/r/approval-card.json",
+    "sha256": "b10c4670c04c6510c4364561d06cc5a670317993a0fd1473b1af254de64b244e",
+    "bytes": 18070,
+    "name": "approval-card",
+    "dependencies": null,
+    "registryDependencies": [
+      "https://www.beautifului.dev/r/foundation.json",
+      "https://www.beautifului.dev/r/button.json",
+      "https://www.beautifului.dev/r/glide-menu.json"
+    ],
+    "files": [
+      {
+        "path": "components/primitives/ApprovalCard.tsx",
+        "type": "registry:component",
+        "lines": 419
+      }
+    ]
+  },
+  "context-cards": {
+    "url": "https://www.beautifului.dev/r/context-cards.json",
+    "sha256": "086d3e60ef3381498a74dde8e9019e9936310c39e71044cae28df8c668c2c38d",
+    "bytes": 5186,
+    "name": "context-cards",
+    "dependencies": null,
+    "registryDependencies": [
+      "https://www.beautifului.dev/r/foundation.json"
+    ],
+    "files": [
+      {
+        "path": "components/primitives/ContextCards.tsx",
+        "type": "registry:component",
+        "lines": 120
+      }
+    ]
+  },
+  "task-rows": {
+    "url": "https://www.beautifului.dev/r/task-rows.json",
+    "sha256": "a195e9caa440f795fb42d11001e00d29066b78a353850b054069fd32236742ef",
+    "bytes": 11330,
+    "name": "task-rows",
+    "dependencies": null,
+    "registryDependencies": [
+      "https://www.beautifului.dev/r/foundation.json"
+    ],
+    "files": [
+      {
+        "path": "components/primitives/TaskRows.tsx",
+        "type": "registry:component",
+        "lines": 274
+      }
+    ]
+  },
+  "streaming-text": {
+    "url": "https://www.beautifului.dev/r/streaming-text.json",
+    "sha256": "f2dd3322858f99a92c19f92ce1f4dad7162237f176d3775e7320f857363fcba8",
+    "bytes": 11494,
+    "name": "streaming-text",
+    "dependencies": null,
+    "registryDependencies": [
+      "https://www.beautifului.dev/r/foundation.json"
+    ],
+    "files": [
+      {
+        "path": "components/primitives/StreamingText.tsx",
+        "type": "registry:component",
+        "lines": 252
+      }
+    ]
+  },
+  "loading-state": {
+    "url": "https://www.beautifului.dev/r/loading-state.json",
+    "sha256": "a418ce72d2d3aa17ab72dbcea0a396610a8c42946af4c21b0b9b21f4effcfaab",
+    "bytes": 6024,
+    "name": "loading-state",
+    "dependencies": null,
+    "registryDependencies": [
+      "https://www.beautifului.dev/r/foundation.json"
+    ],
+    "files": [
+      {
+        "path": "components/primitives/LoadingState.tsx",
+        "type": "registry:component",
+        "lines": 154
+      }
+    ]
+  },
+  "LICENSE": {
+    "url": "https://raw.githubusercontent.com/slev12397/beautiful-ui/main/LICENSE",
+    "sha256": "dcd98784bcd83e727fad4612bfdd20d1363860149e2ca6829f546273b2f8d063",
+    "bytes": 1069
+  },
+  "foundation": {
+    "url": "https://www.beautifului.dev/r/foundation.json",
+    "sha256": "c3b97e7d7cac0c53b78823611b8fd793f136bfde72b8e4635147fb83f6fc162c",
+    "bytes": 19652,
+    "dependencies": null,
+    "registryDependencies": null,
+    "files": [
+      {
+        "path": "app/beautifui/foundation.css",
+        "type": "registry:file",
+        "lines": 643
+      }
+    ]
+  },
+  "button": {
+    "url": "https://www.beautifului.dev/r/button.json",
+    "sha256": "cdc7affc58ab3353dc159d33bd87e826c581856ea39fa6bbab7cb11f67ac3352",
+    "bytes": 2598,
+    "dependencies": [
+      "class-variance-authority"
+    ],
+    "registryDependencies": [
+      "https://www.beautifului.dev/r/foundation.json"
+    ],
+    "files": [
+      {
+        "path": "components/atoms/Button.tsx",
+        "type": "registry:ui",
+        "lines": 47
+      }
+    ]
+  },
+  "glide-menu": {
+    "url": "https://www.beautifului.dev/r/glide-menu.json",
+    "sha256": "8ca85bd9719332b57c5a16306cbb7548ac1c17ad5b9e0061358d231b60a30462",
+    "bytes": 2484,
+    "dependencies": null,
+    "registryDependencies": [
+      "https://www.beautifului.dev/r/foundation.json"
+    ],
+    "files": [
+      {
+        "path": "components/primitives/GlideMenu.tsx",
+        "type": "registry:ui",
+        "lines": 59
+      }
+    ]
+  }
+}
