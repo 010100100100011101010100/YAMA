@@ -84,6 +84,8 @@ MongoDB is the canonical record store. FalkorDB is a rebuildable but central ret
 
 Workers are long-lived processes. Deploying the Next.js frontend to Vercel alone will not provision the workers, Python runtime, local embedding model, or private storage.
 
+The root [Dockerfile](Dockerfile) packages the API and workers for a Node/Python container host. See [Render settings, image checks, and remaining deployment changes](docs/render-docker.md) before deploying; the image does not remove the current localhost restrictions.
+
 ## Run the localhost demo
 
 Use **Node 24** (`.nvmrc`), **Python 3.11+**, and compatible Colima/Lima/Docker/Compose tools. Local container binaries are ignored. GraphRAG dependencies may require C++ build tools. Credentials belong server-side in the ignored `.env.local`.
