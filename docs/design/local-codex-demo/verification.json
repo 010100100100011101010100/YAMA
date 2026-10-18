@@ -1,0 +1,123 @@
+{
+  "verifiedAt": "2026-10-17T06:38:26.572Z",
+  "dataset": {
+    "version": "synthetic-incidents-v1",
+    "cases": 25,
+    "sourceReports": 25,
+    "pngUploads": 25,
+    "reviewedTextUploads": 25,
+    "allFileHashesVerified": true,
+    "outcomes": {
+      "resolved": 9,
+      "unresolved": 11,
+      "partially_resolved": 5
+    }
+  },
+  "comparison": {
+    "status": "ready",
+    "revision": 1,
+    "basis": "exact confirmed identifiers, no pattern tags",
+    "matches": [
+      {
+        "id": "synthetic-demo-01-gadget-laptop",
+        "identifierKinds": [
+          "phone",
+          "email",
+          "telegram"
+        ],
+        "resolution": "resolved",
+        "actions": [
+          "cyber_complaint",
+          "account_blocked",
+          "refund"
+        ]
+      },
+      {
+        "id": "synthetic-demo-02-gadget-camera",
+        "identifierKinds": [
+          "phone",
+          "email",
+          "telegram"
+        ],
+        "resolution": "unresolved",
+        "actions": [
+          "cyber_complaint",
+          "bank_notified"
+        ]
+      },
+      {
+        "id": "synthetic-demo-03-gadget-tablet",
+        "identifierKinds": [
+          "phone",
+          "email",
+          "telegram"
+        ],
+        "resolution": "partially_resolved",
+        "actions": [
+          "cyber_complaint",
+          "platform_removed",
+          "partial_refund"
+        ]
+      }
+    ]
+  },
+  "conversation": {
+    "revision": 1,
+    "confirmed": true,
+    "narrationMessages": 1,
+    "deliveredReplies": 5,
+    "agents": [
+      "saathi",
+      "drishti",
+      "disha",
+      "drishti",
+      "disha"
+    ],
+    "providers": [
+      "codex"
+    ],
+    "allCodexReplies": true,
+    "handoffs": [
+      {
+        "from": "saathi",
+        "to": "drishti"
+      },
+      {
+        "from": "drishti",
+        "to": "disha"
+      },
+      {
+        "from": "drishti",
+        "to": "disha"
+      }
+    ],
+    "latestStatus": "delivered",
+    "threeRoleProjectInitialized": true
+  },
+  "checks": {
+    "frontend": 171,
+    "backend": 101,
+    "integration": 216,
+    "python": 128,
+    "typecheck": "passed",
+    "lint": "passed",
+    "productionBuild": "passed"
+  },
+  "browser": {
+    "refreshRestoredMessages": true,
+    "restoredArticleCount": 7,
+    "comparisonReopenedFromSavedReply": true,
+    "outcomeStatesInspected": [
+      "resolved",
+      "unresolved",
+      "partially_resolved"
+    ],
+    "evidenceMetadataExpanded": true,
+    "clarifiedMissingPatternTagsWithoutInventingContradictions": true,
+    "screenshots": [
+      "conversation.jpg",
+      "comparison.jpg",
+      "comparison-contacts.jpg"
+    ]
+  }
+}

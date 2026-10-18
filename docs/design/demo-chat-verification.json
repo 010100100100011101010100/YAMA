@@ -1,0 +1,182 @@
+{
+  "verifiedAt": "2026-10-17T21:18:49.224Z",
+  "reportId": "6b56673a-29f5-4ef1-a55b-dc37e2ed68ff",
+  "graphTarget": "cloud",
+  "revision": 2,
+  "confirmedRevision": 2,
+  "incidentMessages": 2,
+  "comparison": {
+    "status": "ready",
+    "matches": 4,
+    "eachReporterProfileRemoved": true,
+    "namesAbsentFromModelContext": true,
+    "outcomes": [
+      {
+        "caseId": "synthetic-demo-01-gadget-laptop",
+        "status": "resolved",
+        "version": "edf911ac98f441c6091088ba19534c3439f4571e8cd022dddad97414736ef327"
+      },
+      {
+        "caseId": "synthetic-demo-02-gadget-camera",
+        "status": "unresolved",
+        "version": "e32378b12ef79241976946dc76d7ca9525c5b4701bfa4a537d3c7ac07d36d407"
+      },
+      {
+        "caseId": "synthetic-demo-03-gadget-tablet",
+        "status": "partially_resolved",
+        "version": "5d16e7473f8bdd343533bf4ce3b39d12db229193cc671b282093072f39f11faf"
+      },
+      {
+        "caseId": "synthetic-demo-26-cyber-account-takeover",
+        "status": "unresolved",
+        "version": "003aaea81ea098ff1081b06d7aa87dc9efdf09368a292fa29a647f44991f3d01"
+      }
+    ]
+  },
+  "modelContextCharacters": 23199,
+  "liveReplies": [
+    {
+      "id": "76317f3b-5759-4dda-b828-841888a2b616",
+      "agent": "saathi",
+      "provider": "codex",
+      "live": true,
+      "hasQuestion": true,
+      "followUp": false,
+      "relatedReports": 0,
+      "publicSources": []
+    },
+    {
+      "id": "c2db2b46-3acb-4346-9786-6d32e7e65073",
+      "agent": "saathi",
+      "provider": "codex",
+      "live": true,
+      "hasQuestion": true,
+      "followUp": false,
+      "relatedReports": 0,
+      "publicSources": []
+    },
+    {
+      "id": "e31537db-7511-406e-9f6b-310da8a26c56",
+      "agent": "drishti",
+      "provider": "codex",
+      "live": true,
+      "hasQuestion": false,
+      "followUp": true,
+      "relatedReports": 4,
+      "publicSources": []
+    },
+    {
+      "id": "690d5129-003c-445e-a7b6-b86f8a4e3eec",
+      "agent": "disha",
+      "provider": "codex",
+      "live": true,
+      "hasQuestion": true,
+      "followUp": true,
+      "relatedReports": 4,
+      "publicSources": [
+        {
+          "url": "https://consumerhelpline.gov.in/",
+          "live": true,
+          "bodyRead": true
+        },
+        {
+          "url": "https://consumerhelpline.gov.in/public/about",
+          "live": true,
+          "bodyRead": false
+        },
+        {
+          "url": "https://consumerhelpline.gov.in/public/otherdeptgrievancesportal",
+          "live": true,
+          "bodyRead": false
+        }
+      ]
+    }
+  ],
+  "publicWebJobs": [
+    {
+      "operation": "search_public_web",
+      "status": "ready",
+      "errorCode": null,
+      "adapter": {
+        "provider": "exa",
+        "version": "exa-js@2.25.0",
+        "live": true
+      }
+    },
+    {
+      "operation": "fetch_public_page",
+      "status": "ready",
+      "errorCode": null,
+      "adapter": {
+        "provider": "firecrawl",
+        "version": "firecrawl@4.46.0",
+        "live": true
+      }
+    }
+  ],
+  "browserChecks": {
+    "mcqSaved": true,
+    "differentNameContactMatch": true,
+    "filteredImageLoaded": true,
+    "trackingVideo": {
+      "duration": 5,
+      "playedThrough": true,
+      "error": null
+    },
+    "reportedAliasImageLoaded": true,
+    "inlineOfficialSourceLink": true,
+    "responsive": {
+      "desktop": "inspected and confirmed",
+      "mobile": "inspected and confirmed; no horizontal page overflow at observed 410 CSS px",
+      "readingPositionRegression": "passed",
+      "viewportOverride": "cleared"
+    }
+  },
+  "scope": {
+    "retrieval": "FalkorDB parameterized contact/pattern traversal + canonical MongoDB validation + role-bound generation",
+    "officialGraphRagSdk": false,
+    "privacy": "Per-report profile removal from authored catalogue; real reports require reviewed publication",
+    "aliasImage": "Original illustration, identity unverified",
+    "video": "Authored visual reconstruction",
+    "privateMapsAndReviewedExports": "Deferred"
+  },
+  "automatedChecks": {
+    "frontendFull": {
+      "files": 31,
+      "tests": 179,
+      "status": "passed"
+    },
+    "frontendFinalFocused": {
+      "files": 3,
+      "tests": 21,
+      "status": "passed"
+    },
+    "backend": {
+      "files": 23,
+      "tests": 123,
+      "status": "passed"
+    },
+    "python": {
+      "tests": 132,
+      "status": "passed"
+    },
+    "integration": {
+      "files": 3,
+      "tests": 49,
+      "status": "passed"
+    },
+    "typecheck": "passed",
+    "lint": "passed",
+    "productionBuild": "passed",
+    "diffCheck": "passed",
+    "impeccable": {
+      "version": "4.6.0",
+      "changedUiFindings": 0
+    }
+  },
+  "screenshots": [
+    "docs/design/demo-chat-desktop.png",
+    "docs/design/demo-chat-mobile.png"
+  ],
+  "completedAt": "2026-10-17T21:21:00.879Z"
+}

@@ -58,12 +58,12 @@ describe("saved chat integration", () => {
     await act(async () => acceptance.resolve(saved));
     expect(screen.getByRole("button", { name: "Extract proposals" })).toHaveFocus();
     expect(screen.getByText("Saathi · authored fixture · accepted by you")).toBeVisible();
-    expect(screen.queryByRole("button", { name: "Find similar examples" })).not.toBeInTheDocument();
+    expect(screen.queryByRole("button", { name: "Find related reports" })).not.toBeInTheDocument();
     expect(gateway.confirm).not.toHaveBeenCalled();
     await user.click(screen.getByRole("checkbox", { name: "These details match what I want to say." }));
     vi.mocked(gateway.confirm).mockResolvedValue({ ...saved, confirmation: { revision: 2, kind: "user_confirmed" } });
     await user.click(screen.getByRole("button", { name: "Confirm my notes" }));
-    expect(await screen.findByRole("button", { name: "Find similar examples" })).toBeEnabled();
+    expect(await screen.findByRole("button", { name: "Find related reports" })).toBeEnabled();
     expect(gateway.confirm).toHaveBeenCalledWith(original._id, 2);
   });
   it("restores exact words, waits for saved corrections and confirmation, and restores edit focus", async () => {
@@ -85,9 +85,9 @@ describe("saved chat integration", () => {
     expect(screen.getByRole("button", { name: "Edit Amount" })).toHaveFocus();
     await user.click(screen.getByRole("checkbox", { name: "These details match what I want to say." }));
     await user.click(screen.getByRole("button", { name: "Confirm my notes" }));
-    expect(screen.queryByRole("button", { name: "Find similar examples" })).not.toBeInTheDocument();
+    expect(screen.queryByRole("button", { name: "Find related reports" })).not.toBeInTheDocument();
     await act(async () => confirmation.resolve({ ...corrected, confirmation: { revision: 2, kind: "user_confirmed" } }));
-    expect(screen.getByRole("button", { name: "Find similar examples" })).toBeEnabled();
+    expect(screen.getByRole("button", { name: "Find related reports" })).toBeEnabled();
     expect(gateway.confirm).toHaveBeenCalledWith(report._id, 2);
   }, 15000);
   it("keeps a failed message draft and retries the same creation request", async () => {
@@ -128,7 +128,7 @@ describe("saved chat integration", () => {
     const user = userEvent.setup(); const gateway = reportGateway(); vi.mocked(gateway.restore).mockResolvedValue(confirmedReport());
     const { container } = render(<Storyroom api={gateway} agentTasksApi={agentGateway()} />);
     await user.click(await screen.findByRole("button", { name: "See what matches" }));
-    expect(screen.getByText(/There are no confirmed pattern details/)).toBeInTheDocument();
+    expect(screen.getByText(/There are no confirmed pattern or identifier details/)).toBeInTheDocument();
     expect(screen.queryByText("Example 1 + Example 2")).not.toBeInTheDocument();
     expect((await axe.run(container, { rules: { "color-contrast": { enabled: false } } })).violations.map(item => item.id)).toEqual([]);
   }, 10000);

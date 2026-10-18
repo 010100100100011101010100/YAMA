@@ -39,6 +39,7 @@ export class IntelligenceService {
           config.graphHost,
           config.graphPort,
           config.graphPassword,
+          { username: config.graphUsername, tls: config.graphTls },
         );
       try {
         return await getConnections(

@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="1040" viewBox="0 0 1120 1040" role="img" aria-labelledby="title desc">
+  <title id="title">Yama: where a graph-grounded reply comes from</title>
+  <desc id="desc">A user confirms Saathi's source-linked draft. MongoDB saves the canonical revision and an outbox job. The graph worker projects it into the owner's private FalkorDB graph. The official GraphRAG SDK queries the separate published synthetic catalogue through exact details and optional narrative vectors. Canonical validation precedes a separate Drishti or Disha review. Attached cases enter reply generation; omitted cases do not enter that turn's retrieved context. MongoDB stores decisions and a versioned source receipt.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 8 4 0 8Z" fill="#a3b6a9"/></marker>
+    <marker id="green-arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 8 4 0 8Z" fill="#9cdda9"/></marker>
+    <style>
+      text{font-family:Arial,Helvetica,sans-serif;fill:#eef5ef;font-size:20px}
+      .title{font-size:30px;font-weight:700}.label{font-size:16px;letter-spacing:1.5px;fill:#b4c5b9}.head{font-size:22px;font-weight:700}.muted{fill:#b4c5b9;font-size:18px}.green{fill:#b5ebbf}.box{fill:#19241e;stroke:#4b6253;stroke-width:1.5}.edge{fill:none;stroke:#a3b6a9;stroke-width:2;marker-end:url(#arrow)}.active{fill:none;stroke:#9cdda9;stroke-width:2;marker-end:url(#green-arrow)}
+    </style>
+  </defs>
+  <rect width="1120" height="1040" rx="20" fill="#101813"/>
+  <text x="40" y="52" class="title">Where an agent's answer comes from</text>
+  <text x="40" y="84" class="muted">Confirmed sources → graph discovery → relevance review → source-linked reply</text>
+  <path d="M350 174H399" class="edge"/>
+  <path d="M715 174H764" class="edge"/>
+  <path d="M560 670V708" class="edge"/>
+  <path d="M800 769H838" class="edge"/>
+  <path d="M420 830V868" class="active"/>
+  <path d="M925 815V868" class="edge"/>
+  <path d="M800 800H820V850H960V868" class="edge"/>
+  <path d="M800 926H838" class="edge"/>
+  <rect x="40" y="118" width="310" height="112" rx="12" class="box"/>
+  <text x="60" y="148" class="label">01 / USER + SAATHI</text>
+  <text x="60" y="180" class="head">Review and confirm</text>
+  <text x="60" y="209" class="muted">Messages + reviewed evidence</text>
+  <rect x="405" y="118" width="310" height="112" rx="12" class="box"/>
+  <text x="425" y="148" class="label">02 / MONGODB</text>
+  <text x="425" y="180" class="head">Canonical revision</text>
+  <text x="425" y="209" class="muted">Immutable snapshot + outbox</text>
+  <rect x="770" y="118" width="310" height="112" rx="12" class="box"/>
+  <text x="790" y="148" class="label">03 / GRAPH WORKER</text>
+  <text x="790" y="180" class="head">Project confirmed data</text>
+  <text x="790" y="209" class="muted">Revision-bound, repeatable job</text>
+  <rect x="40" y="280" width="1040" height="250" rx="16" fill="#152c1e" stroke="#9cdda9" stroke-width="2"/>
+  <path d="M925 230V255H22V415H64" class="active"/>
+  <path d="M520 413H598" class="active"/>
+  <path d="M828 475V552H560V578" class="active"/>
+  <text x="66" y="316" class="head green">FALKORDB</text>
+  <text x="230" y="316" class="green">Central case-discovery engine</text>
+  <rect x="66" y="355" width="454" height="120" rx="10" fill="#1c3826" stroke="#6a9e77"/>
+  <text x="86" y="386" class="head">Private account graph</text>
+  <text x="86" y="418">ReportSnapshot → Assertion → SourceRange</text>
+  <text x="86" y="450" class="muted">Confirmed patterns + contact identifiers</text>
+  <text x="560" y="399" text-anchor="middle" class="label green">SDK</text>
+  <rect x="602" y="355" width="452" height="120" rx="10" fill="#1c3826" stroke="#6a9e77"/>
+  <text x="622" y="386" class="head">Published synthetic catalogue</text>
+  <text x="622" y="418">Case → shared detail / contact / pattern</text>
+  <text x="622" y="450" class="muted">Native index for local narrative vectors</text>
+  <text x="66" y="508" class="muted">Official GraphRAG SDK · fixed traversals · optional multilingual vector search</text>
+  <rect x="40" y="580" width="1040" height="90" rx="12" class="box"/>
+  <text x="60" y="613" class="head">04 / Validate the retrieved evidence</text>
+  <text x="60" y="646">Canonical versions + source paths + hashes + privacy disclosure</text>
+  <rect x="40" y="710" width="760" height="120" rx="12" class="box"/>
+  <text x="60" y="742" class="label">05 / DRISHTI OR DISHA — SEPARATE RELEVANCE REVIEW</text>
+  <text x="60" y="775" class="head">“Does this report help answer this user's question?”</text>
+  <text x="60" y="807" class="muted">Review up to 10 candidates · attach up to 5 · give a short reason for each</text>
+  <rect x="840" y="720" width="240" height="95" rx="12" fill="#2b241b" stroke="#b99d70"/>
+  <text x="860" y="750" class="head">OMIT</text>
+  <text x="860" y="778" class="muted">Outside this turn's</text>
+  <text x="860" y="802" class="muted">retrieved context</text>
+  <text x="438" y="855" class="label green">ATTACH</text>
+  <rect x="40" y="870" width="760" height="112" rx="12" fill="#1c3826" stroke="#9cdda9"/>
+  <text x="60" y="903" class="head green">06 / Generate, validate, and deliver the reply</text>
+  <text x="60" y="935">Selected cases + role policy + conversation + attributed guidance</text>
+  <text x="60" y="964" class="muted">Recheck freshness; show sources; permit the next agent's handoff</text>
+  <rect x="840" y="870" width="240" height="112" rx="12" class="box"/>
+  <text x="860" y="901" class="label">MONGODB AUDIT</text>
+  <text x="860" y="930">Review decisions</text>
+  <text x="860" y="959">+ versioned receipt</text>
+  <text x="40" y="1018" class="muted">One clue can retrieve a case. Review decides attachment. A match does not establish identity or guilt.</text>
+</svg>

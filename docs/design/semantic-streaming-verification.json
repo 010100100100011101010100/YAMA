@@ -1,0 +1,134 @@
+{
+  "checkedAt": "2026-10-18T07:20:11.969Z",
+  "model": "intfloat/multilingual-e5-small",
+  "revision": "614241f622f53c4eeff9890bdc4f31cfecc418b3",
+  "publishedVectors": 42,
+  "semanticOnlyProbes": [
+    {
+      "language": "en",
+      "first": "synthetic-demo-26-cyber-account-takeover",
+      "score": 0.8856353759765621,
+      "latencyMs": 23954
+    },
+    {
+      "language": "hi",
+      "first": "synthetic-demo-26-cyber-account-takeover",
+      "score": 0.8577308654785161,
+      "latencyMs": 17102
+    },
+    {
+      "language": "hinglish",
+      "first": "synthetic-demo-26-cyber-account-takeover",
+      "score": 0.85670530796051,
+      "latencyMs": 18550
+    }
+  ],
+  "liveReview": {
+    "reportId": "3f4223b5-c912-4667-9205-09b8df36d40e",
+    "turnId": "0469e2cb-4365-44d8-8e30-320e4417e529",
+    "discovered": 10,
+    "decisions": [
+      {
+        "id": "synthetic-demo-26-cyber-account-takeover",
+        "decision": "attach",
+        "reason": "Closely matches repair support, a recovery-email change, lost portfolio access and unauthorized client payment requests. Preserved notifications and account history are relevant; no shared contact or identity is established, and recovery remains unresolved.",
+        "version": "003aaea81ea098ff1081b06d7aa87dc9efdf09368a292fa29a647f44991f3d01"
+      },
+      {
+        "id": "synthetic-demo-32-cyber-doxing-hate",
+        "decision": "omit",
+        "reason": "Concerns doxing and targeted abuse, with no reported account takeover or recovery-email change.",
+        "version": "b9d32216309bed9ef3dd7bd0d9ca76e9b4c11098c3d71bb58d1d3d2b9f72bf4b"
+      },
+      {
+        "id": "synthetic-demo-24-control-uncertain",
+        "decision": "omit",
+        "reason": "Concerns an uncertain forwarded investment screenshot, with no lost account access.",
+        "version": "e258a7435731a2e1f64fa1b6d4e7df6a2159ef2b80f63b837adb02568673bdb4"
+      },
+      {
+        "id": "synthetic-demo-12-investment-independent",
+        "decision": "omit",
+        "reason": "Concerns blocked investment withdrawals and replacement support, not loss of account access through a recovery change.",
+        "version": "d142094b76228e1e2073a362a6d7600c0b8fa547340482ed0b56267be4b37a6f"
+      },
+      {
+        "id": "synthetic-demo-38-bullying-copied-alias",
+        "decision": "omit",
+        "reason": "Concerns harassment and an unverified copied name, with no relevant account-access event.",
+        "version": "e76ccce2d016b6ed05505f0bfa0b21e28a3ae5a96d614cc5e4270fada516624f"
+      },
+      {
+        "id": "synthetic-demo-27-bullying-rating-group",
+        "decision": "omit",
+        "reason": "Concerns group harassment after a complaint, not account takeover or unauthorized client requests.",
+        "version": "e1993a4683d31a45f6fd1535598b97f1349a7e140aebcdc24381671e528a9299"
+      },
+      {
+        "id": "synthetic-demo-23-control-corrected",
+        "decision": "omit",
+        "reason": "Concerns corrected seller attribution and completed delivery, with no account compromise.",
+        "version": "2e10cbd58eff7064897bb92efcb04eedba2975e1515afde985588fe57cae938f"
+      },
+      {
+        "id": "synthetic-demo-37-bullying-witness-pressure",
+        "decision": "omit",
+        "reason": "Concerns workplace intimidation, with no account-access loss or recovery change.",
+        "version": "d3044034444d480b2d8db8c2b4cd356f7fd506a35595972259ab54baea662e14"
+      },
+      {
+        "id": "synthetic-demo-33-hate-rental-pressure",
+        "decision": "omit",
+        "reason": "Concerns discriminatory rental targeting and misleading attribution, not account takeover.",
+        "version": "97ffb46a348efe3960687dae6756488d771de5b5e4bf7372970544ff4e7e22e6"
+      },
+      {
+        "id": "synthetic-demo-21-control-delivered",
+        "decision": "omit",
+        "reason": "Concerns a delayed laptop that was delivered, with no account compromise or unauthorized payment requests.",
+        "version": "68d63c286815d82efe2a247f899453850c84f1b39e2758fb82c6e5ca08f58951"
+      }
+    ],
+    "receipt": {
+      "recipe": "confirmed-pattern-sources-v1",
+      "revision": 1,
+      "cases": [
+        {
+          "id": "synthetic-demo-26-cyber-account-takeover",
+          "version": "003aaea81ea098ff1081b06d7aa87dc9efdf09368a292fa29a647f44991f3d01"
+        }
+      ]
+    },
+    "status": "delivered",
+    "streamed": true
+  },
+  "voice": {
+    "liveSarvam": "awaiting account-control confirmation",
+    "offlineSdkTests": 7,
+    "localTransportAndPlayoutTests": 11
+  },
+  "streaming": {
+    "provider": "codex-session",
+    "previewUpdates": 30,
+    "ready": "2026-10-18T07:17:54.982Z",
+    "delivered": "2026-10-18T07:17:55.765Z",
+    "sourceAttachmentOpened": true,
+    "sourceHttpSeedForwardingRegression": "passed"
+  },
+  "validation": {
+    "frontend": 185,
+    "backend": 134,
+    "python": 139,
+    "graphSdk": 5,
+    "dialogueAndCasesIntegration": 36,
+    "localVoiceIntegration": 11,
+    "voiceSdk": 7,
+    "typecheck": "passed",
+    "lint": "passed",
+    "productionBuild": "passed",
+    "browser": {
+      "desktop": "semantic-chat-desktop.png",
+      "mobile": "semantic-chat-mobile.png"
+    }
+  }
+}

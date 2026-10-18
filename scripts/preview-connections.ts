@@ -4,15 +4,15 @@ import { spawn, type ChildProcess } from "node:child_process";
 import { randomUUID } from "node:crypto";
 import { MongoClient } from "mongodb";
 import { initializeSchema } from "../src/server/database/schema";
-import { getServerConfig } from "../src/server/config";
+import { parseServerConfig } from "../src/server/config";
 import { connectGraph } from "../src/server/database/graph-client";
 import { GraphStore, syntheticCatalogue } from "../src/server/database/graph";
 
-const config = getServerConfig(), namespace = `yama_connection_preview_${randomUUID().replaceAll("-", "").slice(0, 16)}`;
+const config = parseServerConfig({ ...process.env, YAMA_GRAPH_TARGET: "local" }), namespace = `yama_connection_preview_${randomUUID().replaceAll("-", "").slice(0, 16)}`;
 const mongo = new MongoClient("mongodb://127.0.0.1:27018/?replicaSet=yama-rs&directConnection=true", {
   auth: { username: "yama_root", password: process.env.MONGO_ROOT_PASSWORD! }, authSource: "admin" });
 const children: ChildProcess[] = [];
-const environment = { ...process.env, APP_ORIGIN: "http://localhost:4100", MONGODB_DATABASE: namespace,
+const environment = { ...process.env, YAMA_GRAPH_TARGET: "local", APP_ORIGIN: "http://localhost:4100", MONGODB_DATABASE: namespace,
   MONGODB_URI: `mongodb://yama_root:${encodeURIComponent(process.env.MONGO_ROOT_PASSWORD!)}@127.0.0.1:27018/?replicaSet=yama-rs&directConnection=true&authSource=admin`,
   YAMA_TEXT_PROVIDER: "fixture", YAMA_MODEL_LIVE_ENABLED: "false", YAMA_LANGFUSE_ENABLED: "false", YAMA_VOICE_LIVE_ENABLED: "false" };
 let stopping = false;

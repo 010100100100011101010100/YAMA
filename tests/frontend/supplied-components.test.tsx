@@ -34,6 +34,22 @@ describe("supplied BeautifulUI components", () => {
     expect(screen.getByText(/Keep the date uncertain/)).toBeVisible();
     expect(screen.queryByRole("button", { name: "Stop reply" })).not.toBeInTheDocument();
   });
+  it("reveals a new validated reply once, allows immediate reading and acknowledges completion once", () => {
+    vi.useFakeTimers();
+    try {
+      const done = vi.fn(), text = "मेरी बात\nKeep my original words.";
+      const { rerender } = render(<StreamingText text={text} reveal onDone={done} />);
+      expect(done).not.toHaveBeenCalled();
+      act(() => vi.advanceTimersByTime(55));
+      expect(screen.getByText(/मेरी/)).not.toHaveTextContent("Keep my original words.");
+      fireEvent.click(screen.getByRole("button", { name: "Show full reply" }));
+      expect(screen.getByText(/Keep my original words/).textContent).toBe(text);
+      expect(done).toHaveBeenCalledOnce();
+      rerender(<StreamingText text={text} onDone={done} />);
+      act(() => vi.advanceTimersByTime(60_000));
+      expect(done).toHaveBeenCalledOnce();
+    } finally { vi.useRealTimers(); }
+  });
 
   it("requires an explicit approval and only displays confirmed state from the application", () => {
     const submit = vi.fn();

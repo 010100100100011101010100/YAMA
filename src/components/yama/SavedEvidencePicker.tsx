@@ -115,6 +115,7 @@ export default function SavedEvidencePicker({ reportId, inputRef, copy, language
       setFiles(current => current.filter(entry => entry.id !== file.id)); if (source?.evidenceId === file.id) setSource(null); returnFocus.current = file.id;
     }); }}><X size={17} /></Button></div>)}
     {source && <div className="source-inspection">
+      {files.some(file => file.id === source.evidenceId && ["png", "jpeg"].includes(file.format ?? "")) && <figure className="reply-evidence-image"><img src={`/api/reports/${reportId}/evidence/${source.evidenceId}/content`} alt={source.name} /><figcaption>{source.name}</figcaption></figure>}
       <label htmlFor="evidence-text"><strong>{text.title}</strong></label>
       {source.extraction?.pages.some(page => page.method === "ocr") && <p>{text.ocr}</p>}
       <textarea id="evidence-text" readOnly rows={8} value={source.text} className="w-full resize-y rounded-control bg-field p-3 text-ink" />

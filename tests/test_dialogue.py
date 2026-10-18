@@ -15,6 +15,37 @@ def bindings(agent='saathi', language='en', automatic=True, depth=0):
 
 
 class DialogueTests(unittest.IsolatedAsyncioTestCase):
+    async def test_synthetic_identifier_matches_and_reported_outcomes_are_grounded_for_both_specialists(self):
+        from copy import deepcopy
+        source_id = '550e8400-e29b-41d4-a716-446655440000'
+        reference = {'messageId': source_id, 'start': 0, 'end': 24, 'quote': 'seller@synthetic.invalid'}
+        reference['end'] = len(reference['quote'])
+        candidate = {'title': 'Fictional report', 'shared': [], 'different': [], 'differences': [],
+            'harmCategories': ['sexual_molestation', 'bullying'],
+            'identifiers': [{'kind': 'email', 'value': reference['quote'], 'assertionIds': [source_id],
+                'quote': reference['quote'], 'source': {key: reference[key] for key in ('messageId', 'start', 'end')}, 'catalogueSource': reference}],
+            'resolution': {'status': 'partially_resolved', 'summary': 'The synthetic reporter said an account was blocked.',
+                'verification': 'synthetic_user_report', 'actions': [{'kind': 'account_blocked', 'description': 'Reported block',
+                    'date': '2026-10-01', 'sourceMessageId': source_id}]},
+            'evidence': [{'id': source_id, 'name': 'synthetic-screenshot.png', 'format': 'png', 'sha256': 'a' * 64}]}
+        for agent in ('drishti', 'disha'):
+            context = bindings(agent, automatic=False); context['confirmed'] = True
+            context['comparison'] = {'status': 'ready', 'revision': 2, 'recipe': 'confirmed-pattern-sources-v1',
+                'candidates': [candidate], 'blocked': [], 'linkage': 'not_assessed'}
+            await generate(context, FixtureDialogue())
+            for mutate in (
+                lambda value: value['resolution'].update(verification='police_verified'),
+                lambda value: value['evidence'][0].update(sha256='not-a-hash'),
+                lambda value: value['identifiers'][0].update(kind='password'),
+                lambda value: value['identifiers'][0]['catalogueSource'].update(end=999),
+                lambda value: value.update(privateVictimName='not authorized'),
+                lambda value: value.update(harmCategories=['unrecognized_offence']),
+                lambda value: value.update(harmCategories=['bullying', 'bullying']),
+                lambda value: value.update(fictionalActor={'name': 'Author-only answer key'}),
+            ):
+                invalid = deepcopy(context); mutate(invalid['comparison']['candidates'][0])
+                with self.assertRaises(BackendError): await generate(invalid, FixtureDialogue())
+
     async def test_named_recipient_gets_an_explicit_localized_saathi_bridge(self):
         for language in ('en', 'hi', 'hinglish'):
             context = bindings(language=language)
@@ -92,7 +123,7 @@ class DialogueTests(unittest.IsolatedAsyncioTestCase):
 
     async def test_openai_has_app_owned_history_strict_output_and_no_write_tools(self):
         client = SimpleNamespace(responses=SimpleNamespace(create=AsyncMock(return_value=SimpleNamespace(
-            status='completed', model='test-model', output=[], output_text='{"text":"What would you like to clarify?","handoff":null}', usage=None))))
+            status='completed', model='test-model', output=[], output_text='{"text":"What would you like to clarify?","handoff":null,"question":null}', usage=None))))
         model = OpenAIModel(ProviderConfig('private-test-key', 'test-model', 'https://api.openai.com/v1', 1000, 2), client=client)
         context = bindings('disha', 'hinglish')
         context['history'] = [{'agent': 'saathi', 'text': 'An earlier reply.'}]
@@ -118,7 +149,7 @@ class DialogueTests(unittest.IsolatedAsyncioTestCase):
         context = bindings('drishti')
         context['assertions'] = [{'field': 'amount', 'value': '₹2,000', 'originalValue': '₹1,000', 'included': False, 'polarity': 'contradicted'}]
         client = SimpleNamespace(responses=SimpleNamespace(create=AsyncMock(return_value=SimpleNamespace(
-            status='completed', model='test-model', output=[], output_text='{"text":"We need to review this uncertainty.","handoff":null}', usage=None))))
+            status='completed', model='test-model', output=[], output_text='{"text":"We need to review this uncertainty.","handoff":null,"question":null}', usage=None))))
         model = OpenAIModel(ProviderConfig('private-test-key', 'test-model', 'https://api.openai.com/v1', 1000, 2), client=client)
         await generate(context, model)
         import json

@@ -1,95 +1,180 @@
 # Yama
 
-An incident-intelligence platform built around **Narrate → Confirm → Connect → Understand → Act**. Saathi supports intake, Drishti explains possible connections, and Disha helps people choose next actions. Reports and connections are assertions with provenance, never findings of guilt.
+**Tell your story. Review the details. Find what connects. Choose your next step.**
 
-The first milestone is a low-cost **localhost demo using synthetic incidents**. Public launch is a separate stage. The Next.js chat connects to MongoDB/FalkorDB through authenticated APIs: narration, corrections, confirmation and catalogue comparisons survive refresh. Owned text/PDF/image evidence, local English/Hindi OCR and explicit source review are connected. The Python three-agent coordinator runs thirteen read/preview tools through the owned localhost gateway. Dated India assistance and private action review are implemented; see [the action-service contract](docs/assistance-actions.md). Saathi extraction has durable Mongo receipts and browser proposal review, with fixtures by default and an opt-in official OpenAI adapter plus metadata-only Langfuse. The chat also has durable three-agent text replies and delivery-bound handoffs in English, Hindi and Hinglish. Source-linked Connections and grounded Drishti replies are implemented; see [the contract and architecture](docs/connection-explanations.md). Sarvam/LiveKit voice is implemented with explicit transcript review and playback-bound handoffs; live provider auditions await keys. See [voice setup and limits](docs/voice-integration.md). Exa/Firecrawl public lookup is implemented through owned API jobs and the specialist dispatcher, using authored fixtures by default; autonomous chat browsing is not enabled. See [public lookup setup and limits](docs/public-web.md). The [notification service](docs/notifications.md) now implements fixed previews, explicit approval, Resend/Nodemailer adapters and durable capture-only jobs. Maps and reviewed exports are deferred; payments are the next increment.
+Yama helps someone work through a scam, harassment, bullying, or another harmful experience in one shared conversation. **Saathi** helps them explain what happened, **Drishti** looks for useful connections with other reports, and **Disha** helps them consider next steps. They can address an agent directly or let the agents hand the conversation to each other, in English, Hindi, or Hinglish.
 
-UI credits: [BeautifulUI](https://www.beautifului.dev/) for the chat and AI primitives, [Aceternity UI](https://ui.aceternity.com/components/magnetic-button) for the button styling, and [Rare UI](https://rareui.com) by Swami Malode for Folder and Matrix Orb. Rare UI copyright (c) 2026 Swami Malode; its MIT + Commons Clause + Attribution notice is preserved in `licenses/RareUI.txt`. [Selected components, locations, source snapshots, and checks](docs/design/action-components/README.md).
+**FalkorDB is the case-discovery engine at the centre of Yama.** Its graph supplies the relationships and retrieved reports that agents can review and cite. MongoDB keeps the original accounts, evidence metadata, confirmations, conversations, and decision receipts. A graph match is a lead to examine, never a finding of identity or guilt.
 
-Use Node 24 (`.nvmrc`), then:
+Current stage: a **private localhost demo with synthetic incidents**. This repository does not yet provide a public service for real reports.
+
+## How the graph informs an agent's answer
+
+![How a confirmed account becomes a graph-grounded agent reply](docs/diagrams/graph-decision-flow.svg)
+
+1. **Saathi helps prepare the account.** Original messages and reviewed evidence retain their source references. Extracted details are proposals until the user accepts them; only the user confirms the account revision.
+2. **The graph worker projects that confirmed revision into FalkorDB.** Assertions point back to exact message ranges and evidence hashes. Private graphs are separated by account.
+3. **The official GraphRAG SDK retrieves candidates.** The server reads confirmed graph seeds and queries the published synthetic catalogue. One supported contact, amount, item, reported alias, or supported pattern can be enough for discovery. Optional multilingual vector search also finds similar narratives without a literal shared key.
+4. **The connection service checks the evidence.** Graph paths, canonical records, content versions, and semantic hashes must agree. Reporter profiles and contacts the user did not already supply are withheld from the comparison.
+5. **Drishti or Disha makes a separate relevance decision.** For every retrieved candidate, the role-bound reviewer returns `attach` or `omit` with a short reason. At most ten candidates are reviewed and at most five enter the reply context. A failed review does not attach everything by default.
+6. **The selected agent writes a source-linked reply.** Selected candidate records enter that reply's comparison context. The server stores review decisions and a versioned connection receipt; delivery rechecks freshness. Corrections require a new confirmation before fresh comparisons.
+
+The graph determines **what can be retrieved and supported**. The model decides **what is relevant to the question and how to explain it**, under its role policy and server validation. Saathi's intake replies do not require a graph search; Disha can also use dated assistance guidance and separately attributed public sources. General advice is not evidence of a case connection.
+
+### A concrete example from the demo graph
+
+![Four synthetic reports connected through one shared phone identifier in FalkorDB](docs/diagrams/shared-contact-graph.svg)
+
+A new account gives a different seller name but includes the fictional phone number **+1 202 555 0101**. Four catalogue reports connect to that `Identifier`: a laptop purchase, a camera deposit, a tablet purchase, and a portfolio account takeover. The phone alone retrieves all four; a shared seller name is unnecessary.
+
+For a question only about purchase losses, the reviewer can omit the account-takeover report even though the phone matches. For lost account access, narrative similarity can retrieve that report even without the phone. **Retrieval and attachment are separate decisions.**
+
+The [read-only cloud subgraph check](docs/design/readme-graph-verification.json) verifies the diagram's four phone matches, two weak-detail edges, and 42 current published vectors. Recorded live synthetic runs demonstrate the relevance decisions:
+
+- [Exact-detail run](docs/design/graphrag-sdk-verification.json): one phone retrieved four reports; a purchase-focused review attached three of five discovered candidates and omitted two.
+- [Semantic run](docs/design/semantic-streaming-verification.json): 42 published vectors; the intended account-takeover report ranked first for English, Hindi, and Hinglish probes without an exact shared key. A live review attached one of ten candidates before a streamed reply.
+
+See [the graph schema, decision trail, and read-only Cypher examples](docs/graph-and-agent-decisions.md). These diagrams describe the implemented retrieval path and a bounded synthetic subgraph; they are not an interactive private case-map feature.
+
+## The three agents
+
+| Agent | Responsibility | Information sources |
+| --- | --- | --- |
+| **Saathi** | Listen, clarify, propose details, and route requests | User messages, reviewed evidence, source-linked proposals, and conversation |
+| **Drishti** | Explain relevant reports, matches, differences, and uncertainty | Confirmed FalkorDB results, canonical source checks, and reviewed candidates |
+| **Disha** | Discuss next steps and recorded outcomes | Reviewed graph comparisons, dated assistance, and public sources when available |
+
+All three share a conversation and can request handoffs. `@Drishti` addresses Drishti directly; naming an agent in prose routes through Saathi's explicit transfer. The server controls turns, cancellation, permissions, and delivery. Only the user marks a chat resolved or reopens it.
+
+Role instructions: [Saathi](agents/saathi/SKILL.md), [Drishti](agents/drishti/SKILL.md), [Disha](agents/disha/SKILL.md). See [orchestration and shared policies](docs/agent-orchestration.md).
+
+## What is implemented
+
+| Area | Current behaviour / limits |
+| --- | --- |
+| Chat | Persistent shared conversation, agent addressing, handoffs, typing states, provider streaming, and source previews |
+| Reports | Source-linked assertions, corrections, immutable revisions, explicit confirmation, and owner-scoped access |
+| Evidence | Private files, SHA-256, bounded text/PDF/image extraction, local English/Hindi OCR, and review before adding draft text |
+| GraphRAG | Official FalkorDB SDK, exact-detail and optional local multilingual vector retrieval, and candidate review; no automatic ontology discovery |
+| Demo cases | 40 authored reports across seven harm categories plus two baseline fixtures; recurring fictional actors and false-link controls |
+| Text models | Fixtures by default; opt-in OpenAI API; signed-in Codex adapter for the private synthetic localhost demo only |
+| Voice | Sarvam STT/TTS and LiveKit implemented, transcript review and playback-bound handoffs; disabled pending live Sarvam verification |
+| Public lookup | Exa search and Firecrawl page reading, attributed sources and bounded jobs; fixtures by default |
+| Email / monitoring | Resend with optional Nodemailer fallback and metadata-only Langfuse adapters; live account verification remains separate |
+| Payments | Dodo test-checkout backend, verified webhook inbox, and credit ledger; browser checkout and actual advanced paid analysis pending |
+
+Voice prepares short audio replies before playback and requires transcript review. It is not yet a seamless duplex conference call. Two female voices and one male voice are configured. The account owner reports model training disabled, but Sarvam retention remains unverified; it must not be described as zero retention.
+
+Private visual maps, reviewed PDF/DOCX exports, DigiLocker/police partnerships, and public launch remain deferred. The commercial proposal is approximately 30% of advanced details free, then $10 for ten more. Current entitlement content is synthetic test material, not something to sell. Essential assistance and private victim information stay outside the paywall.
+
+## Architecture
+
+| Layer | Technology / responsibility |
+| --- | --- |
+| Application | Next.js 16 App Router, React, TypeScript, Tailwind CSS, Motion |
+| Identity and transactions | Better Auth and a MongoDB replica set |
+| Case graph | FalkorDB private account graphs and a separate published synthetic catalogue |
+| Retrieval | `graphrag-sdk==1.4.0`, fixed parameterised traversals, native FalkorDB vector index |
+| Local embeddings | Pinned `intfloat/multilingual-e5-small`, 384 dimensions, CPU inference; no embedding API key |
+| Agents | Python coordinator, role skills, bounded provider adapters, MongoDB jobs and receipts |
+| Voice | Sarvam Saaras v4 / Bulbul v3, local LiveKit, separate Python voice worker |
+| Optional services | Exa, Firecrawl, Resend/Nodemailer, Langfuse, Dodo test mode |
+
+MongoDB is the canonical record store. FalkorDB is a rebuildable but central retrieval projection: confirmed assertions and provenance are queryable there, while uploads, chat history, auth, billing, and decision receipts stay in their appropriate stores. Real private reports are **not** automatically published into cross-account discovery. The catalogue's `AUTHORED_ACTOR` edges are an evaluation answer key, excluded from runtime matching and model context.
+
+Workers are long-lived processes. Deploying the Next.js frontend to Vercel alone will not provision the workers, Python runtime, local embedding model, or private storage.
+
+## Run the localhost demo
+
+Use **Node 24** (`.nvmrc`), **Python 3.11+**, and compatible Colima/Lima/Docker/Compose tools. Local container binaries are ignored. GraphRAG dependencies may require C++ build tools. Credentials belong server-side in the ignored `.env.local`.
 
 ```sh
 npm ci
+
+# Generate local secrets before SDK setup; preserve an existing .env.local.
 npm run db:setup
 npm run db:up
+npm run agents:setup
+sh scripts/setup-graphrag.sh
 npm run evidence:setup
 npm run db:init
+npm run db:seed-demo
+
+# Optional: download the pinned local model and index the published catalogue.
+.venv-graphrag/bin/python scripts/setup-semantic.py
+npm run db:index-semantic
+
 npm run dev
-# In separate terminals:
+```
+
+Run these in separate terminals:
+
+```sh
 npm run worker:graph
 npm run worker:evidence
 npm run worker:agents
 ```
 
-Open `http://127.0.0.1:3000`. Begin with **Try an example**, correct the proposed amount, explicitly confirm your notes, then run the comparison. The example's proposals are authored fixtures, not AI extraction. Arbitrary narration is saved verbatim. For fixture extraction, open **Check my notes → Add extraction example → Extract proposals**, inspect the original quotes, select details and acknowledge before adding them. Acceptance creates a draft; confirm it separately before comparison. Extraction tasks survive refresh and support cancellation. An opt-in OpenAI extraction adapter is implemented; keys and live account verification can be added later. See [provider setup and limits](docs/openai-extraction.md) and [text dialogue/handoffs](docs/text-dialogue.md). Send fictional narration to try the authored three-agent reply chain, or select an agent and turn off automatic handoffs in Options for one reply. In **Files**, upload a fictional PDF/PNG/JPEG (5 MB maximum) or UTF-8 `.txt` (64 KB). PDFs are limited to three pages, images to eight megapixels and extracted text to 6,000 characters. PDF/image processing runs in a local isolated worker with English/Hindi OCR. Read and compare its text with the original, then explicitly add it as a draft note. Adding reviewed text clears confirmation; uploading alone does not. Refresh restores the latest owned report and its file metadata, and rechecks confirmed graph results. Assistant replies, active agent, language and handoff preferences survive refresh. Unsent drafts stay in the current tab. Session expiry or lost cookies can make earlier reports inaccessible; account recovery is a separate stage. Voice remains disabled until Sarvam setup is explicitly enabled. Its connected flow reviews transcribed words before saving and completes agent handoffs after actual playback. See [voice setup](docs/voice-integration.md).
+Open **http://127.0.0.1:3000**. Start with a fictional account from [the recording script](docs/demo-video-script.md), review **Your notes**, and confirm before asking Drishti for comparisons. **Ask a question** discusses the confirmed account; adding or correcting details creates a new draft revision. Uploading a file alone does not add its contents or confirm the account.
+
+Fixtures work without paid calls. For generated replies, configure [the OpenAI adapter](docs/openai-extraction.md) or [the local signed-in Codex adapter](docs/local-codex-provider.md). Codex consumes the existing account's allowance and must not be exposed in a public deployment.
+
+### Local or cloud FalkorDB
+
+Fresh setup uses local FalkorDB. Cloud mode explicitly selects server-side cloud credentials; it does not replace MongoDB or upload storage.
 
 ```sh
+# Read-only: inspect the active connection.
+npm run db:check-graph
+
+# Check saved cloud credentials without switching the active target.
+npm run db:check-graph -- --cloud
+
+npm run db:status
+npm run db:down
+```
+
+Set `YAMA_GRAPH_TARGET=cloud` only after configuring `YAMA_CLOUD_FALKORDB_*` and checking the instance's actual TLS setting. Restart the app and workers after changes. See [.env.example](.env.example) and [credentials and cloud selection](docs/credentials-setup.md). Never commit `.env.local`, API keys, passwords, native account sessions, or `.local` data.
+
+Optional setup: [voice](docs/voice-integration.md), [public lookup](docs/public-web.md), [notifications](docs/notifications.md), and [Dodo test billing](docs/billing.md). These have separate worker/configuration steps.
+
+## Verify changes
+
+```sh
+# TypeScript, lint, frontend/backend unit tests, and a production build.
 npm run check
-python3 scripts/check_frontend_contrast.py
+
+# Python coordinator/provider contracts; no paid calls.
+.venv/bin/python -m unittest discover -s tests -q
+.venv-graphrag/bin/python -m unittest discover -s tests/graphrag -q
+
+# Optional voice SDK checks after voice:setup; in-memory transports.
+npm run test:voice
 ```
 
-`check` runs TypeScript, ESLint, frontend/backend unit tests, and a production build. Browser unit tests use one worker to leave room for the local databases on an 8 GB laptop. Run the integration suite separately from `check`. See [Frontend milestone and verification limits](docs/frontend-milestone.md) and [Shared design rules](DESIGN.md).
-
-Use `npm run db:status` to check containers and `npm run db:down` to stop them while retaining their volumes. With initialized databases, the parser image and a fixture-mode dev server running, `npm run test:integration` exercises real MongoDB transactions, FalkorDB queries, isolated document parsers and authenticated HTTP sessions. Stop the graph, evidence, agent, voice, web, mail and billing workers during that suite; tests run their own workers. Keep the local LiveKit server running for the synthetic RTC test. See [runtime, architecture and recovery](docs/backend-architecture.md), [API contract](docs/backend-api.md), [document extraction](docs/document-evidence.md), and [next service sequence](docs/backend-services.md). The local container CLI binaries are ignored; compatible Colima/Lima/Docker/Compose tools must be installed on a fresh machine.
-
-- [Implementation plan](docs/implementation-plan.md)
-- [Evidence service contract and limitations](docs/evidence-service.md)
-- [PDF/image extraction, OCR and processing limits](docs/document-evidence.md)
-- [Three-agent roles, tools, handoffs, and conversation UX](docs/agent-orchestration.md)
-- [Authenticated agent dispatcher](docs/agent-dispatcher.md)
-- [Durable Saathi proposals and browser review](docs/agent-proposal-review.md)
-- [Selected providers, DigiLocker research, and service functions](docs/third-party-services.md)
-- [Proposed agent tools, maps, reports, and export UX](docs/agent-tool-catalogue.md)
-- [Editable agent/tool architecture map](docs/design/yama-tool-map.excalidraw)
-- [Integration status and verification](docs/tooling.md)
-- [Component source review](docs/component-review.md)
-- [ASCII Magic artwork check](assets/artwork-check/README.md)
-- [Wireframe brief](docs/wireframe-brief.md)
-- [Current chat/conference design](DESIGN.md)
-- [Chat and voice screenshots](docs/design/chat-redesign/README.md)
-- [Earlier Storyroom visual proposal](docs/visual-direction-v3.md)
-- [Previous visual direction studies](docs/visual-direction-v2.md)
-- [First UX proposal and journey reasoning](docs/ux-direction.md)
-- [Editable Excalidraw wireframes](docs/design/yama-wireframes.excalidraw)
-- [Design-preview checks](docs/design-preview-verification.json)
-- [Verification matrix](docs/verification-matrix.md)
-- [Original product context](docs/product-context.txt)
-
-Build order: fixture frontend → MongoDB + FalkorDB and core backend → frontend persistence adapter (complete) → evidence/agent services → live integrations, exports and sandbox payments. The user moved work to the database/backend stage on 2026-10-08 and selected MongoDB in place of PostgreSQL. The user authorized official Excalidraw as the sketching fallback on 2026-10-07. Tests accompany each implemented stage.
-
-Run the public beUI MCP check with Python 3.11 or newer:
+Integration tests require initialized local databases, the parser image, and a fixture-mode app. Stop the regular graph, evidence, agent, voice, web, mail, and billing workers; tests drive their own workers. Keep local LiveKit running for synthetic transport checks. See [the demo test guide](docs/demo-testing.md):
 
 ```sh
-python3 scripts/check_beui.py
+# Application terminal:
+YAMA_TEXT_PROVIDER=fixture npm run dev
+
+# Test terminal; isolate graph tests from the cloud instance:
+YAMA_GRAPH_TARGET=local YAMA_TEXT_PROVIDER=fixture npm run test:integration
 ```
 
-This retrieves component metadata and source for inspection, checks MCP access, and writes `docs/beui-verification.json`. It neither installs components nor calls a paid API. The current frontend installs BeautifulUI Context Cards through the shadcn registry and adapts Prompt Bar from its inspected source. See the component review for provenance and modifications.
+Recorded checks and screenshots are dated evidence, not a guarantee that every provider is live: [GraphRAG](docs/design/graphrag-sdk-verification.json), [semantic retrieval and streaming](docs/design/semantic-streaming-verification.json), [desktop](docs/design/semantic-chat-desktop.png), and [mobile](docs/design/semantic-chat-mobile.png).
 
-Rebuild the editable synthetic board locally:
+## Read more
 
-```sh
-python3 scripts/design_board.py
-```
+- **Graph and decisions:** [schema and decision trail](docs/graph-and-agent-decisions.md), [SDK integration](docs/graphrag-sdk-integration.md), [semantic retrieval](docs/semantic-search-and-streaming.md), [connection explanations](docs/connection-explanations.md).
+- **Demo:** [recording story](docs/demo-video-script.md), [casebook](docs/demo-casebook.md), [seeding and matching](docs/synthetic-case-dataset.md), [walkthrough](docs/demo-walkthrough.md).
+- **Backend:** [architecture and recovery](docs/backend-architecture.md), [API contract](docs/backend-api.md), [service sequence](docs/backend-services.md), [document processing](docs/document-evidence.md).
+- **Agents:** [orchestration](docs/agent-orchestration.md), [dispatcher](docs/agent-dispatcher.md), [proposal review](docs/agent-proposal-review.md), [dialogue/handoffs](docs/text-dialogue.md), [assistance](docs/assistance-actions.md).
+- **Design:** [shared rules](DESIGN.md), [component sources](docs/component-review.md), [selected components](docs/design/action-components/README.md), [wireframe brief](docs/wireframe-brief.md), [editable wireframes](docs/design/yama-wireframes.excalidraw), [tool map](docs/design/yama-tool-map.excalidraw).
+- **Planning:** [implementation plan](docs/implementation-plan.md), [providers](docs/third-party-services.md), [proposed tools/maps/exports](docs/agent-tool-catalogue.md), [verification matrix](docs/verification-matrix.md), [original context](docs/product-context.txt).
 
-`--verify` checks the official Excalidraw MCP and records creation/edit/read-back results. `--share` additionally uploads the synthetic design board and returns an editable link. Both flags are explicit; the default only writes the local drawing.
+Before real reports: review safeguarding, child-consent workflows, access/recovery, retention/deletion, backups, India-only provider data handling, and production security. Current demo controls do not establish public-launch readiness.
 
-Exercise agent unit contracts locally (standard-library Python 3.11+; no credentials or provider calls):
+## Component and artwork credits
 
-```sh
-npm run test:agents
-# Optional official provider SDKs and offline transport/export tests:
-npm run agents:setup
-npm run test:providers
-python3 -m scripts.demo_agent_handoff --mode text
-python3 -m scripts.demo_agent_handoff --mode voice
-```
-
-The demos use scripted synthetic dialogue and the actual coordinator. Voice mode simulates playout completion; it does not record or play audio. Product-agent instructions live in `agents/saathi/SKILL.md`, `agents/drishti/SKILL.md`, and `agents/disha/SKILL.md`, with a shared policy and enforced capability allowlists.
-
-### Billing increment (2026-10-14)
-
-Dodo's pinned SDK, hosted test checkout, verified webhook inbox and account credit ledger are implemented. Fixtures are the default: no external payment requests or charges. Run `npm run billing:setup`, `npm run db:init`, then `npm run worker:billing`. The fixed offer is $10 USD for ten details; an owned fixture catalogue tests a 30% free allowance and one-credit unlocks. Existing reports, Connections and essential help stay free. Actual advanced intelligence, browser purchase controls and sandbox account verification remain pending. See [billing contract and setup](docs/billing.md). Private maps and reviewed PDF/DOCX exports remain deferred.
-
-### Shared-chat finishing (2026-10-14)
-
-The sidebar now opens saved chats, with red unresolved and green resolved states controlled by the user. All three agents share the conversation; actual handoffs remain visible in history. Agent info controls explain each role, and typing dots follow pending reply state. New chats create separate reports and unsent drafts stay with their chat within the current tab. See [frontend behaviour and verification](docs/frontend-chat-finishing.md).
+[BeautifulUI](https://www.beautifului.dev/) supplies the chat/AI primitives; [beUI](https://beui.dev/) informed discovery; [Aceternity UI](https://ui.aceternity.com/components/magnetic-button) supplies the adapted button style. Folder, Matrix Orb, Web Search, and Voice Note come from [Rare UI](https://rareui.com) by Swami Malode. Its MIT + Commons Clause + Attribution notice is preserved in [licenses/RareUI.txt](licenses/RareUI.txt). See [component review](docs/component-review.md) and [ASCII Magic artwork](assets/artwork-check/README.md) for provenance. Third-party notices apply to their respective assets/components; this README does not grant a new licence to the application.

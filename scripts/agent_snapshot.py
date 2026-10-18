@@ -16,6 +16,7 @@ from yama_agents.coordinator import AgentId
 from yama_agents.dispatcher import ToolDispatcher
 from yama_agents.fixture_model import FixtureModel
 from yama_agents.openai_model import OpenAIModel, ProviderConfig
+from yama_agents.codex_model import CodexConfig, CodexModel
 from yama_agents.observability import MetadataMonitor
 
 
@@ -37,10 +38,15 @@ async def extract(snapshot, adapter=None):
         config = ProviderConfig.from_env(os.environ)
         monitor = MetadataMonitor.from_env(os.environ)
         model = OpenAIModel(config, monitor=monitor)
+    elif adapter.get("provider") == "codex":
+        config = CodexConfig.from_env(os.environ)
+        model = CodexModel(config)
     if adapter != model.metadata:
         raise BackendError("provider_config_changed")
     try:
         dispatcher = await ToolDispatcher.bind(SnapshotBackend(snapshot), snapshot["_id"], model)
+        if adapter.get("provider") == "codex":
+            dispatcher.timeout_seconds = config.timeout_seconds + 10
         output = dispatcher.coordinator.begin_output(AgentId.SAATHI)
         task = await dispatcher.start(output, AgentId.SAATHI, "propose_draft_assertions", {})
         receipt = await dispatcher.execute(task)

@@ -57,7 +57,7 @@ export function createReportApi(): ReportApi {
   async function request(path: string, method = "GET", body?: unknown, signal?: AbortSignal, headers: Record<string, string> = {}) {
     try {
       const result = await fetch(path, { method, credentials: "same-origin", cache: "no-store",
-        signal: signal ? AbortSignal.any([signal, AbortSignal.timeout(10_000)]) : AbortSignal.timeout(10_000),
+        signal: signal ? AbortSignal.any([signal, AbortSignal.timeout(path.endsWith("/connections") ? 40_000 : 10_000)]) : AbortSignal.timeout(path.endsWith("/connections") ? 40_000 : 10_000),
         headers: { "Content-Type": "application/json", ...headers }, body: body === undefined ? undefined : JSON.stringify(body) });
       const payload: unknown = await result.json();
       if (!result.ok) {

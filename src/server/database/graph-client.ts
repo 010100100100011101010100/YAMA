@@ -8,12 +8,14 @@ export type GraphClient = Pick<FalkorDB, "selectGraph" | "list" | "close"> & { i
 // Native Node ESM and the test/Next bundlers unwrap this CommonJS default differently.
 const commands = "default" in commandModule ? commandModule.default as typeof commandModule : commandModule;
 
-export async function connectGraph(host: string, port: number, password: string): Promise<GraphClient> {
+export type GraphConnectionOptions = { username?: string; tls?: boolean };
+export async function connectGraph(host: string, port: number, password: string, options: GraphConnectionOptions = {}): Promise<GraphClient> {
   // Reuse FalkorDB's protocol/Graph implementation with bounded node-redis transport.
   // Its 6.8.0 factory emits connection errors before callers can register a listener.
   // Keep that package pinned while using these two internal transport exports.
-  const redis = createClient<{ falkordb: typeof commands }, RedisFunctions, RedisScripts, 2>({ modules: { falkordb: commands }, RESP: 2, password,
-    socket: { host, port, connectTimeout: 5000, socketTimeout: 5000, reconnectStrategy: false },
+  const redis = createClient<{ falkordb: typeof commands }, RedisFunctions, RedisScripts, 2>({ modules: { falkordb: commands }, RESP: 2, password, username: options.username,
+    socket: { host, port, connectTimeout: 5000, socketTimeout: 5000, reconnectStrategy: false,
+      ...(options.tls ? { tls: true, servername: host, rejectUnauthorized: true } : { tls: false }) },
     disableOfflineQueue: true, commandsQueueMaxLength: 100, pingInterval: 2500,
   });
   redis.on("error", () => { /* Fail through requests/jobs without logging query data. */ });

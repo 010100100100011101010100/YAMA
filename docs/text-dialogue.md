@@ -7,7 +7,7 @@ Implemented 2026-10-10 as increment **3c2**. The saved-report chat now generates
 1. Send fictional narration through the existing report API. Original words and assertion provenance remain separate from generated replies.
 2. Enqueue a reply against the current report revision and conversation version. The server assigns the turn ID, freezes provider configuration and binds the selected registered role. Starting again with the same request key cannot create another generation.
 3. The existing agent worker claims one extraction or dialogue job at a time. It loads the fixed role `SKILL.md` and shared policy, supplies a minimal owned-report context, and runs bounded Python IPC. No cookies, database credentials, provider-selected file paths or raw database access enter the child process.
-4. A ready reply appears through BeautifulUI's existing `StreamingText`. It is fully readable immediately; the interface does not simulate incremental provider tokens. A React effect acknowledges the completed DOM render, deferring delivery in hidden tabs. Delivery does not move keyboard focus or force scroll on a reader who moved away from the end.
+4. Live provider text arrives through an owned SSE observer into BeautifulUI's `StreamingText` while generation is running. OpenAI uses its official structured-output stream; the private Codex fallback uses native `item/agentMessage/delta` events in an ephemeral, tool-disabled app-server session. Only the partial JSON `text` field is exposed, with a held tail and reporter-detail filtering. Drafts have no source attachments, executable handoff or saved assistant-history entry. Completion validates the entire reply before committing it, then acknowledges the completed DOM render, deferring delivery in hidden tabs. A failed, canceled or stale draft is removed. Real streamed text does not replay the presentation reveal after completion. Delivery does not move keyboard focus or force scroll on a reader who moved away from the end.
 5. A validated handoff changes the foreground role only in the delivery transaction. The next reply is then queued using the same frozen provider settings. A chain is limited to **three replies / two handoffs** before returning control to the user.
 6. New narration, a report correction, manual role/language selection, stopping the reply or changing the handoff preference invalidates pending work. Late results cannot replace the current turn. Already delivered replies remain in history and show their original revision; earlier revisions are labelled accordingly.
 
@@ -32,7 +32,7 @@ This text operation connects shared own-report context and controlled handoff in
 | Automatic chain | At most 3 replies, then user control |
 | Reply text | 4,000 UTF-16 code units |
 | Serialized provider context | 24,000 UTF-16 code units; oversized context fails before reserving a call |
-| Worker lease / process deadline | 45 seconds / 25 seconds |
+| Worker lease / process deadline | 480 seconds / 25 seconds for OpenAI, configured Codex deadline plus process margin |
 | Provider deadline | Existing configurable 1–18 seconds; no SDK automatic retries |
 | Live cost | Shared lifetime OpenAI reservation budget with extraction; each speaker consumes one reservation |
 | Crash recovery | Fixtures may retry up to 3 attempts; an expired live claim fails as uncertain and is never automatically replayed |

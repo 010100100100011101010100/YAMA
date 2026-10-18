@@ -1,0 +1,28 @@
+{
+  "checkedAt": "2026-10-18T10:34:32.975Z",
+  "mode": "read-only",
+  "target": "cloud",
+  "syntheticOnly": true,
+  "sharedPhone": {
+    "key": "phone:+12025550101",
+    "cases": [
+      "synthetic-demo-01-gadget-laptop",
+      "synthetic-demo-02-gadget-camera",
+      "synthetic-demo-03-gadget-tablet",
+      "synthetic-demo-26-cyber-account-takeover"
+    ]
+  },
+  "weakDetails": [
+    {
+      "id": "synthetic-demo-01-gadget-laptop",
+      "key": "amount:18400"
+    },
+    {
+      "id": "synthetic-demo-26-cyber-account-takeover",
+      "key": "reported_alias:lex voss"
+    }
+  ],
+  "publishedVectors": 42,
+  "diagram": "../diagrams/shared-contact-graph.svg",
+  "decisions": "Prior live runs are linked separately; this check does not call a model or make attach/omit decisions."
+}

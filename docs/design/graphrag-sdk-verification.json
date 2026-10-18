@@ -1,0 +1,181 @@
+{
+  "checkedAt": "2026-10-17T21:45:50.015Z",
+  "sdk": "graphrag-sdk@1.4.0",
+  "target": "cloud",
+  "results": {
+    "phone": [
+      {
+        "id": "synthetic-demo-01-gadget-laptop",
+        "version": "edf911ac98f441c6091088ba19534c3439f4571e8cd022dddad97414736ef327",
+        "sharedPatterns": [],
+        "sharedIdentifiers": [
+          "phone:+12025550101"
+        ],
+        "sharedDetails": []
+      },
+      {
+        "id": "synthetic-demo-02-gadget-camera",
+        "version": "e32378b12ef79241976946dc76d7ca9525c5b4701bfa4a537d3c7ac07d36d407",
+        "sharedPatterns": [],
+        "sharedIdentifiers": [
+          "phone:+12025550101"
+        ],
+        "sharedDetails": []
+      },
+      {
+        "id": "synthetic-demo-03-gadget-tablet",
+        "version": "5d16e7473f8bdd343533bf4ce3b39d12db229193cc671b282093072f39f11faf",
+        "sharedPatterns": [],
+        "sharedIdentifiers": [
+          "phone:+12025550101"
+        ],
+        "sharedDetails": []
+      },
+      {
+        "id": "synthetic-demo-26-cyber-account-takeover",
+        "version": "003aaea81ea098ff1081b06d7aa87dc9efdf09368a292fa29a647f44991f3d01",
+        "sharedPatterns": [],
+        "sharedIdentifiers": [
+          "phone:+12025550101"
+        ],
+        "sharedDetails": []
+      }
+    ],
+    "amount": [
+      {
+        "id": "synthetic-demo-01-gadget-laptop",
+        "version": "edf911ac98f441c6091088ba19534c3439f4571e8cd022dddad97414736ef327",
+        "sharedPatterns": [],
+        "sharedIdentifiers": [],
+        "sharedDetails": [
+          "amount:18400"
+        ]
+      }
+    ],
+    "alias": [
+      {
+        "id": "synthetic-demo-26-cyber-account-takeover",
+        "version": "003aaea81ea098ff1081b06d7aa87dc9efdf09368a292fa29a647f44991f3d01",
+        "sharedPatterns": [],
+        "sharedIdentifiers": [],
+        "sharedDetails": [
+          "reported_alias:lex voss"
+        ]
+      }
+    ]
+  },
+  "liveReview": {
+    "checkedAt": "2026-10-17T22:03:14.442Z",
+    "reportId": "6b56673a-29f5-4ef1-a55b-dc37e2ed68ff",
+    "revision": 2,
+    "turnId": "a00a87d9-1e4d-4481-9674-24af690aaf81",
+    "agent": "drishti",
+    "provider": "codex",
+    "status": "delivered",
+    "discovered": 5,
+    "attached": 3,
+    "omitted": 2,
+    "decisions": [
+      {
+        "id": "synthetic-demo-02-gadget-camera",
+        "decision": "attach",
+        "reason": "Purchase with matching contacts. Reported recovered: INR0; outstanding: INR7200. The INR1800 was requested, not established as paid.",
+        "version": "e32378b12ef79241976946dc76d7ca9525c5b4701bfa4a537d3c7ac07d36d407"
+      },
+      {
+        "id": "synthetic-demo-01-gadget-laptop",
+        "decision": "attach",
+        "reason": "Purchase with matching contacts. Reported recovered: INR18400; outstanding: INR0.",
+        "version": "edf911ac98f441c6091088ba19534c3439f4571e8cd022dddad97414736ef327"
+      },
+      {
+        "id": "synthetic-demo-03-gadget-tablet",
+        "decision": "attach",
+        "reason": "Purchase with matching contacts. Reported recovered: INR3000; outstanding: INR6600, still under review.",
+        "version": "5d16e7473f8bdd343533bf4ce3b39d12db229193cc671b282093072f39f11faf"
+      },
+      {
+        "id": "synthetic-demo-26-cyber-account-takeover",
+        "decision": "omit",
+        "reason": "Account-access incident, explicitly excluded from this comparison.",
+        "version": "003aaea81ea098ff1081b06d7aa87dc9efdf09368a292fa29a647f44991f3d01"
+      },
+      {
+        "id": "synthetic-demo-17-rental-deposit",
+        "decision": "omit",
+        "reason": "Rental viewing deposit, outside purchase payments; only the requested INR1800 amount matches.",
+        "version": "095cf9d2198813ed8e43717adc233f39fafed85806242a8b7dda84bf4416d394"
+      }
+    ],
+    "receipt": {
+      "recipe": "confirmed-pattern-sources-v1",
+      "revision": 2,
+      "cases": [
+        {
+          "id": "synthetic-demo-02-gadget-camera",
+          "version": "e32378b12ef79241976946dc76d7ca9525c5b4701bfa4a537d3c7ac07d36d407"
+        },
+        {
+          "id": "synthetic-demo-01-gadget-laptop",
+          "version": "edf911ac98f441c6091088ba19534c3439f4571e8cd022dddad97414736ef327"
+        },
+        {
+          "id": "synthetic-demo-03-gadget-tablet",
+          "version": "5d16e7473f8bdd343533bf4ce3b39d12db229193cc671b282093072f39f11faf"
+        }
+      ]
+    }
+  },
+  "scope": {
+    "officialSdk": true,
+    "strategy": "indexed custom RetrievalStrategy",
+    "semanticVectorSearch": false,
+    "automaticOntologyDiscovery": false,
+    "oneSupportedDetailCanRetrieve": true,
+    "reviewBeforeGeneration": true
+  },
+  "validation": {
+    "completedAt": "2026-10-17T22:05:15.852Z",
+    "typecheck": "passed",
+    "lint": "passed",
+    "productionBuild": "passed",
+    "frontend": {
+      "tests": 184,
+      "files": 31
+    },
+    "backend": {
+      "tests": 130,
+      "files": 25
+    },
+    "python": {
+      "tests": 134
+    },
+    "sdkContracts": {
+      "tests": 3
+    },
+    "integration": {
+      "tests": 66,
+      "files": 5
+    },
+    "runtimeInterpreterCloudCheck": "one amount retrieved the expected case",
+    "sdkDependencyCheck": "no broken requirements",
+    "browser": {
+      "desktop": {
+        "width": 1440,
+        "height": 1000,
+        "screenshot": "graphrag-chat-desktop.png"
+      },
+      "mobile": {
+        "width": 390,
+        "height": 844,
+        "screenshot": "graphrag-chat-mobile.png"
+      },
+      "messageCount": 13,
+      "dividerCount": 12,
+      "wordReveal": "unit and live delivery completion verified",
+      "sourceCards": "actual server receipt shown; mobile width corrected",
+      "voiceNote": "real player clock/waveform tested; live Sarvam call not exercised"
+    },
+    "designScan": "four changed component files; regex scan found no issues, parsed-page checks did not run"
+  }
+}

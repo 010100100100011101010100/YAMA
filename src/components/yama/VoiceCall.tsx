@@ -9,6 +9,8 @@ import type { VoiceView } from "@/lib/voice";
 import { useVoice } from "@/lib/use-voice";
 import { voiceCopy } from "@/lib/voice-copy";
 import type { VoiceApi } from "@/lib/voice-api";
+import { VoiceNote } from "@/components/ui/voice-note";
+import { AGENT_NAMES } from "./AgentRail";
 
 function TranscriptReview({
   transcript,
@@ -160,6 +162,12 @@ export default function VoiceCall({
           )}
         </div>
       )}
+      {voice.playback && <div className="voice-playback dark">
+        <p>{AGENT_NAMES[voice.playback.agent]}</p>
+        <VoiceNote className="w-full max-w-sm" duration={voice.playback.duration} playbackPosition={voice.playback.elapsed}
+          waveform={voice.playback.waveform} playing={voice.playback.playing} seekable={false} speeds={[1]} accent="var(--signal)"
+          onPlayingChange={() => void voice.togglePause()} />
+      </div>}
       {voice.session?.partial && (
         <p role="status" dir="auto">
           {copy.partial} {voice.session.partial}

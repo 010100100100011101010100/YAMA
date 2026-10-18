@@ -12,7 +12,7 @@ import { voiceApi, type VoiceApi } from "./voice-api";
 import type { VoiceView } from "./voice";
 import type { SavedReport } from "./report-api";
 import type { Dialogue } from "./dialogue";
-import { VoicePlayer } from "./voice-player";
+import { VoicePlayer, type VoicePlayback } from "./voice-player";
 
 export function useVoice(
   report: SavedReport | null,
@@ -38,8 +38,9 @@ export function useVoice(
     key = useRef<string | null>(null),
     analysis = useRef<ReturnType<typeof createAudioAnalyser> | null>(null),
     audioTimer = useRef<ReturnType<typeof setInterval> | null>(null);
+  const [playback, setPlayback] = useState<VoicePlayback | null>(null);
   const [player] = useState(
-    () => new VoicePlayer(api, onSpeaking, () => setError("speech_failed")),
+    () => new VoicePlayer(api, onSpeaking, () => setError("speech_failed"), undefined, snapshot => { setPlayback(snapshot); if (snapshot) setPaused(!snapshot.playing); }),
   );
   const connectionEpoch = useRef(0);
   useEffect(() => {
@@ -353,6 +354,7 @@ export function useVoice(
     }
   }
   return {
+    playback,
     enabled,
     configured,
     session,

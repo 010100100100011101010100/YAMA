@@ -10,8 +10,9 @@ import type { Copy } from "@/lib/copy";
 // Tall composer, @ and / menus, gliding rows, agent picker and tactile send control.
 // The app owns actions and drafts. No gallery autoplay, shader upgrade, or fake dictation.
 export type PromptAction = { key: string; name: string; description: string; onPick?: () => void; insertText?: string; keywords?: string[] };
-export default function PromptBar({ value, onChange, onSend, onAttach, error, copy, placeholder, agentControl, sourceActions = [], commandActions = [], mentionActions = [], mentionLabel = "Agents", onVoice, disabled = false, pending = false }: {
+export default function PromptBar({ value, onChange, onSend, onAttach, error, copy, placeholder, agentControl, sourceActions = [], commandActions = [], mentionActions = [], mentionLabel = "Agents", onVoice, disabled = false, pending = false, maxLength = 6000 }: {
   value: string; onChange: (value: string) => void; onSend: () => void;
+  maxLength?: number;
   onAttach: () => void; error: boolean; copy: Copy; placeholder?: string; agentControl?: ReactNode;
   sourceActions?: PromptAction[]; commandActions?: PromptAction[]; mentionActions?: PromptAction[]; mentionLabel?: string; onVoice?: () => void;
   disabled?: boolean; pending?: boolean;
@@ -81,7 +82,7 @@ export default function PromptBar({ value, onChange, onSend, onAttach, error, co
           <textarea ref={input} id="message" value={value} onChange={event => { onChange(event.target.value); setCaret(event.target.selectionStart); setDismissed(false); setPlusOpen(false); setActive(0); }}
             onSelect={event => setCaret(event.currentTarget.selectionStart)}
             className="col-span-full col-start-1 row-start-1 min-h-[68px] min-w-0 w-full resize-none bg-transparent px-2 py-2 text-[14px] leading-5 text-ink outline-none placeholder:text-ink-3"
-            placeholder={placeholder ?? copy.placeholder} maxLength={6000} rows={2} aria-describedby={error ? "message-error" : "message-hint"}
+            placeholder={placeholder ?? copy.placeholder} maxLength={maxLength} rows={2} aria-describedby={error ? "message-error" : "message-hint"}
             aria-invalid={error || undefined} readOnly={pending}
             aria-autocomplete={agentMenu ? "list" : undefined} aria-controls={agentMenu && rows.length ? menuId : undefined}
             aria-activedescendant={agentMenu && rows.length ? `${menuId}-${rows[active % rows.length].key}` : undefined}

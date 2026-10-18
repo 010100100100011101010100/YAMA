@@ -3,6 +3,9 @@ import userEvent from "@testing-library/user-event";
 import { describe, expect, it, vi } from "vitest";
 import Storyroom from "@/components/yama/Storyroom";
 import SidePanel from "@/components/yama/SidePanel";
+import Conversation from "@/components/yama/Conversation";
+import { getSavedCopy } from "@/lib/persistence-copy";
+import { connections, reportId } from "./report-fixtures";
 
 vi.mock("next/image", () => ({ default: ({ src, alt }: { src: string; alt: string }) => <img src={src} alt={alt} /> }));
 
@@ -85,6 +88,22 @@ describe("conversation layout", () => {
       expect(log.scrollTop).toBe(100);
       unmount();
       expect(disconnect).toHaveBeenCalled();
+    } finally { vi.unstubAllGlobals(); }
+  });
+
+  it("preserves the reader’s position when they explore a reply’s sources", async () => {
+    let onResize = () => {};
+    vi.stubGlobal("ResizeObserver", class { constructor(callback: () => void) { onResize = callback; } observe() {} disconnect() {} });
+    try {
+      render(<Conversation language="en" copy={getSavedCopy("en")} speakingAgent={null} reportId={reportId} loadReports={async () => connections()}
+        messages={[{ id: "comparison", agent: "drishti", text: "Four matching reports.", dialogue: { revision: 1, older: false, provider: "fixture", language: "en",
+          connectionReceipt: { recipe: "confirmed-pattern-sources-v1", revision: 1, cases: [{ id: "case-1", version: "a".repeat(64) }] } } }]} />);
+      const log = screen.getByRole("log");
+      Object.defineProperties(log, { scrollHeight: { configurable: true, value: 1000 }, clientHeight: { configurable: true, value: 400 } });
+      log.scrollTop = 600;
+      await userEvent.setup().click(screen.getByRole("button", { name: "Related reports · 1" }));
+      act(() => onResize());
+      expect(log.scrollTop).toBe(600);
     } finally { vi.unstubAllGlobals(); }
   });
 

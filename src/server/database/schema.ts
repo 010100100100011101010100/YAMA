@@ -34,12 +34,16 @@ const definitions = {
     createdAt: { bsonType: "date" }, updatedAt: { bsonType: "date" },
   } },
   agent_worker_lock: { required: ["_id", "claimToken", "leaseUntil"], properties: { _id: { bsonType: "string" }, claimToken: { bsonType: ["string", "null"] }, leaseUntil: { bsonType: "date" } } },
-  provider_budgets: { required: ["_id", "reservedCalls"], properties: { _id: { enum: ["openai-synthetic-demo"] }, reservedCalls: { bsonType: ["int", "double"], minimum: 0, maximum: 100 } } },
+  provider_budgets: { required: ["_id", "reservedCalls"], properties: { _id: { enum: ["openai-synthetic-demo", "codex-synthetic-demo"] }, reservedCalls: { bsonType: ["int", "double"], minimum: 0, maximum: 200 } } },
   dialogues: { required: ["_id", "ownerId", "version", "activeAgent", "automatic", "language", "messages", "turn", "requests", "updatedAt"], properties: {
     _id: { bsonType: "string" }, ownerId: { bsonType: "string" }, version: { bsonType: ["int", "double"], minimum: 0 },
     activeAgent: { enum: ["saathi", "drishti", "disha"] }, automatic: { bsonType: "bool" }, messages: { bsonType: "array", maxItems: 60 },
     language: { enum: ["en", "hi", "hinglish"] },
     requests: { bsonType: "array", maxItems: 20 }, turn: { bsonType: ["object", "null"] }, updatedAt: { bsonType: "date" },
+  } },
+  dialogue_candidate_reviews: { required: ["_id", "ownerId", "reportId", "revision", "agent", "adapter", "reviewedAt", "cases"], properties: {
+    _id: { bsonType: "string" }, ownerId: { bsonType: "string" }, reportId: { bsonType: "string" }, revision: { bsonType: ["int", "double"], minimum: 1 },
+    agent: { enum: ["drishti", "disha"] }, adapter: { bsonType: "object" }, reviewedAt: { bsonType: "date" }, cases: { bsonType: "array", maxItems: 10 },
   } },
   action_reviews: { required: ["_id", "ownerId", "reportId", "revision", "receipt", "reviewedAt", "preview"], properties: {
     _id: { bsonType: "string" }, ownerId: { bsonType: "string" }, reportId: { bsonType: "string" }, revision: { bsonType: ["int", "double"], minimum: 1 },

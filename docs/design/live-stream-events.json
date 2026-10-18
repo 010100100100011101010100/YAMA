@@ -1,0 +1,271 @@
+{
+  "reportId": "3f4223b5-c912-4667-9205-09b8df36d40e",
+  "events": [
+    {
+      "at": "2026-10-18T07:17:12.183Z",
+      "turnId": "0469e2cb-4365-44d8-8e30-320e4417e529",
+      "agent": "drishti",
+      "status": "queued"
+    },
+    {
+      "at": "2026-10-18T07:17:12.329Z",
+      "turnId": "0469e2cb-4365-44d8-8e30-320e4417e529",
+      "agent": "drishti",
+      "status": "running"
+    },
+    {
+      "at": "2026-10-18T07:17:50.506Z",
+      "turnId": "0469e2cb-4365-44d8-8e30-320e4417e529",
+      "agent": "drishti",
+      "status": "running",
+      "sequence": 1,
+      "characters": 3
+    },
+    {
+      "at": "2026-10-18T07:17:50.532Z",
+      "turnId": "0469e2cb-4365-44d8-8e30-320e4417e529",
+      "agent": "drishti",
+      "status": "running",
+      "sequence": 2,
+      "characters": 44
+    },
+    {
+      "at": "2026-10-18T07:17:50.633Z",
+      "turnId": "0469e2cb-4365-44d8-8e30-320e4417e529",
+      "agent": "drishti",
+      "status": "running",
+      "sequence": 3,
+      "characters": 89
+    },
+    {
+      "at": "2026-10-18T07:17:50.806Z",
+      "turnId": "0469e2cb-4365-44d8-8e30-320e4417e529",
+      "agent": "drishti",
+      "status": "running",
+      "sequence": 4,
+      "characters": 129
+    },
+    {
+      "at": "2026-10-18T07:17:50.872Z",
+      "turnId": "0469e2cb-4365-44d8-8e30-320e4417e529",
+      "agent": "drishti",
+      "status": "running",
+      "sequence": 5,
+      "characters": 167
+    },
+    {
+      "at": "2026-10-18T07:17:51.102Z",
+      "turnId": "0469e2cb-4365-44d8-8e30-320e4417e529",
+      "agent": "drishti",
+      "status": "running",
+      "sequence": 6,
+      "characters": 175
+    },
+    {
+      "at": "2026-10-18T07:17:51.258Z",
+      "turnId": "0469e2cb-4365-44d8-8e30-320e4417e529",
+      "agent": "drishti",
+      "status": "running",
+      "sequence": 7,
+      "characters": 204
+    },
+    {
+      "at": "2026-10-18T07:17:51.500Z",
+      "turnId": "0469e2cb-4365-44d8-8e30-320e4417e529",
+      "agent": "drishti",
+      "status": "running",
+      "sequence": 8,
+      "characters": 255
+    },
+    {
+      "at": "2026-10-18T07:17:51.583Z",
+      "turnId": "0469e2cb-4365-44d8-8e30-320e4417e529",
+      "agent": "drishti",
+      "status": "running",
+      "sequence": 9,
+      "characters": 297
+    },
+    {
+      "at": "2026-10-18T07:17:51.698Z",
+      "turnId": "0469e2cb-4365-44d8-8e30-320e4417e529",
+      "agent": "drishti",
+      "status": "running",
+      "sequence": 10,
+      "characters": 336
+    },
+    {
+      "at": "2026-10-18T07:17:51.830Z",
+      "turnId": "0469e2cb-4365-44d8-8e30-320e4417e529",
+      "agent": "drishti",
+      "status": "running",
+      "sequence": 11,
+      "characters": 385
+    },
+    {
+      "at": "2026-10-18T07:17:52.117Z",
+      "turnId": "0469e2cb-4365-44d8-8e30-320e4417e529",
+      "agent": "drishti",
+      "status": "running",
+      "sequence": 12,
+      "characters": 399
+    },
+    {
+      "at": "2026-10-18T07:17:52.875Z",
+      "turnId": "0469e2cb-4365-44d8-8e30-320e4417e529",
+      "agent": "drishti",
+      "status": "running",
+      "sequence": 13,
+      "characters": 412
+    },
+    {
+      "at": "2026-10-18T07:17:52.893Z",
+      "turnId": "0469e2cb-4365-44d8-8e30-320e4417e529",
+      "agent": "drishti",
+      "status": "running",
+      "sequence": 14,
+      "characters": 419
+    },
+    {
+      "at": "2026-10-18T07:17:52.915Z",
+      "turnId": "0469e2cb-4365-44d8-8e30-320e4417e529",
+      "agent": "drishti",
+      "status": "running",
+      "sequence": 15,
+      "characters": 534
+    },
+    {
+      "at": "2026-10-18T07:17:52.947Z",
+      "turnId": "0469e2cb-4365-44d8-8e30-320e4417e529",
+      "agent": "drishti",
+      "status": "running",
+      "sequence": 16,
+      "characters": 560
+    },
+    {
+      "at": "2026-10-18T07:17:53.075Z",
+      "turnId": "0469e2cb-4365-44d8-8e30-320e4417e529",
+      "agent": "drishti",
+      "status": "running",
+      "sequence": 17,
+      "characters": 609
+    },
+    {
+      "at": "2026-10-18T07:17:53.186Z",
+      "turnId": "0469e2cb-4365-44d8-8e30-320e4417e529",
+      "agent": "drishti",
+      "status": "running",
+      "sequence": 18,
+      "characters": 613
+    },
+    {
+      "at": "2026-10-18T07:17:53.315Z",
+      "turnId": "0469e2cb-4365-44d8-8e30-320e4417e529",
+      "agent": "drishti",
+      "status": "running",
+      "sequence": 19,
+      "characters": 667
+    },
+    {
+      "at": "2026-10-18T07:17:53.489Z",
+      "turnId": "0469e2cb-4365-44d8-8e30-320e4417e529",
+      "agent": "drishti",
+      "status": "running",
+      "sequence": 20,
+      "characters": 699
+    },
+    {
+      "at": "2026-10-18T07:17:53.599Z",
+      "turnId": "0469e2cb-4365-44d8-8e30-320e4417e529",
+      "agent": "drishti",
+      "status": "running",
+      "sequence": 21,
+      "characters": 731
+    },
+    {
+      "at": "2026-10-18T07:17:53.764Z",
+      "turnId": "0469e2cb-4365-44d8-8e30-320e4417e529",
+      "agent": "drishti",
+      "status": "running",
+      "sequence": 22,
+      "characters": 743
+    },
+    {
+      "at": "2026-10-18T07:17:53.857Z",
+      "turnId": "0469e2cb-4365-44d8-8e30-320e4417e529",
+      "agent": "drishti",
+      "status": "running",
+      "sequence": 23,
+      "characters": 783
+    },
+    {
+      "at": "2026-10-18T07:17:54.013Z",
+      "turnId": "0469e2cb-4365-44d8-8e30-320e4417e529",
+      "agent": "drishti",
+      "status": "running",
+      "sequence": 24,
+      "characters": 840
+    },
+    {
+      "at": "2026-10-18T07:17:54.387Z",
+      "turnId": "0469e2cb-4365-44d8-8e30-320e4417e529",
+      "agent": "drishti",
+      "status": "running",
+      "sequence": 25,
+      "characters": 860
+    },
+    {
+      "at": "2026-10-18T07:17:54.391Z",
+      "turnId": "0469e2cb-4365-44d8-8e30-320e4417e529",
+      "agent": "drishti",
+      "status": "running",
+      "sequence": 26,
+      "characters": 869
+    },
+    {
+      "at": "2026-10-18T07:17:54.514Z",
+      "turnId": "0469e2cb-4365-44d8-8e30-320e4417e529",
+      "agent": "drishti",
+      "status": "running",
+      "sequence": 27,
+      "characters": 883
+    },
+    {
+      "at": "2026-10-18T07:17:54.647Z",
+      "turnId": "0469e2cb-4365-44d8-8e30-320e4417e529",
+      "agent": "drishti",
+      "status": "running",
+      "sequence": 28,
+      "characters": 943
+    },
+    {
+      "at": "2026-10-18T07:17:54.780Z",
+      "turnId": "0469e2cb-4365-44d8-8e30-320e4417e529",
+      "agent": "drishti",
+      "status": "running",
+      "sequence": 29,
+      "characters": 995
+    },
+    {
+      "at": "2026-10-18T07:17:54.892Z",
+      "turnId": "0469e2cb-4365-44d8-8e30-320e4417e529",
+      "agent": "drishti",
+      "status": "running",
+      "sequence": 30,
+      "characters": 1008
+    },
+    {
+      "at": "2026-10-18T07:17:54.982Z",
+      "turnId": "0469e2cb-4365-44d8-8e30-320e4417e529",
+      "agent": "drishti",
+      "status": "ready",
+      "streamed": true
+    },
+    {
+      "at": "2026-10-18T07:17:55.765Z",
+      "turnId": "0469e2cb-4365-44d8-8e30-320e4417e529",
+      "agent": "drishti",
+      "status": "delivered",
+      "streamed": true
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "checkedAt": "2026-10-17T18:10:22.266Z",
+  "status": "ready",
+  "sources": [
+    {
+      "url": "https://consumerhelpline.gov.in/",
+      "live": true,
+      "bodyRead": true,
+      "excerptCharacters": 2000
+    },
+    {
+      "url": "https://consumerhelpline.gov.in/public/about",
+      "live": true,
+      "bodyRead": false,
+      "excerptCharacters": 0
+    },
+    {
+      "url": "https://consumerhelpline.gov.in/public/otherdeptgrievancesportal",
+      "live": true,
+      "bodyRead": false,
+      "excerptCharacters": 0
+    }
+  ],
+  "jobs": [
+    {
+      "operation": "fetch_public_page",
+      "status": "ready",
+      "errorCode": null,
+      "adapter": {
+        "provider": "firecrawl",
+        "version": "firecrawl@4.46.0",
+        "live": true
+      }
+    },
+    {
+      "operation": "search_public_web",
+      "status": "ready",
+      "errorCode": null,
+      "adapter": {
+        "provider": "exa",
+        "version": "exa-js@2.25.0",
+        "live": true
+      }
+    }
+  ]
+}

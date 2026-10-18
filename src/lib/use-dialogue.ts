@@ -27,6 +27,10 @@ export function useDialogue(enabled: boolean, report: SavedReport | null, api: D
     async function poll() {
       let delay = 5000;
       try {
+        if (api.subscribe) {
+          await api.subscribe(reportId!, controller.signal, received => { receive(received); setReadError(""); });
+          delay = 1000; return;
+        }
         const received = await api.get(reportId!, controller.signal);
         if (controller.signal.aborted) return;
         receive(received); setReadError("");
@@ -62,12 +66,12 @@ export function useDialogue(enabled: boolean, report: SavedReport | null, api: D
       return false;
     } finally { working.current = false; if (mounted.current) setBusy(false); }
   }, [api, enabled, receive]);
-  const requestReply = useCallback(async (snapshot: SavedReport, agent: Dialogue["activeAgent"], automatic: boolean, language = snapshot.language) => {
+  const requestReply = useCallback(async (snapshot: SavedReport, agent: Dialogue["activeAgent"], automatic: boolean, language = snapshot.language, userPrompt?: string) => {
     const messageId = snapshot.messages.at(-1)?.id;
     if (!messageId) return false;
     const old = pending.current;
-    const operation: Extract<Operation, { operation: "reply" }> = old?.report._id === snapshot._id && old.report.revision === snapshot.revision && old.operation.agent === agent && old.operation.automatic === automatic && old.operation.language === language
-      ? old.operation : { operation: "reply", key: crypto.randomUUID(), messageId, agent, automatic, language };
+    const operation: Extract<Operation, { operation: "reply" }> = old?.report._id === snapshot._id && old.report.revision === snapshot.revision && old.operation.agent === agent && old.operation.automatic === automatic && old.operation.language === language && old.operation.userPrompt === userPrompt
+      ? old.operation : { operation: "reply", key: crypto.randomUUID(), messageId, agent, automatic, language, ...(userPrompt ? { userPrompt } : {}) };
     pending.current = { report: snapshot, operation };
     const saved = await mutate(snapshot, operation);
     if (saved) pending.current = null;

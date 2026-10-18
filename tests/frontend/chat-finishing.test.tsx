@@ -92,6 +92,7 @@ describe("chat finishing controls", () => {
     };
     const view = render(<DialogueStatus {...props} dialogue={queued} />);
     expect(screen.getByRole("status")).toHaveTextContent("Waiting for Drishti");
+    expect(screen.queryByRole("button", { name: "Ask selected agent" })).not.toBeInTheDocument();
     view.rerender(
       <DialogueStatus
         {...props}
@@ -99,6 +100,7 @@ describe("chat finishing controls", () => {
       />,
     );
     expect(screen.getByRole("status")).toHaveTextContent("Drishti is typing");
+    expect(screen.queryByRole("button", { name: "Ask selected agent" })).not.toBeInTheDocument();
     view.rerender(
       <DialogueStatus
         {...props}

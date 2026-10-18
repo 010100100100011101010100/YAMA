@@ -52,7 +52,7 @@ export class AgentTaskService {
         const task: AgentTaskRecord = { _id: randomUUID(), ownerId, reportId, requestKey, revision: expectedRevision, agent: "saathi", tool: "propose_draft_assertions",
           status: "queued", attempts: 0, adapter: textAdapter(), result: null, resultHash: null, accepted: null, errorCode: null,
           claimToken: null, leaseUntil: null, createdAt: now, updatedAt: now };
-        task.executionConfigHash = task.adapter.provider === "openai" ? executionConfigHash() : null;
+        task.executionConfigHash = task.adapter.live ? executionConfigHash() : null;
         await this.records.insertOne(task, { session }); return task;
       }, transactionOptions));
     } catch (error) {

@@ -80,7 +80,7 @@ class SDKTests(unittest.IsolatedAsyncioTestCase):
             requests.append(json.loads(request.content))
             return httpx2.Response(200, json={"id": "resp_dialogue", "object": "response", "created_at": 1, "status": "completed",
                 "model": "test-model", "output": [{"type": "message", "id": "msg_dialogue", "role": "assistant", "status": "completed",
-                    "content": [{"type": "output_text", "text": '{"text":"A bounded reply","handoff":null}', "annotations": []}]}]})
+                    "content": [{"type": "output_text", "text": '{"text":"A bounded reply","handoff":null,"question":null}', "annotations": []}]}]})
         async with httpx2.AsyncClient(transport=httpx2.MockTransport(transport), trust_env=False) as http:
             async with AsyncOpenAI(api_key="fake-key", max_retries=0, http_client=http) as client:
                 reply = await generate(context, OpenAIModel(ProviderConfig.from_env(environment()), client=client))

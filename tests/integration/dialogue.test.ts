@@ -7,6 +7,7 @@ import { DialogueService, type DialogueRecord } from "@/server/dialogue/service"
 import { DialogueWorker } from "@/server/dialogue/worker";
 import type { Report } from "@/server/reports/domain";
 import type { Dialogue } from "@/lib/dialogue";
+import type { ConnectionsResult } from "@/lib/connections";
 import { connectGraph, type GraphClient } from "@/server/database/graph-client";
 import { GraphStore, syntheticCatalogue, type CatalogueCase } from "@/server/database/graph";
 import { getServerConfig } from "@/server/config";
@@ -44,6 +45,50 @@ afterAll(async () => { if (graphClient) { for (const name of await graphClient.l
   await mongo.db(namespace).dropDatabase(); await mongo.close(); });
 
 describe("persistent dialogue and delivery-bound handoffs", () => {
+  it("keeps streamed drafts separate from delivery and removes rejected drafts", async () => {
+    await start("saathi", false);
+    await new DialogueWorker(database, mongo, async (_report, _record, _signal, _comparison, _public, progress) => {
+      await progress!("A reviewed account can help us understand the sequence. ".repeat(5));
+      const during = await service.get("owner-a", report._id);
+      expect(during.turn?.preview?.text).toContain("A reviewed account");
+      expect(during.messages).toHaveLength(0); expect(during.turn?.reply).toBeNull();
+      expect(during.turn?.connectionReceipt).toBeUndefined();
+      await expect(service.get("owner-b", report._id)).rejects.toMatchObject({ code: "report_not_found" });
+      return { text: "A validated final answer.", handoff: null };
+    }).runOnce();
+    const ready = await service.get("owner-a", report._id);
+    expect(ready.turn?.streamed).toBe(true); expect(ready.turn?.preview).toBeUndefined();
+    expect(ready.turn?.status).toBe("ready"); await ack(ready); await start("saathi", false);
+    await new DialogueWorker(database, mongo, async (_report, _record, _signal, _comparison, _public, progress) => {
+      await progress!("A provisional answer. ".repeat(15)); return { text: "Rejected", handoff: null, forbidden: true };
+    }).runOnce();
+    const failed = await service.get("owner-a", report._id);
+    expect(failed.turn?.status).toBe("failed"); expect(failed.turn?.preview).toBeUndefined(); expect(failed.messages).toHaveLength(1);
+  });
+  it("keeps a chat follow-up separate from confirmed incident facts and binds retries to its text", async () => {
+    report = await reports.confirm("owner-a", report._id, { expectedRevision: report.revision, acknowledged: true });
+    const before = await reports.get("owner-a", report._id), key = randomUUID();
+    const input = { operation: "reply", key, language: "en", messageId: report.messages.at(-1)!.id, agent: "disha", automatic: false,
+      userPrompt: "Which reports recovered any money?" };
+    const started = await command(await service.get("owner-a", report._id), input);
+    const runner = vi.fn(async (_report: Report, record: DialogueRecord) => {
+      expect(record.turn!.userPrompt?.text).toBe(input.userPrompt);
+      expect(dialogueContext(_report, record).messages.at(-1)?.text).toBe(input.userPrompt);
+      return { text: "Let’s check the reported outcomes.", handoff: null };
+    });
+    const worker = new DialogueWorker(database, mongo, runner, async () => ({ status: "ready", reportId: report._id, revision: report.revision, recipe: "confirmed-pattern-sources-v1", sources: [], candidates: [] }));
+    await worker.runOnce();
+    const ready = await service.get("owner-a", report._id);
+    expect(ready.turn?.userPrompt?.text).toBe(input.userPrompt);
+    const delivered = await ack(ready);
+    expect(delivered.messages.at(-1)?.userPrompt).toEqual(ready.turn?.userPrompt);
+    const after = await reports.get("owner-a", report._id);
+    expect({ revision: after.revision, confirmation: after.confirmation, assertions: after.assertions, messages: after.messages })
+      .toEqual({ revision: before.revision, confirmation: before.confirmation, assertions: before.assertions, messages: before.messages });
+    await command(delivered, input);
+    await expect(command(delivered, { ...input, userPrompt: "A different question" })).rejects.toThrow("idempotency_conflict");
+    expect(started.turn?.userPrompt?.id).toBe(ready.turn?.userPrompt?.id);
+  });
   it("routes an @mention from saved text instead of trusting the requested agent", async () => {
     report = await reports.create("owner-a", { synthetic: true, language: "en", narrative: "Synthetic: @Drishti, explain the comparison." }, randomUUID());
     const initial = await start("disha", false);
@@ -112,7 +157,7 @@ describe("persistent dialogue and delivery-bound handoffs", () => {
     await confirmedComparison(); await new GraphWorker(database, graph).runOnce(); await start("drishti");
     const worker = new DialogueWorker(database, mongo, runDialogueSnapshot, compare); await worker.runOnce();
     const ready = await service.get("owner-a", report._id);
-    expect(ready.turn?.status).toBe("ready"); expect(ready.turn?.reply?.text).toContain("2 matching fictional examples");
+    expect(ready.turn?.status).toBe("ready"); expect(ready.turn?.reply?.text).toContain("2 matching reports");
     expect(ready.turn?.reply?.text).toContain("identity linkage has not been assessed");
     expect(ready.turn?.connectionReceipt?.cases).toHaveLength(2);
     const record = await database.collection<DialogueRecord>("dialogues").findOne({ _id: report._id });
@@ -123,6 +168,20 @@ describe("persistent dialogue and delivery-bound handoffs", () => {
     expect(delivered.messages[0].connectionReceipt).toEqual(ready.turn?.connectionReceipt);
     expect((await reports.get("owner-a", report._id)).assertions).toEqual(report.assertions);
     await expect(compare("owner-b", report._id)).rejects.toMatchObject({ code: "report_not_found" });
+  });
+  it("sends only reviewed reports to generation and persists all attachment decisions privately", async () => {
+    await confirmedComparison(); await new GraphWorker(database, graph).runOnce(); await start("drishti", false);
+    const reviewer = vi.fn(async (_report: Report, _record: DialogueRecord, comparison: ConnectionsResult) => ({ cases: comparison.candidates.map((candidate, index) => ({ id: candidate.id, decision: index === 0 ? "attach" : "omit", reason: index === 0 ? "Relevant recorded events" : "Not useful for this question" })) }));
+    const runner = vi.fn(async (_report: Report, _record: DialogueRecord, _signal: AbortSignal, comparison?: ConnectionsResult) => {
+      expect(comparison?.candidates).toHaveLength(1);
+      return { text: "One report was useful for this comparison.", handoff: null };
+    });
+    await new DialogueWorker(database, mongo, runner, compare, reviewer).runOnce();
+    const ready = await service.get("owner-a", report._id);
+    expect(ready.turn?.status).toBe("ready"); expect(ready.turn?.connectionReceipt?.cases).toHaveLength(1);
+    const review = await database.collection("dialogue_candidate_reviews").findOne({ reportId: report._id });
+    expect(review?.cases.map((entry: { decision: string }) => entry.decision)).toEqual(["attach", "omit"]);
+    expect(JSON.stringify(ready)).not.toContain("Not useful for this question");
   });
   it("reports projection pending without announcing a completed comparison", async () => {
     await confirmedComparison(); await start("drishti", false);
@@ -238,7 +297,9 @@ describe("persistent dialogue and delivery-bound handoffs", () => {
       report = await reports.create("owner-a", { synthetic: true, language, narrative: "काल्पनिक: भुगतान नहीं किया।" }, randomUUID());
       await start("disha", false); await new DialogueWorker(database, mongo).runOnce();
       const ready = await service.get("owner-a", report._id);
-      expect(ready.turn?.reply?.text).toContain(language === "hi" ? "दिशा" : "Disha");
+      expect(ready.turn?.agent).toBe("disha");
+      expect(ready.turn?.reply?.text).toContain(language === "hi" ? "भुगतान" : "payment");
+      expect(ready.turn?.reply?.text).not.toMatch(/मैं दिशा हूँ|Main Disha hoon/);
     }
   });
   it("shares the extraction call budget and refuses uncertain live replays", async () => {

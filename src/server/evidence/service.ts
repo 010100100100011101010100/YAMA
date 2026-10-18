@@ -89,6 +89,13 @@ export class EvidenceService {
     if (createHash("sha256").update(bytes).digest("hex") !== record.sha256) throw new ServiceError(409, "integrity_failed");
     return bytes;
   }
+  async content(ownerId: string, reportId: string, id: string) {
+    const record = await this.get(ownerId, reportId, id);
+    if (!["png", "jpeg"].includes(record.format ?? "")) throw new ServiceError(415, "unsupported_file_type");
+    const bytes = await this.read(record);
+    await this.get(ownerId, reportId, id); // A concurrent removal revokes the preview.
+    return { bytes, type: record.format === "png" ? "image/png" : "image/jpeg" };
+  }
   async extract(ownerId: string, reportId: string, id: string) {
     const record = await this.get(ownerId, reportId, id);
     if (record.extractor === "local-doc-v1") {

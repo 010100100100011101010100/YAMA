@@ -1,0 +1,115 @@
+{
+  "verifiedAt": "2026-10-17T16:57:27.400Z",
+  "dataset": "synthetic-incidents-v3",
+  "graphTarget": "cloud",
+  "cases": 40,
+  "harmCategories": 7,
+  "fictionalActors": [
+    {
+      "name": "Adrian Crane",
+      "cases": 3
+    },
+    {
+      "name": "Calder Black",
+      "cases": 3
+    },
+    {
+      "name": "Lex Voss",
+      "cases": 4
+    },
+    {
+      "name": "Oswald Crowe",
+      "cases": 5
+    },
+    {
+      "name": "Silas Rook",
+      "cases": 2
+    },
+    {
+      "name": "Victor Morne",
+      "cases": 5
+    },
+    {
+      "name": "Wilson Sable",
+      "cases": 5
+    }
+  ],
+  "authoredActorLinks": 27,
+  "newEvidenceFiles": 80,
+  "projectedAssertions": 138,
+  "projectedSourceRanges": 138,
+  "preservedPersonalCollections": {
+    "reports": {
+      "count": 8,
+      "unchanged": true
+    },
+    "report_revisions": {
+      "count": 28,
+      "unchanged": true
+    },
+    "evidence": {
+      "count": 2,
+      "unchanged": true
+    },
+    "dialogues": {
+      "count": 7,
+      "unchanged": true
+    },
+    "chat_statuses": {
+      "count": 1,
+      "unchanged": true
+    }
+  },
+  "preservedHistoricalSourceReports": 50,
+  "preservedHistoricalEvidenceFiles": 100,
+  "comparisons": {
+    "cyber_and_fraud": {
+      "cases": 4,
+      "harms": [
+        "cybercrime",
+        "fraud"
+      ],
+      "contextCharacters": 22867,
+      "authorKeyExcluded": true
+    },
+    "bullying_hate_and_fraud": {
+      "cases": 5,
+      "harms": [
+        "bullying",
+        "cybercrime",
+        "fraud",
+        "hate_speech"
+      ],
+      "contextCharacters": 23643,
+      "authorKeyExcluded": true
+    },
+    "terrorism_concerns": {
+      "cases": 2,
+      "harms": [
+        "cybercrime",
+        "terrorism"
+      ],
+      "contextCharacters": 15316,
+      "authorKeyExcluded": true
+    },
+    "laundering_and_fraud": {
+      "cases": 5,
+      "harms": [
+        "cybercrime",
+        "fraud",
+        "money_laundering"
+      ],
+      "contextCharacters": 22881,
+      "authorKeyExcluded": true
+    },
+    "sexual_harm_and_intimidation": {
+      "cases": 3,
+      "harms": [
+        "bullying",
+        "sexual_molestation"
+      ],
+      "contextCharacters": 18393,
+      "authorKeyExcluded": true
+    }
+  }
+}

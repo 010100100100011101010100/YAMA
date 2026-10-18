@@ -1,0 +1,34 @@
+{
+  "verifiedAt": "2026-10-17T16:07:29.100Z",
+  "target": "cloud",
+  "tls": false,
+  "catalogueCases": 27,
+  "catalogueContentVersionsVerified": true,
+  "currentConfirmedSnapshots": 27,
+  "assertions": 118,
+  "sourceRanges": 118,
+  "comparison": {
+    "status": "ready",
+    "candidates": [
+      {
+        "id": "synthetic-demo-01-gadget-laptop",
+        "sharedIdentifiers": 3,
+        "outcome": "resolved"
+      },
+      {
+        "id": "synthetic-demo-02-gadget-camera",
+        "sharedIdentifiers": 3,
+        "outcome": "unresolved"
+      },
+      {
+        "id": "synthetic-demo-03-gadget-tablet",
+        "sharedIdentifiers": 3,
+        "outcome": "partially_resolved"
+      }
+    ]
+  },
+  "localCatalogueCases": 27,
+  "localGraphsPreserved": true,
+  "graphRagSdkIntegrated": false,
+  "storageModel": "MongoDB canonical; FalkorDB confirmed structured projections; private evidence files remain local"
+}

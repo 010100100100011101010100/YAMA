@@ -1,0 +1,24 @@
+.record { display: grid; gap: 24px; min-width: 0; margin-block: 20px; font-size: 16px; line-height: 1.6; }
+.record h4 { margin: 0 0 10px; color: var(--ink); font-size: 17px; font-weight: 550; line-height: 1.4; }
+.record p { margin: 8px 0 0; }
+.record summary { min-height: 44px; padding-block: 10px; cursor: pointer; color: var(--ink-2); }
+.identifiers { display: grid; gap: 16px; list-style: none; padding: 0; margin: 0; }
+.identifiers > li { min-width: 0; }
+.identifierKind { display: block; color: var(--ink-2); font-size: 14px; }
+.identifierValue { display: block; color: var(--ink); font-size: 18px; overflow-wrap: anywhere; }
+.identifiers blockquote { margin: 8px 0 16px; border-inline-start: 2px solid var(--line-strong); padding-inline-start: 12px; white-space: pre-wrap; overflow-wrap: anywhere; }
+.caution { color: var(--ink-2); }
+.outcomeHeading { display: flex; gap: 10px; align-items: baseline; justify-content: space-between; flex-wrap: wrap; }
+.status { border-radius: 6px; padding: 3px 8px; font-size: 14px; font-weight: 550; background: var(--field); }
+.status[data-status="resolved"] { color: oklch(0.84 0.12 150); }
+.status[data-status="unresolved"] { color: var(--error); }
+.status[data-status="partially_resolved"] { color: oklch(0.84 0.1 85); }
+.sourceNote { color: var(--ink-2); font-size: 14px; }
+.actions { padding-inline-start: 20px; margin: 16px 0 0; }
+.actions > li + li { margin-top: 16px; }
+.actions time { font-size: 14px; color: var(--ink-2); }
+.actions p { margin-top: 4px; }
+.evidence { border-top: 1px solid var(--line); padding-top: 8px; }
+.evidence ul { list-style: none; margin: 0; padding: 0; }
+.evidence li { padding-block: 10px; }
+.evidence code { display: block; overflow-wrap: anywhere; font-size: 13px; }

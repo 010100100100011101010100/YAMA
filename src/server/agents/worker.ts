@@ -6,7 +6,7 @@ import type { Report } from "@/server/reports/domain";
 import { validateExtraction, resultHash } from "./domain";
 import type { AgentTaskRecord } from "./service";
 import { runAgentSnapshot, type AgentRunner } from "./runtime";
-import { executionConfigHash, openAISettings, textAdapter } from "./config";
+import { executionConfigHash, providerCallSettings, textAdapter } from "./config";
 import { reserveProviderCall } from "./budget";
 
 type WorkerLock = { _id: string; claimToken: string | null; leaseUntil: Date };
@@ -14,7 +14,8 @@ export class AgentWorker {
   constructor(private readonly database: Db, private readonly client: MongoClient, private readonly runner: AgentRunner = runAgentSnapshot) {}
   async runOnce(signal: AbortSignal = new AbortController().signal) {
     if (signal.aborted) return false;
-    const now = new Date(), token = randomUUID(), leaseUntil = new Date(now.getTime() + 45_000);
+    // Covers the bounded Codex process deadline (180 seconds plus shutdown overhead).
+    const now = new Date(), token = randomUUID(), leaseUntil = new Date(now.getTime() + 210_000);
     const locks = this.database.collection<WorkerLock>("agent_worker_lock"), tasks = this.database.collection<AgentTaskRecord>("agent_tasks");
     const lock = await locks.findOneAndUpdate({ _id: "agent", leaseUntil: { $lte: now } }, { $set: { claimToken: token, leaseUntil } }, { returnDocument: "after" });
     if (!lock) return false;
@@ -35,11 +36,12 @@ export class AgentWorker {
         if (task.attempts > 3) throw new ServiceError(422, "retry_limit");
         const report = await this.database.collection<Report>("reports").findOne({ _id: task.reportId, ownerId: task.ownerId });
         if (!report || report.revision !== task.revision) throw new ServiceError(409, "revision_conflict");
-        if (task.adapter.provider === "openai") {
+        if (task.adapter.live) {
           if (this.runner === runAgentSnapshot && process.env.NODE_ENV === "test") throw new ServiceError(503, "live_provider_disabled_in_tests");
           if (task.attempts !== 1) throw new ServiceError(503, "provider_call_uncertain");
           if (JSON.stringify(textAdapter()) !== JSON.stringify(task.adapter) || executionConfigHash() !== task.executionConfigHash) throw new ServiceError(503, "provider_config_changed");
-          await reserveProviderCall(this.database, openAISettings().maxCalls);
+          const settings = providerCallSettings();
+          await reserveProviderCall(this.database, settings.maxCalls, settings.budget);
         }
         const output = await this.runner(report, AbortSignal.any([signal, canceled.signal]), task.adapter);
         if (signal.aborted || canceled.signal.aborted) throw new ServiceError(409, "task_canceled");

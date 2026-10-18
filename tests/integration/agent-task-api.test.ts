@@ -11,6 +11,7 @@ import { connectGraph } from "@/server/database/graph-client";
 import type { AgentTask } from "@/lib/agent-task";
 import type { SavedReport } from "@/lib/report-api";
 import { anonymousSignIn } from "./anonymous-session";
+import { connectionsSchema } from "@/lib/connections";
 
 process.loadEnvFile(".env.local");
 const config = getServerConfig(), owners: string[] = [];
@@ -113,7 +114,14 @@ describe("authenticated durable agent HTTP flow", () => {
     }
     finally { await graph.close(); }
     const response = await call(`/api/reports/${report._id}/connections`); expect(response.status).toBe(200);
-    expect((await response.json()).candidates).toHaveLength(2);
+    const comparison = connectionsSchema.parse(await response.json());
+    expect(comparison).toMatchObject({ status: "ready", reportId: report._id, revision: 2 });
+    // The shared catalogue can include the opt-in 25-case demo dataset.
+    // Exact baseline counts belong to the isolated graph tests, not this app database.
+    expect(comparison.candidates.length).toBeGreaterThan(0);
+    expect(comparison.candidates.length).toBeLessThanOrEqual(10);
+    expect(comparison.candidates.some(candidate => candidate.id === "synthetic-delivery-01")).toBe(true);
+    expect(comparison.candidates.every(candidate => candidate.synthetic && candidate.pattern.shared.length > 0)).toBe(true);
     expect((await call(`/api/reports/${report._id}/connections`, cookieB)).status).toBe(404);
   });
   it("restores cancellation, rejects stale results and revokes receipt access after sign-out", async () => {

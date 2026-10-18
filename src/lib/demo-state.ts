@@ -6,7 +6,7 @@ export type Language = "en" | "hi" | "hinglish";
 export type MessageKey = "welcome" | "noteReply" | "saathiBridge" | "dishaBridge" | "drishtiBridge";
 export type Message = { id: string; agent: AgentId | "you"; text: string; key?: MessageKey;
   voiceSource?: import("./report-api").SavedReport["messages"][number]["voiceSource"];
-  dialogue?: { handoff?:import("./dialogue").DialogueReply["handoff"]; revision: number; older: boolean; provider: "fixture" | "openai"; language: Language; connectionReceipt?: import("./connections").ConnectionReceipt };
+  dialogue?: { handoff?:import("./dialogue").DialogueReply["handoff"]; question?:import("./dialogue").DialogueQuestion; publicContext?: import("./dialogue-sources").DialoguePublicContext; revision: number; older: boolean; provider: import("./agent-task").AgentTask["adapter"]["provider"]; language: Language; connectionReceipt?: import("./connections").ConnectionReceipt };
   evidenceSource?: { evidenceId: string; sha256: string; name: string; extraction?: import("./evidence-extraction").EvidenceExtraction } };
 export type Detail = { id: string; value: string; originalValue: string; sourceId: string; included: boolean;
   field?: "narrative" | "amount" | "item" | "date" | "pattern" | "note"; polarity?: "affirmed" | "contradicted" | "uncertain";

@@ -2,7 +2,11 @@
 
 Implemented 2026-10-08 for synthetic localhost use and connected to the frontend on 2026-10-09. MongoDB is the canonical application store; FalkorDB is a rebuildable graph of confirmed revisions. This replaces the earlier PostgreSQL plan and the earlier note proposing FalkorDB as the primary incident store. The frontend keeps presentation state locally and restores report/conversation data from authenticated endpoints.
 
+17 October: cloud FalkorDB is active through `YAMA_GRAPH_TARGET=cloud`; its credentials have been authenticated. TLS certificates are verified when TLS is selected, but this supplied instance uses plain TCP and explicitly sets `YAMA_CLOUD_FALKORDB_TLS=false`. Its earlier DNS failure cleared after the user restarted it. The initial cloud migration copied 27 catalogue entries and rebuilt 27 confirmed snapshots; the later v3 refresh has 40 authored cases plus two baseline fixtures. The app, MongoDB and upload storage remain local, and local graphs are preserved. See [connection setup](credentials-setup.md), [initial migration verification](design/cloud-graph-verification.json) and [current cross-harm verification](design/cross-harm-demo-verification.json). The subsequent [official GraphRAG SDK integration](graphrag-sdk-integration.md) now handles indexed candidate retrieval, followed by a separate role-bound review before reply generation.
+
 ## Architecture
+
+For the current graph schema and the complete retrieval → relevance review → reply path, see [FalkorDB and agent decisions](graph-and-agent-decisions.md). That guide includes a concrete shared-contact subgraph, read-only Cypher examples, and the private decision/receipt trail. The broader service map below covers the supporting application services.
 
 ```mermaid
 flowchart LR
@@ -36,6 +40,8 @@ flowchart LR
     API --> C[Connection service\ncurrent confirmation required]
     C --> P
     C --> S[(FalkorDB\nsynthetic catalogue graph)]
+    S --> HC[HarmCategory\nreported concerns]
+    S -. author answer key only .-> FA[FictionalActor\nauthored same-actor relationships]
     C --> M
     AG[One Python agent coordinator\nroles · generations · handoffs] --> TD[Session-bound dispatcher\nsource-validated draft previews]
     TD --> GW[Authenticated read-only\nlocalhost gateway]
@@ -61,6 +67,10 @@ flowchart LR
 ```
 
 Use a modular monolith, graph/evidence/agent workers and two databases. Evidence queue state stays in MongoDB; only the document parser is isolated in a short-lived container. Keep providers behind service adapters. Do not add separate services for every agent or a new queue server at this stage. The later Python voice worker is separate because the existing LiveKit/coordinator integration is Python.
+
+The v3 synthetic catalogue has 40 accounts across seven reported-harm categories. `AUTHORED_ACTOR` edges encode seven recurring fictional actors as an author/evaluation answer key; connection retrieval does not traverse these edges or send the key to the model. `HAS_HARM` labels a reported concern, including concerns later cleared, rather than a legal finding. The API and role context carry validated harm categories while retaining source-based contact matching and unverified identity linkage. See [the casebook and false-link controls](demo-casebook.md).
+
+Dialogue context keeps a 24,000-character limit. When retrieved prose exceeds that budget, its narrative excerpts are shortened before failing. All five selected matches, exact source quotes, reported outcomes and the user's corrections remain intact. Full records in MongoDB and the interface are not shortened.
 
 ## Source of truth and collections
 

@@ -20,6 +20,22 @@ describe("dialogue boundary and presentation", () => {
     expect(messages.map(message => message.id)).toEqual(["welcome", messageId, id, "later"]);
     expect(messages[2].dialogue?.older).toBe(true); expect(messages[2].dialogue?.language).toBe("hi");
   });
+  it("keeps a follow-up question in order through handoffs and after a later account correction", () => {
+    const dialogue = initialDialogue(), prompt = { id: crypto.randomUUID(), text: "What happened in report two?" };
+    const first = { id: crypto.randomUUID(), messageId, agent: "drishti" as const, revision: 1, text: "It remains open.", adapter: AGENT_ADAPTER, language: "en" as const, userPrompt: prompt };
+    dialogue.messages = [first, { ...first, id: crypto.randomUUID(), agent: "disha", text: "Here are the next steps." }];
+    const base = [{ id: messageId, agent: "you" as const, text: "My account" }, { id: "correction", agent: "you" as const, text: "A correction" }];
+    const messages = conversationMessages(base, dialogue, 2);
+    expect(messages.map(message => message.text)).toEqual(["My account", prompt.text, "It remains open.", "Here are the next steps.", "A correction"]);
+    expect(messages.filter(message => message.id === prompt.id)).toHaveLength(1);
+  });
+  it("preserves the Codex session provider for actual generated conversation replies", () => {
+    const dialogue = initialDialogue();
+    dialogue.messages = [{ id: crypto.randomUUID(), messageId, agent: "drishti", revision: 1, text: "Here are the related records.",
+      adapter: { provider: "codex", model: "codex-session", version: "1", live: true }, language: "en" }];
+    const messages = conversationMessages([{ id: messageId, agent: "you", text: "Find related records." }], dialogue, 1);
+    expect(messages[1].dialogue?.provider).toBe("codex");
+  });
   it("uses same-origin, no-store reads and rejects another report's dialogue", async () => {
     const fetcher = vi.spyOn(globalThis, "fetch").mockResolvedValue(new Response(JSON.stringify({ dialogue: initialDialogue() })));
     const api = createDialogueApi(); await api.get(reportId, new AbortController().signal);

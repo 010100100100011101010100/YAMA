@@ -1,4 +1,5 @@
 import type { Language } from "./demo-state";
+import type { AgentTask } from "./agent-task";
 
 function fixtureCopy(language: Language) {
   const english = {
@@ -32,17 +33,18 @@ function fixtureCopy(language: Language) {
   return english;
 }
 
-export function agentCopy(language: Language, provider: "fixture" | "openai" | null = "fixture") {
+export function agentCopy(language: Language, provider: AgentTask["adapter"]["provider"] | null = "fixture") {
   const copy = fixtureCopy(language);
   if (provider === "fixture") return copy;
-  if (language === "hi") return { ...copy, fixture: provider ? "OpenAI के प्रस्ताव" : "स्रोत जाँचें",
+  const source = provider === "codex" ? "Codex session" : "OpenAI";
+  if (language === "hi") return { ...copy, fixture: provider ? `${source} के प्रस्ताव` : "स्रोत जाँचें",
     note: "प्रस्ताव सुझाव हैं। हर उद्धरण को मूल संदेश से मिलाएँ और केवल सही विवरण जोड़ें।",
     empty: "जोड़ने के लिए कोई नया प्रस्ताव नहीं मिला। अपने सेव किए गए नोट्स जाँचें।",
-    reference: "साथी · OpenAI · आपके स्वीकार किए हुए प्रस्ताव" };
-  if (language === "hinglish") return { ...copy, fixture: provider ? "OpenAI proposals" : "Sources check karein",
+    reference: `साथी · ${source} · आपके स्वीकार किए हुए प्रस्ताव` };
+  if (language === "hinglish") return { ...copy, fixture: provider ? `${source} proposals` : "Sources check karein",
     note: "Proposals suggestions hain. Har quote original message se check karein aur sirf sahi details add karein.",
-    empty: "Naye proposals nahi mile. Apne saved notes check karein.", reference: "Saathi · OpenAI · aapke accepted proposals" };
-  return { ...copy, fixture: provider ? "OpenAI proposals" : "Review sources",
+    empty: "Naye proposals nahi mile. Apne saved notes check karein.", reference: `Saathi · ${source} · aapke accepted proposals` };
+  return { ...copy, fixture: provider ? `${source} proposals` : "Review sources",
     note: "Proposals are suggestions. Check each quote against the original message and add only the details you agree with.",
-    empty: "No new proposals were found. Review your saved notes.", reference: "Saathi · OpenAI · accepted by you" };
+    empty: "No new proposals were found. Review your saved notes.", reference: `Saathi · ${source} · accepted by you` };
 }

@@ -57,6 +57,17 @@ describe("saved three-agent chat", () => {
     await user.click(screen.getByRole("button", { name: "Send message" }));
     await waitFor(() => expect(dialogue.api.change).toHaveBeenCalledWith(reportId, expect.objectContaining({ operation: "reply", agent: "saathi" })));
   });
+  it("sends a follow-up through dialogue without editing the confirmed report", async () => {
+    const user = userEvent.setup(), reports = reportGateway(), dialogue = gateway();
+    vi.mocked(reports.restore).mockResolvedValue(confirmedReport());
+    render(<Storyroom api={reports} agentTasksApi={agentGateway()} conversationsApi={dialogue.api} />);
+    const mode = await screen.findByRole("combobox", { name: "Message type" });
+    expect(mode).toHaveValue("question");
+    fireEvent.change(screen.getByRole("textbox", { name: "Your message" }), { target: { value: "@Drishti, what happened in report two?" } });
+    await user.click(screen.getByRole("button", { name: "Send message" }));
+    await waitFor(() => expect(dialogue.api.change).toHaveBeenCalledWith(reportId, expect.objectContaining({ operation: "reply", agent: "drishti", userPrompt: "@Drishti, what happened in report two?", expectedRevision: 1 })));
+    expect(reports.revise).not.toHaveBeenCalled(); expect(reports.confirm).not.toHaveBeenCalled();
+  });
 
   it("keeps the source panel open while refreshing a grounded comparison", async () => {
     const user = userEvent.setup(), reports = reportGateway();
@@ -74,7 +85,7 @@ describe("saved three-agent chat", () => {
     expect(title).toBeInTheDocument();
     await waitFor(() => expect(reports.connections).toHaveBeenCalledTimes(2));
     finish(connections());
-    await screen.findByText(/There are no confirmed pattern details/);
+    await screen.findByText(/There are no confirmed pattern or identifier details/);
     expect(title).toBeInTheDocument(); expect(document.activeElement).toBe(title);
   });
   it("saves narration, displays and acknowledges a reply, then hands off without moving focus", async () => {
@@ -101,6 +112,25 @@ describe("saved three-agent chat", () => {
     await waitFor(() => expect(screen.getByRole("combobox", { name: "एजेंट चुनें" })).toHaveValue("saathi"));
     expect(dialogue.current().activeAgent).toBe("disha");
     expect(dialogue.api.change).not.toHaveBeenCalled();
+  });
+  it("can ask a selected agent about confirmed notes after delivery without adding narration or revising the report", async () => {
+    const user = userEvent.setup(), reports = reportGateway();
+    vi.mocked(reports.restore).mockResolvedValue(confirmedReport());
+    const entry = { id: crypto.randomUUID(), agent: "saathi" as const, revision: 1, messageId, text: "Your saved account is ready to compare.", adapter: AGENT_ADAPTER, language: "en" as const };
+    const dialogue = gateway({ reportId, version: 3, activeAgent: "saathi", language: "en", automatic: false, messages: [entry],
+      turn: { ...entry, status: "delivered", reply: { text: entry.text, handoff: null }, errorCode: null } });
+    render(<Storyroom api={reports} agentTasksApi={agentGateway()} conversationsApi={dialogue.api} />);
+    const ask = await screen.findByRole("button", { name: "Ask selected agent" });
+    await user.selectOptions(screen.getByRole("combobox", { name: "Choose an agent" }), "drishti");
+    await waitFor(() => expect(ask).toBeEnabled());
+    await user.click(ask);
+    await waitFor(() => expect(dialogue.api.change).toHaveBeenCalledWith(reportId, expect.objectContaining({
+      operation: "reply", agent: "drishti", messageId, expectedRevision: 1,
+    })));
+    expect(reports.create).not.toHaveBeenCalled();
+    expect(reports.revise).not.toHaveBeenCalled();
+    expect(reports.confirm).not.toHaveBeenCalled();
+    expect(screen.getByRole("textbox", { name: "Your message" })).toHaveValue("");
   });
   it("stops a queued reply on manual agent selection", async () => {
     const reports = reportGateway(); vi.mocked(reports.restore).mockResolvedValue(savedReport());

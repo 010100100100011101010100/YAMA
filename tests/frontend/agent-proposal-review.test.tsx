@@ -14,6 +14,14 @@ describe("owned proposal preview and explicit acceptance", () => {
     expect(screen.queryByText("Authored fixture")).not.toBeInTheDocument();
     expect(screen.getByRole("button", { name: "Add selected to draft" })).toBeDisabled();
   });
+  it("labels a signed-in Codex receipt without calling it an OpenAI API or authored fixture response", async () => {
+    const api = agentGateway(); const task = agentTask(); task.adapter = { provider: "codex", model: "codex-session", version: "1", live: true };
+    vi.mocked(api.list).mockResolvedValue([task]);
+    render(<AgentProposalReview report={savedReport()} language="en" api={api} onAccept={async () => true} onExample={async () => true} />);
+    expect(await screen.findByText("Codex session proposals")).toBeVisible();
+    expect(screen.queryByText("OpenAI proposals")).not.toBeInTheDocument();
+    expect(screen.queryByText("Authored fixture")).not.toBeInTheDocument();
+  });
   it("restores quotes and requires selection plus acknowledgement before acceptance", async () => {
     const user = userEvent.setup(), api = agentGateway(), onAccept = vi.fn(async () => true);
     vi.mocked(api.list).mockResolvedValue([agentTask()]);

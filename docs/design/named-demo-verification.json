@@ -1,0 +1,54 @@
+{
+  "verifiedAt": "2026-10-17T16:29:31.448Z",
+  "dataset": "synthetic-incidents-v2",
+  "graphTarget": "cloud",
+  "cases": 25,
+  "newEvidenceFiles": 50,
+  "projectedAssertions": 108,
+  "projectedSourceRanges": 108,
+  "preservedPersonalCollections": {
+    "reports": {
+      "count": 8,
+      "unchanged": true
+    },
+    "report_revisions": {
+      "count": 28,
+      "unchanged": true
+    },
+    "evidence": {
+      "count": 2,
+      "unchanged": true
+    },
+    "dialogues": {
+      "count": 7,
+      "unchanged": true
+    },
+    "chat_statuses": {
+      "count": 1,
+      "unchanged": true
+    }
+  },
+  "preservedHistoricalSourceReports": 25,
+  "preservedHistoricalEvidenceFiles": 50,
+  "publishedCaseIdsStable": true,
+  "comparison": {
+    "status": "ready",
+    "candidates": [
+      {
+        "name": "Emily Mosaic",
+        "identifiers": 3,
+        "outcome": "resolved"
+      },
+      {
+        "name": "Tony Stank",
+        "identifiers": 3,
+        "outcome": "unresolved"
+      },
+      {
+        "name": "Bruce Willi",
+        "identifiers": 3,
+        "outcome": "partially_resolved"
+      }
+    ]
+  }
+}

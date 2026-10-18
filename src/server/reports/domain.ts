@@ -33,6 +33,7 @@ export type Assertion = {
 export type Report = {
   _id: string; ownerId: string; schemaVersion: 1; synthetic: true; language: z.infer<typeof language>;
   creationKey: string; creationHash: string; revision: number;
+  reporter?: { name: string; city: string; occupation: string };
   messages: { id: string; text: string; createdAt: Date; voiceSource?: z.infer<typeof voiceSourceSchema>; evidenceSource?: { evidenceId: string; sha256: string; name: string; extraction?: EvidenceExtraction } }[]; assertions: Assertion[];
   evidenceCount?: number;
   agentTaskCount?: number; agentTaskFence?: number;

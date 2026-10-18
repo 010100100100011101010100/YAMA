@@ -11,6 +11,7 @@ playwright-report/
 test-results/
 .venv/
 .venv-voice/
+.venv-graphrag/
 __pycache__/
 .local/
 *.log

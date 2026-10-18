@@ -10,10 +10,12 @@ const modelName = z.string().regex(/^[a-zA-Z0-9][a-zA-Z0-9._:-]{0,99}$/);
 export const adapterSchema = z.discriminatedUnion("provider", [
   z.strictObject({ provider: z.literal("fixture"), model: z.literal("authored-incident-v1"), version: z.literal("1"), live: z.literal(false) }),
   z.strictObject({ provider: z.literal("openai"), model: modelName, version: z.literal("1"), live: z.literal(true) }),
+  z.strictObject({ provider: z.literal("codex"), model: z.literal("codex-session"), version: z.literal("1"), live: z.literal(true) }),
 ]);
 export const agentSourceSchema = z.discriminatedUnion("provider", [
   z.strictObject({ taskId: z.uuid(), agent: z.literal("saathi"), provider: z.literal("fixture"), model: z.literal("authored-incident-v1"), version: z.literal("1") }),
   z.strictObject({ taskId: z.uuid(), agent: z.literal("saathi"), provider: z.literal("openai"), model: modelName, version: z.literal("1") }),
+  z.strictObject({ taskId: z.uuid(), agent: z.literal("saathi"), provider: z.literal("codex"), model: z.literal("codex-session"), version: z.literal("1") }),
 ]);
 export type AgentAdapter = z.infer<typeof adapterSchema>;
 const hash = z.string().regex(/^[a-f0-9]{64}$/);

@@ -14,7 +14,7 @@ const clip: VoiceClip = {
   durationMs: 100,
   sha256: "a".repeat(64),
 };
-function setup() {
+function setup(onProgress?: ConstructorParameters<typeof VoicePlayer>[4]) {
   const source = {
     onended: null as (() => void) | null,
     buffer: null,
@@ -25,11 +25,12 @@ function setup() {
   };
   const context = {
     state: "running",
+    currentTime: 0,
     resume: vi.fn(async () => {}),
     suspend: vi.fn(async () => {}),
     close: vi.fn(async () => {}),
     destination: {},
-    decodeAudioData: vi.fn(async () => ({ duration: 0.1 })),
+    decodeAudioData: vi.fn(async () => ({ duration: 0.1, getChannelData: () => Float32Array.from({ length: 400 }, (_, index) => Math.sin(index / 9)) })),
     createBufferSource: vi.fn(() => source),
   };
   const api = {
@@ -50,10 +51,27 @@ function setup() {
       speaking,
       failed,
       () => context as unknown as AudioContext,
+      onProgress,
     ),
   };
 }
 describe("actual voice playback boundary", () => {
+  it("drives the voice-note waveform and position from decoded audio and the real audio clock", async () => {
+    vi.useFakeTimers();
+    try {
+      const progress = vi.fn(), test = setup(progress);
+      await test.player.play(clip.reportId, clip.sessionId, clip.turnId, 1);
+      expect(progress).toHaveBeenLastCalledWith(expect.objectContaining({ duration: .1, elapsed: 0, playing: true, waveform: expect.any(Array) }));
+      expect(progress.mock.lastCall![0].waveform).toHaveLength(40);
+      test.context.currentTime = .04;
+      vi.advanceTimersByTime(200);
+      expect(progress.mock.lastCall![0].elapsed).toBe(.04);
+      await test.player.pause();
+      expect(progress.mock.lastCall![0].playing).toBe(false);
+      test.player.cancel();
+      expect(progress).toHaveBeenLastCalledWith(null);
+    } finally { vi.useRealTimers(); }
+  });
   it("acknowledges a handoff only on completed audio, never when preparation begins", async () => {
     const test = setup();
     await test.player.play(clip.reportId, clip.sessionId, clip.turnId, 1);

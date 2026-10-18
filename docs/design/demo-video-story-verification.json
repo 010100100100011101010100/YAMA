@@ -1,0 +1,44 @@
+{
+  "verifiedAt": "2026-10-17T21:26:05.150Z",
+  "graphTarget": "cloud",
+  "script": "docs/demo-video-script.md",
+  "scriptAmount": 12500,
+  "requestedButUnpaid": 1500,
+  "matchingContact": "+12025550101",
+  "storyContactExtraction": "passed",
+  "cloudMatches": 4,
+  "canonicalVersions": "passed",
+  "reporterProfilesAndUnknownContactsRemoved": "passed",
+  "cases": [
+    {
+      "id": "synthetic-demo-01-gadget-laptop",
+      "title": "Two shipping labels, no laptop",
+      "status": "resolved",
+      "reportedOutcome": "I called my bank that afternoon and submitted the payment receipt, both labels and a cyber-complaint acknowledgement. The bank later told me the receiving account had been restricted while it reviewed the transfer. INR18400 came back in one credit eleven days later. I closed my money-loss complaint after checking the statement; I still do not know who was behind the shop account.",
+      "version": "edf911ac98f441c6091088ba19534c3439f4571e8cd022dddad97414736ef327"
+    },
+    {
+      "id": "synthetic-demo-02-gadget-camera",
+      "title": "A camera deposit before the wedding season",
+      "status": "unresolved",
+      "reportedOutcome": "My bank has the transaction reference and the complaint acknowledgement. I also sent the marketplace the invoice and the two versions of the video. The listing disappeared, but I have not received the INR7200 or any written confirmation that the recipient account was frozen. The camera-rental expense was separate from the amount I reported as transferred.",
+      "version": "e32378b12ef79241976946dc76d7ca9525c5b4701bfa4a537d3c7ac07d36d407"
+    },
+    {
+      "id": "synthetic-demo-03-gadget-tablet",
+      "title": "The drawing tablet and a second clearance fee",
+      "status": "partially_resolved",
+      "reportedOutcome": "After I disputed the transfer, my bank credited INR3000 and said the rest was still under review. The messaging platform later told me the sales account had been removed. I have INR6600 outstanding and kept the complaint open. Account removal did not tell me whether the seller used a new account or who actually operated it.",
+      "version": "5d16e7473f8bdd343533bf4ce3b39d12db229193cc671b282093072f39f11faf"
+    },
+    {
+      "id": "synthetic-demo-26-cyber-account-takeover",
+      "title": "The repair desk and a compromised portfolio account",
+      "status": "unresolved",
+      "reportedOutcome": "The platform acknowledged my recovery request, but access has not been restored. One client confirmed they had not paid the new account. The notification establishes a recovery change, not the legal identity of whoever made it. I kept the incident open.",
+      "version": "003aaea81ea098ff1081b06d7aa87dc9efdf09368a292fa29a647f44991f3d01"
+    }
+  ],
+  "applicationRecordsCreated": 0,
+  "liveModelReplayOfRevisedStory": false
+}

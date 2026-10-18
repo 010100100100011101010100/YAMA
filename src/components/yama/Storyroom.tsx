@@ -65,6 +65,8 @@ function StoryroomView({ persisted = true, api=reportApi, agentTasksApi, convers
     if(!panel)document.getElementById("message")?.focus({preventScroll:true});
   },[initialReportId,persistence.phase,panel]);
   const [draft, setDraft] = useState(initialDraft);
+  const [composerIntent, setComposerIntent] = useState<"question" | "account" | null>(null);
+  const questionMode = composerIntent === "question" || composerIntent === null && hasCurrentConfirmation(state);
   const [recipient, setRecipient] = useState<typeof state.activeAgent>("saathi");
   const [sendError, setSendError] = useState(false);
   const [sending, setSending] = useState(false);
@@ -142,23 +144,30 @@ function StoryroomView({ persisted = true, api=reportApi, agentTasksApi, convers
     setPanel(null);
   }
   function chooseFile() { openPanel("evidence"); if (!persisted || state.reportId) fileInput.current?.click(); }
-  async function sendMessage() {
-    if (!draft.trim() || sending || voiceBusy) return;
-    if (failMessage) { setFailMessage(false); setSendError(true); return; }
-    const submitted = draft;
+  async function sendMessage(submitted = draft, intent = questionMode ? "question" : "account"): Promise<boolean> {
+    if (!submitted.trim() || sending || voiceBusy || persistence.busy) return false;
+    if (failMessage) { setFailMessage(false); setSendError(true); return false; }
     const address = resolveAgentAddress(submitted, recipient);
     setSending(true);
     if(persisted&&state.mode==="voice"&&voiceStop.current)await voiceStop.current();
     if (persisted && savedDialogue?.turn && ["queued", "running", "ready"].includes(savedDialogue.turn.status)) await dialogue.control({ operation: "stop" });
+    if (persisted && intent === "question" && persistence.currentReport()) {
+      const accepted = await dialogue.requestReply(persistence.currentReport()!, address.initialAgent, state.automaticHandoffs, state.language, submitted);
+      if (accepted) { setDraft(current => current === submitted ? "" : current); setSendError(false); }
+      else setSendError(true);
+      setSending(false); return accepted;
+    }
     const saved = await handle({ type: "send-message", id: crypto.randomUUID(), text: submitted, recipient });
-    if (saved === false) { setSendError(true); setSending(false); return; }
+    if (saved === false) { setSendError(true); setSending(false); return false; }
     setDraft(current => current === submitted ? "" : current); setSendError(false);
+    setComposerIntent(null);
     if (persisted) {
       dispatch({ type: "mode", mode: "text" });
       const report = persistence.currentReport();
       if (report) await dialogue.requestReply(report, address.initialAgent, state.automaticHandoffs, state.language);
     }
     setSending(false);
+    return true;
   }
   function showComparison() { dispatch({ type: "show-comparison" }); setPanel("connections"); }
   const panelTitle = panel ? { review: copy.reviewTitle, connections: copy.connectionsTitle, steps: copy.nextTitle, evidence: copy.files, settings: copy.settingsTitle }[panel] : "";
@@ -202,7 +211,15 @@ function StoryroomView({ persisted = true, api=reportApi, agentTasksApi, convers
           <span className="voice-state" role="status">{state.voice === "interrupted" ? copy.interrupted : state.voice === "playing" ? copy.voicePlaying : state.voice === "paused" ? copy.voicePaused : copy.voiceOff}</span>
           <p className="voice-note">{copy.voiceNote}</p></>}
         </div>}
-        <Conversation messages={messages} language={state.language} copy={copy} speakingAgent={speakingAgent} deliveryId={deliveryId} onDelivered={deliverReply}
+        <Conversation messages={messages} language={state.language} copy={copy} speakingAgent={speakingAgent} deliveryId={deliveryId} streamedDeliveryId={savedDialogue?.turn?.streamed ? savedDialogue.turn.id : undefined} onDelivered={deliverReply}
+          reportId={state.reportId} loadReports={persisted ? api.connections : undefined}
+          answeringDisabled={sending || dialogue.busy || persistence.busy || voiceBusy}
+          onAnswer={async (message, answer) => {
+            if (message.id !== latestMessage.id || message.dialogue?.revision !== state.revision || message.agent === "you") return false;
+            const question = message.dialogue.question?.prompt;
+            const label = state.language === "hi" ? { question: "सवाल", answer: "मेरा जवाब" } : { question: "Question", answer: "My answer" };
+            return sendMessage(`@${AGENT_NAMES[message.agent]}\n${question ? `${label.question}: “${question}”\n` : ""}${label.answer}: ${answer}`, "account");
+          }}
           onConnections={() => { runComparison(); openPanel("connections"); }}
           activity={<>{persisted && state.reportId && <DialogueStatus dialogue={savedDialogue} revision={state.revision} language={state.language} error={dialogue.error} readError={dialogue.readError} busy={dialogue.busy || persistence.busy} onStop={() => { void dialogue.control({ operation: "stop" }); }} onRetry={() => dialogue.retry(recipient)} onReload={dialogue.retryRead} />}
             <TaskStatus task={task} copy={copy} backend={persisted} comparisonAvailable={persisted ? !!state.connections?.candidates.length : matchesComparisonFixture(state)} onCancel={() => dispatch({ type: "cancel-task" })} onRetry={runComparison} onShow={showComparison} /></>} />
@@ -210,7 +227,7 @@ function StoryroomView({ persisted = true, api=reportApi, agentTasksApi, convers
         <div className="composer-area">
           <div className={state.notice === "handoff" ? "sr-only" : "notice"} role={state.notice === "acknowledgeNeeded" ? "alert" : "status"} aria-live="polite">{notice}</div>
           {!panel && saveStatus}
-          <PromptBar value={draft} onChange={setDraft} onSend={sendMessage} onAttach={chooseFile} error={sendError && !persisted} disabled={persistence.busy || sending || voiceBusy} pending={persistence.phase === "saving" || sending || voiceBusy} copy={copy} placeholder={state.language === "hi" ? `${AGENT_NAMES[recipient]} को संदेश लिखें…` : `${copy.talkingTo} ${AGENT_NAMES[recipient]}…`}
+          <PromptBar value={draft} maxLength={questionMode ? 1000 : 6000} onChange={setDraft} onSend={sendMessage} onAttach={chooseFile} error={sendError && !persisted} disabled={persistence.busy || sending || voiceBusy} pending={persistence.phase === "saving" || sending || voiceBusy} copy={copy} placeholder={state.language === "hi" ? `${AGENT_NAMES[recipient]} को संदेश लिखें…` : `${copy.talkingTo} ${AGENT_NAMES[recipient]}…`}
             onVoice={state.mode === "text" ? () => changeMode("voice") : undefined}
             mentionLabel={state.language === "hi" ? "एजेंट" : "Agents"}
             mentionActions={AGENTS.map(agent => ({ key: agent, name: `@${AGENT_NAMES[agent]}`, description: agentNature[state.language][agent].nature,
@@ -224,7 +241,7 @@ function StoryroomView({ persisted = true, api=reportApi, agentTasksApi, convers
               { key: "files", name: "/files", description: copy.evidence, onPick: () => openPanel("evidence") },
               { key: "steps", name: "/next", description: copy.nextTitle, onPick: () => openPanel("steps") },
             ]}
-            agentControl={<div className="composer-agent-control"><label className="composer-agent"><span className="sr-only">{state.language === "hi" ? "एजेंट चुनें" : "Choose an agent"}</span><select disabled={dialogue.busy||voiceBusy||sending} value={recipient} onChange={event => selectAgent(event.target.value as typeof state.activeAgent)}>{AGENTS.map(agent => <option key={agent} value={agent}>{AGENT_NAMES[agent]}</option>)}</select></label><AgentInfo key={recipient} agent={recipient} language={state.language}/></div>} />
+            agentControl={<div className="composer-agent-control">{persisted && state.reportId && <label className="composer-agent"><span className="sr-only">{state.language === "hi" ? "संदेश का प्रकार" : "Message type"}</span><select value={questionMode ? "question" : "account"} disabled={dialogue.busy || voiceBusy || sending} onChange={event => setComposerIntent(event.target.value as "question" | "account")}><option value="question">{state.language === "hi" ? "सवाल पूछें" : "Ask a question"}</option><option value="account">{state.language === "hi" ? "विवरण जोड़ें" : "Add details"}</option></select></label>}<label className="composer-agent"><span className="sr-only">{state.language === "hi" ? "एजेंट चुनें" : "Choose an agent"}</span><select disabled={dialogue.busy||voiceBusy||sending} value={recipient} onChange={event => selectAgent(event.target.value as typeof state.activeAgent)}>{AGENTS.map(agent => <option key={agent} value={agent}>{AGENT_NAMES[agent]}</option>)}</select></label><AgentInfo key={recipient} agent={recipient} language={state.language}/></div>} />
           <div className="story-actions"><Button variant="secondary" disabled={state.example || persistence.busy||voiceBusy} onClick={() => { void handle({ type: "load-example" }); }}>{state.example ? copy.exampleUsed : copy.example}<ArrowRight size={16} /></Button>
             {state.details.length > 0 && <Button variant="primary" onClick={() => openPanel("review")}>{copy.reviewAction}<ArrowRight size={16} /></Button>}
           </div>

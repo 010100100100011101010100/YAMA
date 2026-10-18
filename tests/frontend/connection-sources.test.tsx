@@ -37,4 +37,13 @@ describe("comparison provenance", () => {
     expect(screen.getByText(/Excluded by you/)).toBeInTheDocument();
     expect(screen.getByText(/not independently verified/)).toBeInTheDocument();
   });
+  it("shows uncertain identifier evidence without treating it as a confirmed match", () => {
+    const comparison = sourcedComparison();
+    const quote = "@seller_demo_7";
+    render(<ConnectionSources result={{ ...comparison, candidates: [], sources: [], identifierSources: [{ kind: "telegram", value: quote,
+      key: `telegram:${quote}`, assertionId, source: { messageId, start: 0, end: quote.length }, quote, status: "uncertain", evidenceId: null }] }} language="en" />);
+    expect(screen.getByText("Telegram · Uncertain")).toBeInTheDocument();
+    expect(screen.getByText(quote, { selector: "blockquote" })).toBeInTheDocument();
+    expect(screen.queryByText("Used as support")).not.toBeInTheDocument();
+  });
 });

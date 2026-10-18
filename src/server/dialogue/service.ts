@@ -10,8 +10,9 @@ import { resolveAgentAddress, requestedHandoff, type AgentAddress } from "@/lib/
 import type { VoiceRecord, PlayoutRecord } from "@/server/voice/records";
 import type { z } from "zod";
 import type { voicePlaybackSchema } from "@/lib/voice";
+import { protectReply } from "./privacy";
 
-type RequestReceipt = { key: string; messageId: string; revision: number; agent: Dialogue["activeAgent"]; automatic: boolean; language: Dialogue["language"] };
+type RequestReceipt = { key: string; messageId: string; revision: number; agent: Dialogue["activeAgent"]; automatic: boolean; language: Dialogue["language"]; userPrompt?: string };
 export type DialogueTurn = NonNullable<Dialogue["turn"]> & { depth: number; attempts: number; claimToken: string | null; leaseUntil: Date | null; executionConfigHash: string | null; address?: AgentAddress; visited?: Dialogue["activeAgent"][] };
 export type DialogueRecord = Omit<Dialogue, "reportId" | "turn"> & { _id: string; ownerId: string; turn: DialogueTurn | null; requests: RequestReceipt[]; updatedAt: Date };
 export const transactionOptions = { writeConcern: { w: "majority" as const }, readConcern: { level: "snapshot" as const } };
@@ -19,9 +20,13 @@ export const activeTurn = (turn: DialogueTurn | null) => !!turn && ["queued", "r
 export function publicDialogue(record: DialogueRecord): Dialogue {
   const turn = record.turn;
   return dialogueSchema.parse({ reportId: record._id, version: record.version, activeAgent: record.activeAgent, automatic: record.automatic, language: record.language,
-    messages: record.messages, turn: turn ? { id: turn.id, agent: turn.agent, revision: turn.revision, messageId: turn.messageId,
-      status: turn.status, adapter: turn.adapter, reply: turn.reply, errorCode: turn.errorCode, language: turn.language,
-      ...(turn.connectionReceipt ? { connectionReceipt: turn.connectionReceipt } : {}) } : null,
+    messages: record.messages.map(message => protectReply(message, message.connectionReceipt?.cases.map(reference => reference.id))), turn: turn ? { id: turn.id, agent: turn.agent, revision: turn.revision, messageId: turn.messageId,
+      ...(turn.userPrompt ? { userPrompt: turn.userPrompt } : {}),
+      status: turn.status, adapter: turn.adapter, reply: turn.reply ? protectReply(turn.reply, turn.connectionReceipt?.cases.map(reference => reference.id)) : null, errorCode: turn.errorCode, language: turn.language,
+      ...(turn.connectionReceipt ? { connectionReceipt: turn.connectionReceipt } : {}),
+      ...(turn.status === "running" && turn.preview ? { preview: { ...turn.preview, text: protectReply({ text: turn.preview.text }).text } } : {}),
+      ...(turn.streamed ? { streamed: true } : {}),
+      ...(turn.publicContext ? { publicContext: turn.publicContext } : {}) } : null,
     ...(record.voiceSessionId ? { voiceSessionId: record.voiceSessionId } : {}) });
 }
 export function queuedTurn(report: Report, agent: Dialogue["activeAgent"], messageId: string, depth = 0, previous?: DialogueTurn): DialogueTurn {
@@ -29,10 +34,11 @@ export function queuedTurn(report: Report, agent: Dialogue["activeAgent"], messa
   return { id: randomUUID(), agent, revision: report.revision, messageId, depth, status: "queued", attempts: 0,
     adapter, language: previous?.language ?? report.language, reply: null, errorCode: null, claimToken: null, leaseUntil: null,
     executionConfigHash: previous?.executionConfigHash ?? (adapter.live ? executionConfigHash() : null),
-    visited: previous ? [...(previous.visited ?? []), previous.agent] : [], ...(previous?.address ? { address: previous.address } : {}) };
+    visited: previous ? [...(previous.visited ?? []), previous.agent] : [], ...(previous?.address ? { address: previous.address } : {}),
+    ...(previous?.userPrompt ? { userPrompt: previous.userPrompt } : {}) };
 }
 export function revokeTurn(record: DialogueRecord, status: "canceled" | "stale") {
-  if (activeTurn(record.turn)) record.turn = { ...record.turn!, status, reply: null, errorCode: null, claimToken: null, leaseUntil: null };
+  if (activeTurn(record.turn)) { record.turn = { ...record.turn!, status, reply: null, errorCode: null, claimToken: null, leaseUntil: null }; delete record.turn.preview; }
 }
 export class DialogueService {
   constructor(private readonly database: Db, private readonly client: MongoClient) {}
@@ -68,25 +74,30 @@ export class DialogueService {
         const replay = command.operation === "reply" && record.requests.find(receipt => receipt.key === command.key);
         const delivered = command.operation === "delivered" && record.messages.some(message => message.id === command.turnId);
         if (replay) {
-          if (replay.messageId !== command.messageId || replay.revision !== command.expectedRevision || replay.agent !== command.agent || replay.automatic !== command.automatic || replay.language !== command.language) throw new ServiceError(409, "idempotency_conflict");
+          if (replay.messageId !== command.messageId || replay.revision !== command.expectedRevision || replay.agent !== command.agent || replay.automatic !== command.automatic || replay.language !== command.language || replay.userPrompt !== command.userPrompt) throw new ServiceError(409, "idempotency_conflict");
         } else if (!delivered) {
           if (report.revision !== command.expectedRevision) throw new ServiceError(409, "revision_conflict");
           if (record.version !== command.expectedVersion) throw new ServiceError(409, "conversation_conflict");
           if (command.operation === "reply") {
             if (report.messages.at(-1)?.id !== command.messageId) throw new ServiceError(400, "invalid_message");
             if (record.requests.length >= 20) throw new ServiceError(422, "conversation_limit");
-            record.requests.push({ key: command.key, messageId: command.messageId, revision: report.revision, agent: command.agent, automatic: command.automatic, language: command.language });
-            const address = resolveAgentAddress(report.messages.at(-1)!.text, command.agent);
+            record.requests.push({ key: command.key, messageId: command.messageId, revision: report.revision, agent: command.agent, automatic: command.automatic, language: command.language,
+              ...(command.userPrompt ? { userPrompt: command.userPrompt } : {}) });
+            const address = resolveAgentAddress(command.userPrompt ?? report.messages.at(-1)!.text, command.agent);
             record.activeAgent = address.initialAgent; record.automatic = command.automatic; record.language = command.language;
             record.turn = queuedTurn(report, address.initialAgent, command.messageId);
             record.turn.address = address;
+            if (command.userPrompt) record.turn.userPrompt = { id: randomUUID(), text: command.userPrompt };
             record.turn.language = command.language;
           } else if (command.operation === "delivered") {
             if (record.voiceSessionId && !playback) throw new ServiceError(409, "voice_playout_required");
             const turn = record.turn;
             if (!turn || turn.id !== command.turnId || turn.status !== "ready" || !turn.reply) throw new ServiceError(409, "reply_not_ready");
             record.messages.push({ id: turn.id, agent: turn.agent, revision: turn.revision, messageId: turn.messageId, text: turn.reply.text, adapter: turn.adapter, language: turn.language,
+              ...(turn.userPrompt ? { userPrompt: turn.userPrompt } : {}),
               ...(turn.reply.handoff ? {handoff:turn.reply.handoff} : {}),
+              ...(turn.reply.question ? { question: turn.reply.question } : {}),
+              ...(turn.publicContext ? { publicContext: turn.publicContext } : {}),
               ...(turn.connectionReceipt ? { connectionReceipt: turn.connectionReceipt } : {}) });
             const directed = requestedHandoff(turn.address, turn.agent, turn.depth);
             const visited = [...(turn.visited ?? []), turn.agent];
