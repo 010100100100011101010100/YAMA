@@ -9,6 +9,8 @@ COPY package.json package-lock.json ./
 # Workers execute TypeScript through tsx, which is currently a devDependency.
 RUN npm ci --include=dev && npm cache clean --force
 COPY . .
+RUN node --conditions=react-server --import tsx --input-type=module \
+    -e "await import('./src/server/config.ts')"
 RUN npm run build
 
 FROM ${PYTHON_IMAGE} AS python-build
@@ -49,6 +51,8 @@ RUN ln -s /usr/local/lib/node_modules/npm/bin/npm-cli.js /usr/local/bin/npm \
 COPY --from=python-build /opt/venvs /opt/venvs
 COPY --from=python-build /opt/models /opt/models
 ENV NODE_ENV=production \
+    YAMA_DEPLOYMENT_MODE=hosted-demo \
+    YAMA_GRAPH_TARGET=cloud \
     NEXT_TELEMETRY_DISABLED=1 \
     PORT=10000 \
     PYTHONUNBUFFERED=1 \
@@ -76,5 +80,6 @@ RUN mkdir -p /app/.local /app/.next/cache \
     && chown -R yama:yama /app/.local /app/.next/cache
 USER 10001:10001
 EXPOSE 10000
-# exec forwards Render's termination signal directly to Next.js; workers override CMD.
-CMD ["/bin/sh", "-c", "exec node node_modules/next/dist/bin/next start --hostname 0.0.0.0 --port \"${PORT:-10000}\""]
+# Validate hosted settings before the listener starts; exec preserves signal handling.
+# Worker services override CMD and use the same hosted configuration parser.
+CMD ["/bin/sh", "-c", "node --conditions=react-server --import tsx scripts/deployment/check-config.ts && exec node node_modules/next/dist/bin/next start --hostname 0.0.0.0 --port \"${PORT:-10000}\""]

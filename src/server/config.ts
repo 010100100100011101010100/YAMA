@@ -9,10 +9,33 @@ function isLocalUrl(value: string, protocols: string[], originOnly = false) {
       && (!originOnly || (url.pathname === "/" && !url.search && !url.hash && !url.username && !url.password));
   } catch { return false; }
 }
+function isHostedOrigin(value: string) {
+  try {
+    const url = new URL(value);
+    return url.protocol === "https:" && !isLoopback(url.hostname) && url.pathname === "/"
+      && !url.search && !url.hash && !url.username && !url.password;
+  } catch { return false; }
+}
+function isAtlasUrl(value: string) {
+  try {
+    const url = new URL(value);
+    if (url.protocol !== "mongodb+srv:" || !url.hostname.endsWith(".mongodb.net") || !url.username || !url.password || url.port || url.hash) return false;
+    for (const [key, value] of url.searchParams) {
+      if (["tls", "ssl"].includes(key.toLowerCase()) && value.toLowerCase() !== "true") return false;
+      if (["tlsinsecure", "tlsallowinvalidcertificates", "tlsallowinvalidhostnames"].includes(key.toLowerCase()) && value.toLowerCase() !== "false") return false;
+    }
+    return true;
+  } catch { return false; }
+}
+
+export class BackendConfigurationError extends Error {
+  constructor(readonly fields: string[]) { super(`Invalid backend configuration: ${fields.join(", ")}`); }
+}
 const common = z.object({
   YAMA_DEMO_ONLY: z.literal("true"),
-  APP_ORIGIN: z.url().refine(value => isLocalUrl(value, ["http:", "https:"], true)),
-  MONGODB_URI: z.string().refine(value => isLocalUrl(value, ["mongodb:"])),
+  YAMA_DEPLOYMENT_MODE: z.enum(["localhost", "hosted-demo"]),
+  APP_ORIGIN: z.url(),
+  MONGODB_URI: z.string(),
   MONGODB_DATABASE: z.string().regex(/^yama[a-z0-9_]{0,45}$/),
   BETTER_AUTH_SECRET: z.string().min(32),
 });
@@ -32,13 +55,30 @@ const configuration = z.discriminatedUnion("YAMA_GRAPH_TARGET", [
     YAMA_CLOUD_FALKORDB_PASSWORD: z.string().min(1),
     YAMA_CLOUD_FALKORDB_TLS: z.enum(["true", "false"]).default("true"),
   }),
-]);
+]).superRefine((value, context) => {
+  const hosted = value.YAMA_DEPLOYMENT_MODE === "hosted-demo";
+  if (!(hosted ? isHostedOrigin(value.APP_ORIGIN) : isLocalUrl(value.APP_ORIGIN, ["http:", "https:"], true)))
+    context.addIssue({ code: "custom", path: ["APP_ORIGIN"], message: "Origin is not valid for the selected deployment mode" });
+  if (!(hosted ? isAtlasUrl(value.MONGODB_URI) : isLocalUrl(value.MONGODB_URI, ["mongodb:"])))
+    context.addIssue({ code: "custom", path: ["MONGODB_URI"], message: "Database URL is not valid for the selected deployment mode" });
+  if (hosted && value.YAMA_GRAPH_TARGET !== "cloud")
+    context.addIssue({ code: "custom", path: ["YAMA_GRAPH_TARGET"], message: "Hosted demos require the cloud graph" });
+});
 
 export function parseServerConfig(environment: Record<string, string | undefined>) {
-  const parsed = configuration.safeParse({ ...environment, YAMA_GRAPH_TARGET: environment.YAMA_GRAPH_TARGET ?? "local" });
+  const mode = environment.YAMA_DEPLOYMENT_MODE ?? "localhost";
+  const hosted = mode === "hosted-demo";
+  // Saved cloud aliases replace copied localhost values only after explicit hosted selection.
+  // Explicit non-local values (including invalid ones) are validated rather than silently replaced.
+  const origin = hosted && (!environment.APP_ORIGIN || isLocalUrl(environment.APP_ORIGIN, ["http:", "https:"], true))
+    ? environment.YAMA_DEPLOYMENT_ORIGIN : environment.APP_ORIGIN;
+  const mongoUri = hosted && (!environment.MONGODB_URI || isLocalUrl(environment.MONGODB_URI, ["mongodb:"]))
+    ? environment.YAMA_CLOUD_MONGODB_URI : environment.MONGODB_URI;
+  const parsed = configuration.safeParse({ ...environment, APP_ORIGIN: origin, MONGODB_URI: mongoUri,
+    YAMA_DEPLOYMENT_MODE: mode, YAMA_GRAPH_TARGET: environment.YAMA_GRAPH_TARGET ?? "local" });
   if (!parsed.success) {
     // Never put database URLs, passwords, or malformed user values in logs.
-    throw new Error(`Invalid backend configuration: ${parsed.error.issues.map(issue => issue.path.join(".")).join(", ")}`);
+    throw new BackendConfigurationError([...new Set(parsed.error.issues.map(issue => issue.path.join(".")))]);
   }
   const graph = parsed.data.YAMA_GRAPH_TARGET === "cloud" ? {
     graphHost: parsed.data.YAMA_CLOUD_FALKORDB_HOST,
@@ -54,6 +94,7 @@ export function parseServerConfig(environment: Record<string, string | undefined
     graphTls: false,
   };
   return {
+    deploymentMode: parsed.data.YAMA_DEPLOYMENT_MODE,
     origin: new URL(parsed.data.APP_ORIGIN).origin,
     mongoUri: parsed.data.MONGODB_URI,
     mongoDatabase: parsed.data.MONGODB_DATABASE,

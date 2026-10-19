@@ -18,7 +18,27 @@ In Render, create a **Web Service** from the YAMA repository:
 | Docker Command | Leave blank to use the image's API command |
 | Health Check Path | `/api/health` once the database configuration is valid |
 
-There is no separate Render Build Command for this Docker image. Its default command starts Next.js on `0.0.0.0:$PORT`, with port `10000` as the default. It does not use the localhost-only `npm start` command. Render should inject secrets as runtime environment variables; do not put them in Dockerfile build arguments or copy `.env.local` into the image.
+There is no separate Render Build Command for this Docker image. Its default command validates hosted settings before starting Next.js on `0.0.0.0:$PORT`, with port `10000` as the default. It does not use the localhost-only `npm start` command. Keep Docker Command blank so a saved override does not skip this check. Render should inject secrets as runtime environment variables; do not put them in Dockerfile build arguments or copy `.env.local` into the image.
+
+## Hosted environment and readiness
+
+Set these in Render's Environment page. If imported localhost values override the image defaults, update them explicitly:
+
+```dotenv
+YAMA_DEPLOYMENT_MODE=hosted-demo
+YAMA_DEMO_ONLY=true
+YAMA_GRAPH_TARGET=cloud
+APP_ORIGIN=https://yamawillsave.vercel.app
+MONGODB_DATABASE=yama
+```
+
+Use the frontend's actual HTTPS origin for `APP_ORIGIN`. Also supply `MONGODB_URI` with the authenticated Atlas `mongodb+srv://` URI, `BETTER_AUTH_SECRET` with at least 32 random characters, and the `YAMA_CLOUD_FALKORDB_HOST/PORT/USERNAME/PASSWORD/TLS` settings from the working instance connection. Match its TLS setting; this change does not rewrite credentials or assume encryption where the endpoint does not provide it.
+
+In hosted mode only, `YAMA_DEPLOYMENT_ORIGIN` and `YAMA_CLOUD_MONGODB_URI` can supply the saved cloud settings when `APP_ORIGIN` or `MONGODB_URI` is missing or still points to loopback. Explicit non-local active values take priority. Invalid values fail validation instead of silently falling back to another destination. Localhost mode keeps its existing restrictions and does not activate staged cloud settings. Hosted mode requires HTTPS, authenticated Atlas with certificate verification, the cloud graph, and synthetic-only use. Keep personal Codex sessions off the server: select `YAMA_TEXT_PROVIDER=fixture` for the initial check, or deliberately configure the API adapter.
+
+The container now fails early with **field names only** if configuration is invalid. A successful startup validation does not prove the databases are reachable. `/api/health` still returns `503` when either database is unavailable; each probe has a four-second deadline, below Render's five-second HTTP health limit. The response and server log identify `configuration`, `mongo`, or `graph` without returning addresses, credentials, or driver errors. It returns `200` only when both dependency checks pass.
+
+If the health response identifies MongoDB, check Atlas credentials and network access for Render's outbound addresses. If it identifies the graph, check that the instance is running and the host, port, username, password, and TLS option match its connection panel. Do not change the health path to a static page to conceal a failing dependency. A Render log that reaches `exporting to image`, `Next.js`, and `Ready`, followed by `Timed Out`, has passed the image build; inspect readiness and the service's port/health settings next.
 
 Use the same Dockerfile for separate Background Worker services. Override **Docker Command** with one of:
 
@@ -64,20 +84,24 @@ docker run --rm --network none yama-runtime \
 docker run --rm --network none yama-runtime \
   /opt/venvs/graphrag/bin/python -c 'from yama_agents.embeddings import LocalEmbeddings; assert len(LocalEmbeddings().encode("Fictional account access incident", query=True)) == 384'
 
-# Check the HTTP listener with no backend credentials. The root UI can load;
-# /api/health correctly returns 503 until valid database settings are provided.
-docker run --rm -p 127.0.0.1:3100:10000 yama-runtime
+# Missing configuration must fail before starting the listener, with field names only:
+docker run --rm --network none yama-runtime
+
+# For an actual HTTP check, inject hosted credentials using your container host's
+# secret mechanism, then map port 10000. Do not use the Mac's local database URI.
 ```
 
 The deployment image never contains real `.env.local` values. Do not blindly pass the Mac's local env file: its loopback database addresses refer to the container itself and its interpreter paths do not exist there.
 
-Local verification on 18 October 2026: 142 Python tests and five SDK contracts passed, including three tests for model-only setup without touching local configuration. The Docker build parsed the image definition and installed the Linux Node dependencies, but was stopped under local disk pressure before the application build and Python/model image stages completed. The full image and container startup are therefore **not yet verified**; use the checks above on a host with sufficient storage.
+Local verification on 18 October 2026: 142 Python tests and five SDK contracts passed, including three tests for model-only setup without touching local configuration. The local Docker build was stopped under disk pressure before its image completed. At that point, the full image and container startup had not been verified.
+
+19 October: the supplied Render log confirms the full image build/export and the Next.js listener succeeded. The deploy timed out afterward. The startup/readiness correction adds the explicit hosted mode, cloud aliases, preflight diagnostics, and bounded dependency checks; these have regression tests. This does not confirm the new deployment or Render-to-database network access until its actual health check passes.
 
 ## Remaining hosting work
 
 This commit packages the runtime; it does not make the localhost application ready for a public deployment:
 
-- `src/server/config.ts` still permits only a loopback application origin and MongoDB URI. Approved hosted HTTPS origins, Atlas, auth/proxy handling, and Vercel API forwarding need a separate tested change.
+- Hosted HTTPS origins and Atlas are now accepted in explicit hosted-demo mode. Vercel API forwarding and browser/auth behaviour across the deployed frontend/backend still need integration verification. Configure the frontend's exact origin; the API does not allow arbitrary cross-origin mutations.
 - Voice's current validation still permits only local LiveKit. Including its SDK is not cloud voice verification or permission to enable live provider calls.
 - Document extraction still invokes a local Colima/Docker parser. This image does not provide that host daemon or bypass parser isolation; the hosted parser needs its own design.
 - Evidence and the embedding query cache currently write under `/app/.local`. They are ephemeral without appropriate storage. A disk is not shared across Render services; split API/evidence processing needs a shared storage adapter. A disk mounted over the whole `/app` would also hide application files.
